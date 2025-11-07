@@ -1,0 +1,51 @@
+import { Robot } from "../Icon";
+import { Avatar, AvatarGroup } from "./";
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import { Hero } from '@storybookComponents/Hero';
+import * as AvatarGroupStories from './AvatarGroup.stories';
+ 
+<Meta of={AvatarGroupStories} />
+ 
+<Title>AvatarGroup</Title>
+<Subtitle>Display avatars as a single stack</Subtitle>
+
+<Hero className="flex gap-4">
+  <AvatarGroup size={48}>
+    <Avatar
+        name="Tyler"
+        imageUrl="https://gravatar.com/avatar/9531b260b9693f3394bea8646c6ea141ce58fe5a138b7db7729d60a4c5dde552"
+    />
+    <Avatar name="Will" color="info" />
+    <Avatar name="Tech support" Icon={Robot} color="discovery" />
+    <Avatar overflowCount={5} color="success" variant="soft" />
+  </AvatarGroup>
+</Hero>
+
+## Usage
+```jsx
+import { AvatarGroup } from "@openai/apps-sdk-ui/components/Avatar";
+```
+
+<Canvas of={AvatarGroupStories.Base} />
+
+## Reference
+<ArgTypes of={AvatarGroupStories.Base} />
+
+## Examples
+
+### Stacking direction
+You can control the stacking direction using the `stack` prop, as either `"start"` or `"end"`.
+<Canvas of={AvatarGroupStories.Direction} sourceState="none" />
+
+<div className="canvas-controls-only">
+<Controls of={AvatarGroupStories.Direction}/>
+</div>
+
+
+### Group sizing
+You can control the size of all avatars in the group by passing `size` directly to the `<AvatarGroup>` component.
+
+<Canvas of={AvatarGroupStories.Sizing} />
+<div className="canvas-controls-only">
+<Controls of={AvatarGroupStories.Sizing}/>
+</div>

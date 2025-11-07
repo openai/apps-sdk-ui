@@ -1,0 +1,25 @@
+import { Canvas, ArgTypes, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+import * as CheckboxStories from './Checkbox.stories';
+ 
+<Meta of={CheckboxStories} />
+ 
+<Title>Checkbox</Title>
+<Subtitle>Toggle control for on and off states</Subtitle>
+
+## Usage
+```jsx
+import { Checkbox } from "@openai/apps-sdk-ui/components/Checkbox";
+```
+
+<Canvas of={CheckboxStories.Base} />
+
+## Reference
+<ArgTypes of={CheckboxStories.Base} />
+
+## Examples
+
+### Indeterminate
+
+Use `checked="indeterminate"` to indicate that the checkbox is partially selected.
+
+<Canvas of={CheckboxStories.Indeterminate} />

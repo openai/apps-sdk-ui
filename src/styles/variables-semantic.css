@@ -1,0 +1,566 @@
+/* stylelint-disable custom-property-pattern -- Tailwind requires this sometimes */
+
+/* Always generate these variables, but they are also available to Tailwind */
+@theme static {
+  /* =============================================
+    Breakpoints - configured in postcss.config
+  ============================================= */
+  /* @inject_breakpoints */
+
+  /* =============================================
+    Font families
+  ============================================= */
+  --font-serif: initial;
+  --font-sans: ui-sans-serif, -apple-system, system-ui, "Segoe UI", "Noto Sans", "Helvetica",
+    "Arial", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", "Menlo", "Monaco", "Consolas",
+    "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace;
+
+  /* =============================================
+    Font weights
+  ============================================= */
+  --font-weight-*: initial;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* =============================================
+    Radius
+  ============================================= */
+  --radius-*: initial;
+  --radius-2xs: 0.125rem; /* 2px */
+  --radius-xs: 0.25rem; /* 4px */
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.625rem; /* 10px */
+  --radius-xl: 0.75rem; /* 12px */
+  --radius-2xl: 1rem; /* 16px */
+  --radius-3xl: 1.25rem; /* 20px */
+  --radius-4xl: 1.5rem; /* 24px */
+  --radius-full: 9999px;
+
+  /* =============================================
+    Spacing
+  ============================================= */
+  --spacing: 0.25rem; /* 4px */
+}
+
+@layer theme {
+  :root,
+  :where([data-theme]) {
+    /* =============================================
+      Text colors
+    ============================================= */
+    --color-text: var(--gray-1000);
+    --color-text-secondary: light-dark(var(--gray-500), var(--gray-700));
+    --color-text-tertiary: light-dark(var(--gray-400), var(--gray-600));
+    --color-text-inverse: var(--gray-0);
+
+    /* =============================================
+      Ring colors
+    ============================================= */
+    --color-ring: light-dark(var(--blue-500), var(--blue-400));
+
+    /* =============================================
+      Primary colors
+    ============================================= */
+    /* Text */
+    --color-text-primary: var(--color-text);
+    /* Soft */
+    --color-background-primary-soft: light-dark(var(--gray-100), var(--gray-300));
+    --color-background-primary-soft-hover: light-dark(var(--gray-150), var(--gray-350));
+    --color-background-primary-soft-active: light-dark(var(--gray-200), var(--gray-400));
+    --color-background-primary-soft-alpha: light-dark(var(--alpha-08), var(--alpha-12));
+    --color-background-primary-soft-alpha-hover: light-dark(var(--alpha-12), var(--alpha-16));
+    --color-background-primary-soft-alpha-active: light-dark(var(--alpha-16), var(--alpha-20));
+    --color-text-primary-soft: var(--color-text);
+    --color-background-primary-soft-alt: var(--alpha-02);
+    --color-border-primary-soft-alt: var(--alpha-06);
+    --color-text-primary-soft-alt: var(--color-text);
+    /* Surface */
+    --color-background-primary-surface: light-dark(var(--alpha-05), var(--alpha-08));
+    --color-border-primary-surface: light-dark(var(--alpha-05), var(--alpha-08));
+    --color-text-primary-surface: var(--color-text);
+    /* Solid */
+    --color-background-primary-solid: light-dark(var(--gray-900), var(--gray-950));
+    --color-background-primary-solid-hover: light-dark(var(--gray-700), var(--gray-900));
+    --color-background-primary-solid-active: light-dark(var(--gray-600), var(--gray-850));
+    --color-text-primary-solid: var(--color-text-inverse);
+    /* Outline */
+    --color-background-primary-outline-hover: light-dark(var(--alpha-02), var(--alpha-04));
+    --color-background-primary-outline-active: light-dark(var(--alpha-04), var(--alpha-06));
+    --color-border-primary-outline: light-dark(var(--alpha-16), var(--alpha-25));
+    --color-border-primary-outline-hover: light-dark(var(--alpha-20), var(--alpha-30));
+    --color-text-primary-outline: var(--color-text);
+    --color-text-primary-outline-hover: var(--color-text);
+    /* Ghost */
+    --color-background-primary-ghost-hover: light-dark(var(--alpha-08), var(--alpha-12));
+    --color-background-primary-ghost-active: light-dark(var(--alpha-12), var(--alpha-16));
+    --color-text-primary-ghost: var(--color-text);
+    --color-text-primary-ghost-hover: var(--color-text);
+    /* Ring */
+    --color-ring-primary: var(--color-ring);
+    --color-ring-primary-soft: var(--color-ring-primary);
+    --color-ring-primary-solid: var(--color-ring-primary);
+    --color-ring-primary-outline: var(--color-ring-primary);
+    --color-ring-primary-ghost: var(--color-ring-primary);
+
+    /* =============================================
+      Secondary colors
+    ============================================= */
+    /* Soft */
+    --color-background-secondary-soft: light-dark(var(--gray-100), var(--gray-300));
+    --color-background-secondary-soft-hover: light-dark(var(--gray-150), var(--gray-350));
+    --color-background-secondary-soft-active: light-dark(var(--gray-200), var(--gray-400));
+    --color-background-secondary-soft-alpha: light-dark(var(--alpha-08), var(--alpha-12));
+    --color-background-secondary-soft-alpha-hover: light-dark(var(--alpha-12), var(--alpha-16));
+    --color-background-secondary-soft-alpha-active: light-dark(var(--alpha-16), var(--alpha-20));
+    --color-text-secondary-soft: var(--color-text);
+    --color-background-secondary-soft-alt: var(--alpha-02);
+    --color-border-secondary-soft-alt: var(--alpha-06);
+    --color-text-secondary-soft-alt: var(--color-text);
+    /* Solid */
+    --color-background-secondary-solid: light-dark(var(--gray-500), var(--gray-400));
+    --color-background-secondary-solid-hover: light-dark(var(--gray-600), var(--gray-450));
+    --color-background-secondary-solid-active: light-dark(var(--gray-700), var(--gray-500));
+    --color-text-secondary-solid: var(--white);
+    /* Outline */
+    --color-background-secondary-outline-hover: light-dark(var(--alpha-02), var(--alpha-04));
+    --color-background-secondary-outline-active: light-dark(var(--alpha-04), var(--alpha-06));
+    --color-border-secondary-outline: light-dark(var(--alpha-16), var(--alpha-25));
+    --color-border-secondary-outline-hover: light-dark(var(--alpha-20), var(--alpha-30));
+    --color-text-secondary-outline: var(--color-text-secondary);
+    --color-text-secondary-outline-hover: var(--color-text);
+    /* Ghost */
+    --color-background-secondary-ghost-hover: light-dark(var(--alpha-08), var(--alpha-12));
+    --color-background-secondary-ghost-active: light-dark(var(--alpha-12), var(--alpha-16));
+    --color-text-secondary-ghost: var(--color-text-secondary);
+    --color-text-secondary-ghost-hover: var(--color-text);
+    /* Ring */
+    --color-ring-secondary: var(--color-ring);
+    --color-ring-secondary-soft: var(--color-ring-secondary);
+    --color-ring-secondary-solid: var(--color-ring-secondary);
+    --color-ring-secondary-outline: var(--color-ring-secondary);
+    --color-ring-secondary-ghost: var(--color-ring-secondary);
+
+    /* =============================================
+      Info colors
+    ============================================= */
+    /* Text */
+    --color-text-info: light-dark(var(--blue-500), var(--blue-200));
+    /* Soft */
+    --color-background-info-soft: var(--blue-50);
+    --color-background-info-soft-hover: var(--blue-75);
+    --color-background-info-soft-active: var(--blue-75);
+    --color-background-info-soft-alpha: var(--blue-a50);
+    --color-background-info-soft-alpha-hover: var(--blue-a75);
+    --color-background-info-soft-alpha-active: var(--blue-a75);
+    --color-text-info-soft: light-dark(var(--blue-600), var(--blue-300));
+    /* Surface */
+    --color-background-info-surface: light-dark(var(--blue-a25), var(--blue-a50));
+    --color-border-info-surface: light-dark(var(--blue-a25), var(--blue-a50));
+    --color-text-info-surface: light-dark(var(--blue-600), var(--blue-300));
+    /* Solid */
+    --color-background-info-solid: var(--blue-400);
+    --color-background-info-solid-hover: var(--blue-500);
+    --color-background-info-solid-active: var(--blue-500);
+    --color-text-info-solid: var(--white);
+    /* Outline */
+    --color-background-info-outline-hover: var(--blue-a25);
+    --color-background-info-outline-active: var(--blue-a25);
+    --color-border-info-outline: var(--blue-500);
+    --color-border-info-outline-hover: var(--blue-500);
+    --color-text-info-outline: var(--blue-500);
+    --color-text-info-outline-hover: var(--blue-500);
+    /* Ghost */
+    --color-background-info-ghost-hover: var(--blue-a50);
+    --color-background-info-ghost-active: var(--blue-a50);
+    --color-text-info-ghost: light-dark(var(--blue-500), var(--blue-200));
+    --color-text-info-ghost-hover: light-dark(var(--blue-500), var(--blue-200));
+    /* Ring */
+    --color-ring-info: var(--color-ring);
+    --color-ring-info-soft: var(--color-ring-info);
+    --color-ring-info-solid: var(--color-ring-info);
+    --color-ring-info-outline: var(--color-ring-info);
+    --color-ring-info-ghost: var(--color-ring-info);
+
+    /* =============================================
+      Warning colors
+    ============================================= */
+    /* Text */
+    --color-text-warning: light-dark(var(--orange-700), var(--orange-500));
+    /* Soft */
+    --color-background-warning-soft: var(--orange-50);
+    --color-background-warning-soft-hover: var(--orange-75);
+    --color-background-warning-soft-active: var(--orange-75);
+    --color-background-warning-soft-alpha: var(--orange-a50);
+    --color-background-warning-soft-alpha-hover: var(--orange-a75);
+    --color-background-warning-soft-alpha-active: var(--orange-a75);
+    --color-text-warning-soft: light-dark(var(--orange-700), var(--orange-400));
+    /* Surface */
+    --color-background-warning-surface: light-dark(var(--orange-a25), var(--orange-a50));
+    --color-border-warning-surface: light-dark(var(--orange-a25), var(--orange-a50));
+    --color-text-warning-surface: light-dark(var(--orange-700), var(--orange-400));
+    /* Solid */
+    --color-background-warning-solid: var(--orange-500);
+    --color-background-warning-solid-hover: var(--orange-600);
+    --color-background-warning-solid-active: var(--orange-600);
+    --color-text-warning-solid: var(--white);
+    /* Outline */
+    --color-background-warning-outline-hover: var(--orange-a25);
+    --color-background-warning-outline-active: var(--orange-a25);
+    --color-border-warning-outline: var(--orange-500);
+    --color-border-warning-outline-hover: var(--orange-500);
+    --color-text-warning-outline: var(--orange-500);
+    --color-text-warning-outline-hover: var(--orange-500);
+    /* Ghost */
+    --color-background-warning-ghost-hover: var(--orange-a50);
+    --color-background-warning-ghost-active: var(--orange-a50);
+    --color-text-warning-ghost: var(--orange-500);
+    --color-text-warning-ghost-hover: var(--orange-500);
+    /* Ring */
+    --color-ring-warning: var(--color-ring);
+    --color-ring-warning-soft: var(--color-ring-warning);
+    --color-ring-warning-solid: var(--color-ring-warning);
+    --color-ring-warning-outline: var(--color-ring-warning);
+    --color-ring-warning-ghost: var(--color-ring-warning);
+
+    /* =============================================
+      Caution colors
+    ============================================= */
+    /* Text */
+    --color-text-caution: light-dark(var(--yellow-700), var(--yellow-500));
+    --color-text-caution-hover: var(--yellow-800);
+    /* Soft */
+    --color-background-caution-soft: var(--yellow-50);
+    --color-background-caution-soft-hover: var(--yellow-75);
+    --color-background-caution-soft-active: var(--yellow-75);
+    --color-background-caution-soft-alpha: var(--yellow-a50);
+    --color-background-caution-soft-alpha-hover: var(--yellow-a75);
+    --color-background-caution-soft-alpha-active: var(--yellow-a75);
+    --color-text-caution-soft: light-dark(var(--yellow-800), var(--yellow-400));
+    /* Surface */
+    --color-background-caution-surface: light-dark(var(--yellow-a25), var(--yellow-a50));
+    --color-border-caution-surface: light-dark(var(--yellow-a25), var(--yellow-a50));
+    --color-text-caution-surface: light-dark(var(--yellow-800), var(--yellow-400));
+    /* Solid */
+    --color-background-caution-solid: var(--yellow-600);
+    --color-background-caution-solid-hover: var(--yellow-700);
+    --color-background-caution-solid-active: var(--yellow-700);
+    --color-text-caution-solid: var(--white);
+    /* Outline */
+    --color-background-caution-outline-hover: var(--yellow-a25);
+    --color-background-caution-outline-active: var(--yellow-a25);
+    --color-border-caution-outline: var(--yellow-700);
+    --color-border-caution-outline-hover: var(--yellow-700);
+    --color-text-caution-outline: var(--yellow-700);
+    --color-text-caution-outline-hover: var(--yellow-700);
+    /* Ghost */
+    --color-background-caution-ghost-hover: var(--yellow-a50);
+    --color-background-caution-ghost-active: var(--yellow-a50);
+    --color-text-caution-ghost: var(--yellow-700);
+    --color-text-caution-ghost-hover: var(--yellow-700);
+    /* Ring */
+    --color-ring-caution: var(--color-ring);
+    --color-ring-caution-soft: var(--color-ring-caution);
+    --color-ring-caution-solid: var(--color-ring-caution);
+    --color-ring-caution-outline: var(--color-ring-caution);
+    --color-ring-caution-ghost: var(--color-ring-caution);
+
+    /* =============================================
+      Danger colors
+    ============================================= */
+    /* Text */
+    --color-text-danger: light-dark(var(--red-700), var(--red-500));
+    /* Soft */
+    --color-background-danger-soft: var(--red-50);
+    --color-background-danger-soft-hover: var(--red-75);
+    --color-background-danger-soft-active: var(--red-75);
+    --color-background-danger-soft-alpha: var(--red-a50);
+    --color-background-danger-soft-alpha-hover: var(--red-a75);
+    --color-background-danger-soft-alpha-active: var(--red-a75);
+    --color-text-danger-soft: light-dark(var(--red-600), var(--red-400));
+    /* Surface */
+    --color-background-danger-surface: light-dark(var(--red-a25), var(--red-a50));
+    --color-border-danger-surface: light-dark(var(--red-a25), var(--red-a50));
+    --color-text-danger-surface: light-dark(var(--red-600), var(--red-400));
+    /* Solid */
+    --color-background-danger-solid: var(--red-500);
+    --color-background-danger-solid-hover: var(--red-600);
+    --color-background-danger-solid-active: var(--red-600);
+    --color-text-danger-solid: var(--white);
+    /* Outline */
+    --color-background-danger-outline-hover: var(--red-a25);
+    --color-background-danger-outline-active: var(--red-a25);
+    --color-border-danger-outline: var(--red-500);
+    --color-border-danger-outline-hover: var(--red-500);
+    --color-text-danger-outline: var(--red-500);
+    --color-text-danger-outline-hover: var(--red-500);
+    /* Ghost */
+    --color-background-danger-ghost-hover: var(--red-a50);
+    --color-background-danger-ghost-active: var(--red-a50);
+    --color-text-danger-ghost: var(--red-500);
+    --color-text-danger-ghost-hover: var(--red-500);
+    /* Ring */
+    --color-ring-danger: var(--red-200);
+    --color-ring-danger-soft: var(--color-ring-danger);
+    --color-ring-danger-solid: var(--color-ring-danger);
+    --color-ring-danger-outline: var(--color-ring-danger);
+    --color-ring-danger-ghost: var(--color-ring-danger);
+
+    /* =============================================
+      Success colors
+    ============================================= */
+    /* Text */
+    --color-text-success: light-dark(var(--green-700), var(--green-400));
+    /* Soft */
+    --color-background-success-soft: var(--green-50);
+    --color-background-success-soft-hover: var(--green-75);
+    --color-background-success-soft-active: var(--green-75);
+    --color-background-success-soft-alpha: var(--green-a50);
+    --color-background-success-soft-alpha-hover: var(--green-a75);
+    --color-background-success-soft-alpha-active: var(--green-a75);
+    --color-text-success-soft: light-dark(var(--green-600), var(--green-400));
+    /* Surface */
+    --color-background-success-surface: light-dark(var(--green-a25), var(--green-a50));
+    --color-border-success-surface: light-dark(var(--green-a25), var(--green-a50));
+    --color-text-success-surface: light-dark(var(--green-600), var(--green-400));
+    /* Solid */
+    --color-background-success-solid: light-dark(var(--green-500), var(--green-600));
+    --color-background-success-solid-hover: light-dark(var(--green-500), var(--green-600));
+    --color-background-success-solid-active: light-dark(var(--green-500), var(--green-600));
+    --color-text-success-solid: var(--white);
+    /* Outline */
+    --color-background-success-outline-hover: var(--green-a25);
+    --color-background-success-outline-active: var(--green-a25);
+    --color-border-success-outline: light-dark(var(--green-500), var(--green-600));
+    --color-border-success-outline-hover: light-dark(var(--green-500), var(--green-600));
+    --color-text-success-outline: var(--green-500);
+    --color-text-success-outline-hover: var(--green-500);
+    /* Ghost */
+    --color-background-success-ghost-hover: var(--green-a50);
+    --color-background-success-ghost-active: var(--green-a50);
+    --color-text-success-ghost: var(--green-500);
+    --color-text-success-ghost-hover: var(--green-500);
+    /* Ring */
+    --color-ring-success: var(--color-ring);
+    --color-ring-success-soft: var(--color-ring-info);
+    --color-ring-success-solid: var(--color-ring-info);
+    --color-ring-success-outline: var(--color-ring-info);
+    --color-ring-success-ghost: var(--color-ring-info);
+
+    /* =============================================
+      Discovery colors
+    ============================================= */
+    /* Text */
+    --color-text-discovery: light-dark(var(--purple-700), var(--purple-500));
+    /* Soft */
+    --color-background-discovery-soft: var(--purple-50);
+    --color-background-discovery-soft-hover: var(--purple-75);
+    --color-background-discovery-soft-active: var(--purple-75);
+    --color-background-discovery-soft-alpha: var(--purple-a50);
+    --color-background-discovery-soft-alpha-hover: var(--purple-a75);
+    --color-background-discovery-soft-alpha-active: var(--purple-a75);
+    --color-text-discovery-soft: light-dark(var(--purple-600), var(--purple-200));
+    /* Surface */
+    --color-background-discovery-surface: light-dark(var(--purple-a25), var(--purple-a50));
+    --color-border-discovery-surface: light-dark(var(--purple-a25), var(--purple-a50));
+    --color-text-discovery-surface: light-dark(var(--purple-600), var(--purple-200));
+    /* Solid */
+    --color-background-discovery-solid: var(--purple-400);
+    --color-background-discovery-solid-hover: var(--purple-500);
+    --color-background-discovery-solid-active: var(--purple-500);
+    --color-text-discovery-solid: var(--white);
+    /* Outline */
+    --color-background-discovery-outline-hover: var(--purple-a25);
+    --color-background-discovery-outline-active: var(--purple-a25);
+    --color-border-discovery-outline: var(--purple-500);
+    --color-border-discovery-outline-hover: var(--purple-500);
+    --color-text-discovery-outline: light-dark(var(--purple-500), var(--purple-400));
+    --color-text-discovery-outline-hover: light-dark(var(--purple-500), var(--purple-400));
+    /* Ghost */
+    --color-background-discovery-ghost-hover: var(--purple-a50);
+    --color-background-discovery-ghost-active: var(--purple-a50);
+    --color-text-discovery-ghost: var(--purple-500);
+    --color-text-discovery-ghost-hover: var(--purple-500);
+    /* Ring */
+    --color-ring-discovery: var(--color-ring);
+    --color-ring-discovery-soft: var(--color-ring);
+    --color-ring-discovery-solid: var(--color-ring);
+    --color-ring-discovery-outline: var(--color-ring);
+    --color-ring-discovery-ghost: var(--color-ring);
+
+    /* =============================================
+      Disabled colors
+    ============================================= */
+    /* Common disabled styles that are typically shared across all semantic colors */
+    --color-background-disabled: var(--alpha-05);
+    --color-border-disabled: var(--alpha-06);
+    --color-text-disabled: light-dark(var(--gray-400), var(--gray-500));
+
+    /* =============================================
+      Border colors
+    ============================================= */
+    --color-border-subtle: light-dark(var(--alpha-05), var(--alpha-06));
+    --color-border: light-dark(var(--alpha-10), var(--alpha-12));
+    --color-border-strong: light-dark(var(--alpha-15), var(--alpha-20));
+
+    /* =============================================
+      Typography
+    ============================================= */
+    /* Tracking */
+    --font-tracking-wide: 0em;
+    --font-tracking-normal: 0em;
+    --font-tracking-tight: 0em;
+    /* Sizes */
+    --font-heading-5xl-size: 4.5rem; /* 72px  */
+    --font-heading-5xl-line-height: 4.5rem; /* 72px  */
+    --font-heading-5xl-weight: var(--font-weight-semibold);
+    --font-heading-5xl-tracking: var(--tracking-tight);
+    --font-heading-4xl-size: 3.75rem; /* 60px  */
+    --font-heading-4xl-line-height: 3.75rem; /* 60px  */
+    --font-heading-4xl-weight: var(--font-weight-semibold);
+    --font-heading-4xl-tracking: var(--tracking-tight);
+    --font-heading-3xl-size: 3rem; /* 48px  */
+    --font-heading-3xl-line-height: 3rem; /* 48px  */
+    --font-heading-3xl-weight: var(--font-weight-semibold);
+    --font-heading-3xl-tracking: var(--tracking-tight);
+    --font-heading-2xl-size: 2.25rem; /* 36px  */
+    --font-heading-2xl-line-height: 2.625rem; /* 42px */
+    --font-heading-2xl-weight: var(--font-weight-semibold);
+    --font-heading-2xl-tracking: var(--tracking-tight);
+    --font-heading-xl-size: 2rem; /* 32px  */
+    --font-heading-xl-line-height: 2.375rem; /* 38px */
+    --font-heading-xl-weight: var(--font-weight-semibold);
+    --font-heading-xl-tracking: var(--tracking-tight);
+    --font-heading-lg-size: 1.5rem; /* 24px  */
+    --font-heading-lg-line-height: 1.75rem; /* 28px */
+    --font-heading-lg-weight: var(--font-weight-semibold);
+    --font-heading-lg-tracking: var(--tracking-normal);
+    --font-heading-md-size: 1.25rem; /* 20px  */
+    --font-heading-md-line-height: 1.625rem; /* 26px */
+    --font-heading-md-weight: var(--font-weight-semibold);
+    --font-heading-md-tracking: var(--tracking-normal);
+    --font-heading-sm-size: 1.125rem; /* 18px  */
+    --font-heading-sm-line-height: 1.625rem; /* 26px */
+    --font-heading-sm-weight: var(--font-weight-semibold);
+    --font-heading-sm-tracking: var(--tracking-normal);
+    --font-heading-xs-size: 1rem; /* 16px  */
+    --font-heading-xs-line-height: 1.5rem; /* 24px */
+    --font-heading-xs-weight: var(--font-weight-semibold);
+    --font-heading-xs-tracking: var(--tracking-normal);
+    --font-text-lg-size: 1.125rem; /* 18px  */
+    --font-text-lg-line-height: 1.8125rem; /* 29px */
+    --font-text-lg-weight: var(--font-weight-normal);
+    --font-text-lg-tracking: var(--tracking-normal);
+    --font-text-md-size: 1rem; /* 16px  */
+    --font-text-md-line-height: 1.5rem; /* 24px */
+    --font-text-md-weight: var(--font-weight-normal);
+    --font-text-md-tracking: var(--tracking-normal);
+    --font-text-sm-size: 0.875rem; /* 14px  */
+    --font-text-sm-line-height: 1.25rem; /* 20px */
+    --font-text-sm-weight: var(--font-weight-normal);
+    --font-text-sm-tracking: var(--tracking-normal);
+    --font-text-xs-size: 0.75rem; /* 12px  */
+    --font-text-xs-line-height: 1.125rem; /* 18px */
+    --font-text-xs-weight: var(--font-weight-normal);
+    --font-text-xs-tracking: var(--tracking-wide);
+    --font-text-2xs-size: 0.625rem; /* 10px  */
+    --font-text-2xs-line-height: 0.875rem; /* 14px */
+    --font-text-2xs-weight: var(--font-weight-normal);
+    --font-text-2xs-tracking: var(--tracking-wide);
+    --font-text-3xs-size: 0.5rem; /* 8px  */
+    --font-text-3xs-line-height: 0.75rem; /* 12px  */
+    --font-text-3xs-weight: var(--font-weight-normal);
+    --font-text-3xs-tracking: var(--tracking-wide);
+
+    /* =============================================
+    Control sizes
+  ============================================= */
+    --control-size-3xs: 1.375rem; /* 22px */
+    --control-size-2xs: 1.5rem; /* 24px */
+    --control-size-xs: 1.625rem; /* 26px */
+    --control-size-sm: 1.75rem; /* 28px */
+    --control-size-md: 2rem; /* 32px */
+    --control-size-lg: 2.25rem; /* 36px */
+    --control-size-xl: 2.5rem; /* 40px */
+    --control-size-2xl: 2.75rem; /* 44px */
+    --control-size-3xl: 3rem; /* 48px */
+    --control-gutter-2xs: 0.375rem; /* 6px */
+    --control-gutter-xs: 0.5rem; /* 8px */
+    --control-gutter-sm: 0.625rem; /* 10px */
+    --control-gutter-md: 0.75rem; /* 12px */
+    --control-gutter-lg: 0.875rem; /* 14px */
+    --control-gutter-xl: 1rem; /* 16px */
+    --control-gutter-pill-scaling: 1.33;
+    --control-radius-sm: var(--radius-sm);
+    --control-radius-md: var(--radius-md);
+    --control-radius-lg: var(--radius-lg);
+    --control-radius-xl: var(--radius-xl);
+    --control-font-size-sm: var(--font-text-xs-size);
+    --control-font-size-md: var(--font-text-sm-size);
+    --control-font-size-lg: var(--font-text-md-size);
+    --control-icon-size-xs: 0.875rem; /* 14px */
+    --control-icon-size-sm: 1rem; /* 16px */
+    --control-icon-size-md: 1.125rem; /* 18px */
+    --control-icon-size-lg: 1.25rem; /* 20px */
+    --control-icon-size-xl: 1.375rem; /* 22px */
+    --control-icon-size-2xl: 1.5rem; /* 24px */
+
+    /* =============================================
+      Motion
+    ============================================= */
+    --cubic-enter: cubic-bezier(0.19, 1, 0.22, 1);
+    --cubic-exit: cubic-bezier(0.8, 0, 0.4, 1);
+    --cubic-exit-snappy: cubic-bezier(0.65, 0, 0.4, 1); /* less inertia delay */
+    --cubic-move: cubic-bezier(0.65, 0, 0.35, 1);
+    --transition-duration-basic: 150ms;
+    --transition-ease-basic: ease;
+
+    /* =============================================
+      Scrollbar
+    ============================================= */
+    --scrollbar-color: var(--alpha-30);
+
+    /* =============================================
+      Shadows
+    ============================================= */
+    --shadow: 0 10px 15px -3px light-dark(rgba(0 0 0 / 10%), rgba(0 0 0 / 20%)),
+      0 4px 6px -4px light-dark(rgba(0 0 0 / 10%), rgba(0 0 0 / 20%));
+    --shadow-hairline: 0 0 0 var(--shadow-hairline-width) var(--shadow-hairline-color);
+    /* 100 */
+    --shadow-100: var(--elevation-100-geo) rgb(var(--shadow-color) / var(--shadow-alpha-100));
+    --shadow-100-strong: var(--elevation-100-geo)
+      rgb(var(--shadow-color) / calc(var(--shadow-alpha-100) * 1.25));
+    --shadow-100-stronger: var(--elevation-100-geo)
+      rgb(var(--shadow-color) / calc(var(--shadow-alpha-100) * 1.6));
+    /* 200 */
+    --shadow-200: var(--elevation-200-geo) rgb(var(--shadow-color) / var(--shadow-alpha-200));
+    --shadow-200-strong: var(--elevation-200-geo)
+      rgb(var(--shadow-color) / calc(var(--shadow-alpha-200) * 1.25));
+    --shadow-200-stronger: var(--elevation-200-geo)
+      rgb(var(--shadow-color) / calc(var(--shadow-alpha-200) * 1.6));
+    /* 300 */
+    --shadow-300: var(--elevation-300-geo) rgb(var(--shadow-color) / var(--shadow-alpha-300));
+    --shadow-300-strong: var(--elevation-300-geo)
+      rgb(var(--shadow-color) / calc(var(--shadow-alpha-300) * 1.25));
+    --shadow-300-stronger: var(--elevation-300-geo)
+      rgb(var(--shadow-color) / calc(var(--shadow-alpha-300) * 1.6));
+    /* 400 */
+    --shadow-400: var(--elevation-400-geo) rgb(var(--shadow-color) / var(--shadow-alpha-400));
+    --shadow-400-strong: var(--elevation-400-geo)
+      rgb(var(--shadow-color) / calc(var(--shadow-alpha-400) * 1.25));
+    --shadow-400-stronger: var(--elevation-400-geo)
+      rgb(var(--shadow-color) / calc(var(--shadow-alpha-400) * 1.6));
+
+    /* =============================================
+      Surfaces
+    ============================================= */
+    --color-surface: light-dark(var(--gray-0), var(--gray-200));
+    --color-surface-secondary: light-dark(var(--gray-50), var(--gray-100));
+    --color-surface-tertiary: light-dark(var(--gray-75), var(--gray-50));
+    --color-surface-elevated: light-dark(var(--gray-0), var(--gray-300));
+    --color-surface-elevated-secondary: light-dark(var(--gray-50), var(--gray-400));
+  }
+}

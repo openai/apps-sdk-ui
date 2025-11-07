@@ -1,0 +1,286 @@
+/* =============================================
+  Custom Select
+============================================= */
+.Menu {
+  /* Top-level selector needs to exist */
+}
+
+.MenuList {
+  /* Default to the width of the trigger */
+  width: var(--select-list-width, var(--radix-popover-trigger-width));
+  min-width: var(--select-list-min-width, 300px);
+  max-width: var(--select-list-max-width, none);
+  border-radius: var(--menu-radius);
+  background: var(--color-surface-elevated);
+  box-shadow: var(--shadow), var(--shadow-hairline);
+  font-size: var(--menu-font-size);
+  line-height: var(--menu-line-height);
+  /* The transform-origin computed from the content and arrow positions/offsets */
+  transform-origin: var(--radix-popover-content-transform-origin);
+  user-select: none;
+  will-change: opacity, transform;
+
+  /* Animation states applied to a wrapping parent */
+  .Menu[data-entering] & {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  .Menu[data-entering-active] &,
+  .Menu[data-entering][data-interrupted] & {
+    opacity: 1;
+    transform: scale(1);
+    transition-duration: 0.35s;
+    transition-property: opacity, transform;
+    transition-timing-function: var(--cubic-enter);
+  }
+
+  .Menu[data-exiting] & {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .Menu[data-exiting-active] &,
+  .Menu[data-exiting][data-interrupted] & {
+    opacity: 0;
+    transform: scale(0.95);
+    transition-duration: 0.2s;
+    transition-property: opacity, transform;
+    transition-timing-function: var(--cubic-exit);
+  }
+}
+
+.MenuInner {
+  display: flex;
+  flex-direction: column;
+  /* The remaining height between the trigger and the boundary edge */
+  max-height: min(
+    var(--select-list-max-height, 400px),
+    var(--radix-popover-content-available-height)
+  );
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+/* =============================================
+  Options
+============================================= */
+.OptionsList {
+  overflow: auto;
+  flex: 1;
+  padding: var(--menu-gutter);
+}
+
+.Option {
+  position: relative;
+  padding: var(--menu-item-padding);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  /* When keyboard navigation snaps item into scrollable view, ensure 20px of spacing to show additional items below */
+  scroll-margin: 15px 0;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: calc(var(--menu-radius) - var(--menu-gutter));
+    background: var(--menu-item-background-color);
+    content: "";
+    opacity: 0;
+    transform: scale(var(--scale, 0.98));
+    transition-duration: var(--transition-duration-basic);
+    transition-property: opacity, background-color, transform;
+    transition-timing-function: var(--cubic-enter);
+    will-change: opacity, transform;
+  }
+
+  &[data-selected] {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &[data-highlight] {
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &:active::before {
+      transform: scale(var(--scale, 0.98));
+    }
+  }
+
+  &[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.PressableInner {
+  position: relative;
+}
+
+.OptionInner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: spacing(1);
+}
+
+.OptionCheck {
+  display: block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.OptionIndicatorSlot {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.OptionGroupHeading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: spacing(1);
+  padding: var(--menu-item-padding);
+  margin-top: spacing(1.5);
+  color: var(--color-text-secondary);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.OptionHardLimitHeading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: spacing(1);
+  padding: var(--menu-item-padding);
+  color: var(--color-text-secondary);
+}
+
+.OptionsLimit {
+  color: var(--link-primary-text-color);
+  font-weight: var(--font-weight-medium);
+}
+
+/* =============================================
+  Action
+============================================= */
+.Action {
+  position: relative;
+  padding: var(--menu-item-padding);
+  border-radius: calc(var(--menu-radius) - var(--menu-gutter));
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  /* Background shape */
+  &::before {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: calc(var(--menu-radius) - var(--menu-gutter));
+    background: light-dark(var(--gray-100), var(--gray-25));
+    content: "";
+    opacity: 0;
+    transform: scale(var(--scale, 0.98));
+    transition-duration: 0.15s;
+    transition-property: opacity, background-color, transform;
+    transition-timing-function: var(--cubic-enter);
+    will-change: opacity, transform;
+  }
+
+  /* Focus ring */
+  &::after {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: calc(var(--menu-radius) - var(--menu-gutter));
+    content: "";
+    pointer-events: none;
+    transition-duration: 0.15s;
+    transition-property: box-shadow, transform;
+    transition-timing-function: var(--cubic-enter);
+  }
+
+  @mixin hover {
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible::after {
+    box-shadow: 0 0 0 2px var(--color-ring);
+  }
+
+  &:active::before,
+  &:active::after {
+    transform: scale(var(--scale, 0.98));
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.ActionInner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--menu-item-gap);
+}
+
+.ActionsContainer {
+  position: relative;
+  padding: var(--menu-gutter);
+  border-top: 1px solid var(--menu-separator-background-color);
+
+  &::before {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 9px;
+    margin-bottom: 1px;
+    background: var(--color-surface-elevated);
+    content: "";
+    mask-image: linear-gradient(180deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 100%));
+    pointer-events: none;
+  }
+}
+
+/* =============================================
+  Search
+============================================= */
+.Search {
+  position: relative;
+  padding: var(--menu-gutter) var(--menu-gutter) 0;
+}
+
+.SearchEmpty {
+  padding: var(--menu-gutter);
+  margin: spacing(4) 0;
+
+  &[data-text-only] {
+    color: var(--color-text-secondary);
+    text-align: center;
+  }
+}

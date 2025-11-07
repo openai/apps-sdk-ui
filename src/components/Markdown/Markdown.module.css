@@ -1,0 +1,225 @@
+.MarkdownContent {
+  overflow-wrap: anywhere;
+
+  /* Avoid margin collapse on all children, for more predictable spacing. */
+  /* ******************************************************************** */
+  /* IMPORTANT: These cannot be removed without changing SmoothMarkdown   */
+  *:first-child {
+    margin-top: 0;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+  /* ******************************************************************** */
+
+  /* Headers */
+  h1 {
+    margin-bottom: 0.5rem;
+    font-size: 1.75em;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: -0.04rem;
+    line-height: 1.222;
+  }
+
+  h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5em;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.222;
+  }
+
+  h3 {
+    margin-top: 1.125rem;
+    margin-bottom: 0.625rem;
+    font-size: 1.25em;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.3;
+  }
+
+  h4 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1em;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.5;
+  }
+
+  h5 {
+    font-size: 1em;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.5;
+  }
+
+  h6 {
+    font-size: 1em;
+    line-height: 1.5;
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    margin: 0.5em 0 1em;
+
+    > li > :first-child {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    > li ul,
+    > li ol {
+      margin-top: 0.25em !important;
+    }
+  }
+
+  ul {
+    padding-left: 1.625em;
+    list-style-type: disc;
+
+    > li {
+      padding-left: 0.375em;
+      margin: 0.5em 0;
+
+      &::marker {
+        color: var(--color-text-secondary);
+        font-size: 1em;
+        font-weight: var(--font-weight-medium);
+      }
+    }
+  }
+
+  ol {
+    padding-left: 1.625em;
+    list-style-type: decimal;
+
+    > li {
+      padding-left: 0.375em;
+      margin: 0.5em 0;
+
+      &::marker {
+        color: var(--color-text-secondary);
+        font-size: 1em;
+        font-weight: var(--font-weight-medium);
+      }
+    }
+  }
+
+  li {
+    min-height: 1.5em;
+    margin: 0.5em 0;
+  }
+
+  /* Text */
+  p {
+    margin: 1em 0;
+  }
+
+  /* Emphasis */
+  strong {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  /* Quotes */
+  blockquote {
+    position: relative;
+    padding-top: 0.25em;
+    padding-bottom: 0.25rem;
+    padding-left: spacing(6);
+    color: var(--tw-prose-quotes);
+    font-weight: var(--font-weight-normal);
+    quotes: "\201C" "\201D" "\2018" "\2019";
+
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      width: 0.25rem;
+      border-radius: var(--radius-2xs);
+      background: light-dark(var(--alpha-15), var(--alpha-20));
+      content: "";
+    }
+
+    p {
+      margin: 0.5em 0 0;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  /* Dividers */
+  hr {
+    border-color: var(--alpha-10);
+    border-top-width: 1px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border: 0;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-collapse: separate;
+    font-size: 0.875em;
+    line-height: 1.7142857;
+    table-layout: auto;
+  }
+
+  th {
+    border: 0;
+    border-bottom: 1px solid var(--color-border-strong);
+    line-height: var(--font-text-sm-line-height);
+    padding-block: spacing(2);
+    padding-inline: spacing(2);
+    text-align: start;
+
+    &:first-child {
+      padding-inline-start: 0;
+    }
+
+    &:last-child {
+      padding-inline-end: 0;
+    }
+  }
+
+  td {
+    border: 0;
+    border-bottom: 1px solid var(--color-border);
+    padding-block: spacing(2.5);
+    padding-inline: spacing(2);
+
+    &:first-child {
+      padding-inline-start: 0;
+    }
+
+    &:last-child {
+      padding-inline-end: 0;
+    }
+  }
+
+  tbody tr:last-child {
+    td {
+      border-bottom: 0;
+    }
+  }
+}
+
+.InlineCode {
+  padding: 1px 0.3rem;
+  border-radius: 0.25rem;
+  background-color: light-dark(var(--alpha-04), var(--alpha-10));
+  box-shadow: inset 0 0 0 1px var(--alpha-08);
+  color: inherit;
+  font-size: 0.875em;
+  font-weight: 500;
+}

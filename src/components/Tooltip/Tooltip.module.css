@@ -1,0 +1,96 @@
+.Tooltip {
+  max-width: 300px;
+  border-radius: var(--radius-md);
+  /* animation-duration: 0.3s; */
+  /* animation-name: scale-in; */
+  /* animation-timing-function: var(--cubic-enter); */
+  background: var(--color-surface-elevated);
+  box-shadow: var(--shadow), var(--shadow-hairline);
+  font-size: 14px;
+  line-height: 1.45;
+  /* transform-origin: var(--radix-tooltip-content-transform-origin); */
+  /* transition: background-color 0.15s ease; */
+
+  /* &[data-state="closed"] {
+    animation: scale-out 0.2s var(--cubic-exit);
+  } */
+
+  /*
+   * Default cursor is slightly more pleasing than text cursor,
+   * if a tooltip transitions between clickable -> non-clickable (e.g., CopyTooltip)
+   */
+  &[data-clickable="false"] {
+    cursor: default;
+  }
+
+  &[data-clickable="true"] {
+    cursor: pointer;
+  }
+
+  &[data-compact="true"][data-clickable="true"] {
+    @mixin hover {
+      background: var(--gray-600);
+      color: var(--gray-0);
+    }
+  }
+
+  &[data-gutter-size="sm"] {
+    padding: 8px 12px;
+  }
+
+  &[data-gutter-size="md"] {
+    padding: 12px 16px;
+  }
+
+  &[data-gutter-size="lg"] {
+    padding: 14px 18px;
+  }
+
+  &[data-compact="true"] {
+    padding: 2px 8px;
+    background: var(--gray-700);
+    color: var(--gray-0);
+    font-size: 14px;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.TriggerDecorator {
+  display: inline-flex;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-decoration-color: transparent;
+  /* transition: text-decoration 0.2s var(--cubic-exit); */
+
+  &:focus {
+    outline: 0;
+  }
+
+  &[data-state*="open"] {
+    text-decoration-color: var(--color-text-tertiary);
+    transition-timing-function: var(--cubic-enter);
+  }
+}

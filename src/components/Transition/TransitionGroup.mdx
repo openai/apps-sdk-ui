@@ -1,0 +1,125 @@
+import { Canvas, Controls, Meta, Subtitle, Title, ArgTypes } from "@storybook/blocks"
+
+import * as TransitionGroupStories from './TransitionGroup.stories';
+ 
+<Meta of={TransitionGroupStories} />
+ 
+<Title>TransitionGroup</Title>
+<Subtitle>Primitive for rendering components over time</Subtitle>
+
+### Usage
+
+```jsx
+import { TransitionGroup } from "@openai/apps-sdk-ui/components/Transition"
+```
+
+### Overview
+
+`<TransitionGroup>` manages the mounting and unmounting of components _over time_ by controlling the rendering of `children` passed to the component.
+
+When `children` are mounted and unmounted, `<TransitionGroup>` wraps the components with a containing element and applies stateful data attributes for entering and exiting transitions.
+
+The timing of component rendering and stateful data attributes is based on `enterDuration` and `exitDuration` values. Children must provide a stable `key` to correctly keep track of component references.
+
+### When to use
+
+Always reach for `<Animate>`, `<AnimateLayout>`, or `<AnimateLayoutGroup>` before using `<TransitionGroup>` directly.
+
+Direct use of this primitive should only be necessary for very complex transitions with many moving parts.
+
+<Canvas of={TransitionGroupStories.Base} source={{code: `
+// JSX
+<TransitionGroup className={s.Example} enterDuration={2000} exitDuration={1000}>
+  {show && <Square key="s" />}
+</TransitionGroup>
+
+// CSS
+.Example {
+  &[data-entering] {
+    opacity: 0;
+  }
+
+  &[data-exiting] {
+    opacity: 1;
+  }
+
+  &[data-entering-active],
+  &[data-exiting][data-interrupted] {
+    opacity: 1;
+    box-shadow: 0 0 0 5px green;
+    transition: opacity 2s ease, box-shadow 2s ease;
+  }
+
+  &[data-exiting-active],
+  &[data-entering][data-interrupted] {
+    opacity: 0;
+    box-shadow: 0 0 0 5px red;
+    transition: opacity 1s ease, box-shadow 1s ease;
+  }
+}
+`}}/>
+
+### Transition states
+
+There are two types of transitions, enter and exit, and five total data attributes that represent the possible state of transitions.
+
+The transition data attributes are transient, only applied while they are relevant. When a given transition is completed, attribute are removed.
+
+No styles are provided by default from `<TransitionGroup>`.
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`data-entering`</td>
+      <td>
+        Component enter transition is about to start - useful for staging enter animation styles.
+        Remains applied through the entire entrance transition.
+      </td>
+    </tr>
+    <tr>
+      <td>`data-entering-active`</td>
+      <td>Component enter transition is active.</td>
+    </tr>
+    <tr>
+      <td>`data-exiting`</td>
+      <td>
+        Component exit transition is about to start - useful for staging exit animation styles.
+        Remains applied through the entire exit transition.
+      </td>
+    </tr>
+    <tr>
+      <td>`data-exiting-active`</td>
+      <td>Component exit transition is active.</td>
+    </tr>
+    <tr>
+      <td>`data-interrupted`</td>
+      <td>
+        Component was animating, but then changed to the opposite transition before the original
+        transition completed. For example, an exiting component was re-mounted again, or an entering
+        component was removed before completing entrance.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Initial mount transitions
+
+By default, `<TransitionGroup>` prevents initial transitions of `children` components when it _itself_ is mounted to the DOM.
+
+For specific situations where you want children of the `<TransitionGroup>` to transition as it's mounted, pass `preventInitialTransition={false}`.
+
+In the above example, `<Sample>` will experience an initial enter transition when the `TransitionGroup` is rendered.
+
+```jsx
+<TransitionGroup preventInitialTransition={false}>{show && <Sample key="s" />}</TransitionGroup>
+```
+
+### Props
+
+<ArgTypes of={TransitionGroupStories} />

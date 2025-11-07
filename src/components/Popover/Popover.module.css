@@ -1,0 +1,84 @@
+.Transition {
+  /* CSS Modules requires a top-level class to create the string map entry */
+}
+
+.Popover {
+  overflow: auto;
+  width: var(--popover-width, auto);
+  min-width: var(--popover-min-width, 300px);
+  max-width: min(var(--popover-max-width, 700px), var(--radix-popover-content-available-width));
+  max-height: var(--radix-popover-content-available-height);
+  border-radius: var(--popover-radius);
+  background: var(--color-surface-elevated);
+  box-shadow: var(--shadow), var(--shadow-hairline);
+  -webkit-overflow-scrolling: touch;
+  transform-origin: var(--radix-popover-content-transform-origin);
+  will-change: transform;
+
+  &:focus {
+    outline: none;
+  }
+
+  &[data-translucent] {
+    backdrop-filter: blur(16px);
+    background: linear-gradient(360deg, rgb(247 247 248 / 50%) 0%, rgb(247 247 248 / 100%) 100%);
+
+    @mixin dark {
+      background: linear-gradient(360deg, rgb(86 88 105 / 25%) 0%, rgb(86 88 105 / 49%) 100%);
+    }
+  }
+
+  /* One-off animations */
+  &[data-animate="shake"] {
+    animation: shake 0.4s ease;
+  }
+
+  /* Visibility transitions */
+  .Transition[data-entering] & {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  .Transition[data-entering-active] &,
+  .Transition[data-entering][data-interrupted] & {
+    opacity: 1;
+    transform: scale(1);
+    transition-duration: 0.35s;
+    transition-property: opacity, transform;
+    transition-timing-function: var(--cubic-enter);
+  }
+
+  .Transition[data-exiting] & {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .Transition[data-exiting-active] &,
+  .Transition[data-exiting][data-interrupted] & {
+    opacity: 0;
+    transform: scale(0.95);
+    transition-duration: 0.2s;
+    transition-property: opacity, transform;
+    transition-timing-function: var(--cubic-exit);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

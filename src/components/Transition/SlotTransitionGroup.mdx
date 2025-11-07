@@ -1,0 +1,114 @@
+import { Canvas, Controls, Meta, Subtitle, Title, ArgTypes } from "@storybook/blocks"
+
+import * as SlotTransitionGroupStories from './SlotTransitionGroup.stories';
+ 
+<Meta of={SlotTransitionGroupStories} />
+ 
+<Title>SlotTransitionGroup</Title>
+<Subtitle>Primitive for rendering components over time (slot-based)</Subtitle>
+
+### Usage
+
+```jsx
+import { SlotTransitionGroup } from "@openai/apps-sdk-ui/components/Transition"
+```
+
+### Overview
+
+`<SlotTransitionGroup>` manages the mounting and unmounting of components over time by applying stateful data attributes directly to the original child element(s). No wrapper elements are introduced.
+
+When keyed `children` are mounted or unmounted, `<SlotTransitionGroup>` adds transition state data attributes on the child node itself.
+
+The timing of stateful attributes is controlled with `enterDuration` and `exitDuration`. Children must provide a stable `key` so transitions are tracked correctly.
+
+### When to use
+
+- Prefer `<Animate>`, `<AnimateLayout>`, or `<AnimateLayoutGroup>` first.
+- Use `<SlotTransitionGroup>` when you need `<TransitionGroup>`-like control but without any extra wrapper nodes.
+
+<Canvas of={SlotTransitionGroupStories.Base} source={{code: `
+// JSX
+<SlotTransitionGroup enterDuration={2000} exitDuration={1000}>
+  {show && <Square key="s" className={s.Example} />}
+</SlotTransitionGroup>
+
+// CSS
+.Example {
+  &[data-entering] {
+    opacity: 0;
+  }
+
+  &[data-exiting] {
+    opacity: 1;
+  }
+
+  &[data-entering-active],
+  &[data-exiting][data-interrupted] {
+    opacity: 1;
+    box-shadow: 0 0 0 5px green;
+    transition: opacity 2s ease, box-shadow 2s ease;
+  }
+
+  &[data-exiting-active],
+  &[data-entering][data-interrupted] {
+    opacity: 0;
+    box-shadow: 0 0 0 5px red;
+    transition: opacity 1s ease, box-shadow 1s ease;
+  }
+}
+`}}/>
+
+### Transition states
+
+There are two types of transitions, enter and exit, and five total data attributes that represent the possible state of transitions. These attributes are applied directly on the child elements.
+
+The attributes are transient and removed when no longer relevant.
+
+No styles are provided by default.
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`data-entering`</td>
+      <td>Component enter transition is staged. Remains applied through the entire entrance transition.</td>
+    </tr>
+    <tr>
+      <td>`data-entering-active`</td>
+      <td>Component enter transition is active.</td>
+    </tr>
+    <tr>
+      <td>`data-exiting`</td>
+      <td>Component exit transition is staged. Remains applied through the entire exit transition.</td>
+    </tr>
+    <tr>
+      <td>`data-exiting-active`</td>
+      <td>Component exit transition is active.</td>
+    </tr>
+    <tr>
+      <td>`data-interrupted`</td>
+      <td>Component was animating and then switched to the opposite transition before completion.</td>
+    </tr>
+  </tbody>
+  </table>
+
+### Initial mount transitions
+
+By default, `<SlotTransitionGroup>` prevents initial transitions of `children` when it is mounted.
+
+If you want children to transition on the initial mount of the group, pass `preventInitialTransition={false}`.
+
+```jsx
+<SlotTransitionGroup preventInitialTransition={false}>{show && <Sample key="s" />}</SlotTransitionGroup>
+```
+
+### Props
+
+<ArgTypes of={SlotTransitionGroupStories} />
+
+

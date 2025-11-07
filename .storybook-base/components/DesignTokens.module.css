@@ -1,0 +1,122 @@
+.StickyContainer {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2 !important;
+  padding-top: 14px !important;
+  margin-top: -10px !important;
+  background: var(--color-surface) !important;
+}
+
+.Container {
+  position: relative;
+}
+
+.Input {
+  display: block;
+  width: 100%;
+  padding: 12px 20px 12px 44px;
+  border: 1px solid var(--alpha-10);
+  border-radius: var(--radius-md);
+  margin: 0 0 24px;
+  background: var(--color-surface);
+  font-size: 15px;
+  transition: border-color 0.15s ease;
+
+  &::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  &:hover {
+    border-color: var(--alpha-15);
+  }
+
+  &:focus {
+    border-color: var(--alpha-20);
+    outline: 0;
+  }
+}
+
+.InputIcon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+
+.Table {
+  width: 100%;
+  margin: 0 0 32px;
+
+  th {
+    padding: 0 6px 4px;
+    color: var(--color-text-tertiary);
+    font-size: 13px;
+    font-weight: var(--font-weight-medium);
+    text-align: left;
+  }
+
+  td {
+    padding: 12px 6px;
+    border-top: 1px solid var(--alpha-10);
+    text-align: left;
+  }
+}
+
+.ColorDisplay {
+  width: 31px;
+  height: 30px;
+  border-radius: var(--radius-xs);
+  margin-bottom: 4px;
+  box-shadow: 0 0 0 1px inset var(--alpha-04);
+}
+
+.ValueDisplay {
+  padding: 2px 6px;
+  border: 1px solid var(--alpha-12);
+  border-radius: var(--radius-xs);
+  background-color: light-dark(var(--gray-50), var(--alpha-08));
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+
+  [data-theme="dark"] & [data-light],
+  [data-theme="light"] & [data-dark] {
+    display: none;
+  }
+}
+
+.RadiusDisplay {
+  width: 61px;
+  height: 60px;
+  background: var(--gray-400);
+}
+
+.ShadowDisplayWrapper {
+  display: inline-block;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  background: var(--gray-75);
+}
+
+.ShadowDisplay {
+  width: 180px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.CopyButton {
+  flex-direction: row-reverse;
+  gap: 6px;
+  font-family: var(--font-mono);
+
+  svg {
+    opacity: 0.75;
+  }
+}

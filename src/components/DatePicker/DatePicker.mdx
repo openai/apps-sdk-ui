@@ -1,0 +1,38 @@
+import { Canvas, ArgTypes, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+ 
+import * as DatePickerStories from './DatePicker.stories';
+ 
+<Meta of={DatePickerStories} />
+ 
+<Title>DatePicker</Title>
+<Subtitle>Select a single date with an interactive calendar</Subtitle>
+
+## Usage
+```jsx
+import { DatePicker } from "@openai/apps-sdk-ui/components/DatePicker";
+```
+
+<Canvas of={DatePickerStories.Base}/>
+
+## Reference
+<ArgTypes of={DatePickerStories.Base} />
+
+## Examples
+
+### Limits
+
+Use `min` and `max` to limit selectable dates to a specific timeframe.
+
+<Canvas of={DatePickerStories.Limits}/>
+
+### Without Icon
+
+Remove the calendar icon from the trigger by setting `triggerShowIcon` to false.
+
+<Canvas of={DatePickerStories.WithoutIcon} />
+
+### Disabled
+
+Disable the picker to prevent user interaction.
+
+<Canvas of={DatePickerStories.Disabled}/>

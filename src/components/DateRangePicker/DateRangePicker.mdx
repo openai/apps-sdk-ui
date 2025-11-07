@@ -1,0 +1,44 @@
+import { Canvas, ArgTypes, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+ 
+import * as DateRangePickerStories from './DateRangePicker.stories';
+ 
+<Meta of={DateRangePickerStories} />
+ 
+<Title>DateRangePicker</Title>
+<Subtitle>Select a date range with an interactive calendar</Subtitle>
+
+## Usage
+```jsx
+import { DateRangePicker } from "@openai/apps-sdk-ui/components/DateRangePicker";
+```
+
+<Canvas of={DateRangePickerStories.Base}/>
+
+## Reference
+<ArgTypes of={DateRangePickerStories.Base} />
+
+## Examples
+
+### Limits
+
+Use `min` and `max` to limit date ranges to a specific timeframe.
+
+You can also use `maxRangeDays` to limit the range of days allowed.
+
+<Canvas of={DateRangePickerStories.Limits}/>
+
+### Shortcuts
+
+Use the `shortcuts` array to provide a list of quick data shortcuts.
+
+When a given shortcut is selected, it's label is displayed in the trigger.
+
+<Canvas of={DateRangePickerStories.Shortcuts} />
+
+### Month stepper
+
+Enable a stepper view in the trigger by passing `stepperUnit`. When the selected date matches the unit (e.g., a month), the trigger view will convert into the stepper view.
+
+When the range does not match the stepper unit, the normal trigger is displayed.
+
+<Canvas of={DateRangePickerStories.MonthStepper}/>

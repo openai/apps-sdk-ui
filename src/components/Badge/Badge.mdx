@@ -1,0 +1,54 @@
+import { Beta } from "../Icon";
+import { Badge } from "./";
+import { linkTo } from '@storybook/addon-links';
+import { LoadingIndicator } from "../Indicator";
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import { Hero } from '@storybookComponents/Hero';
+ 
+import * as BadgeStories from './Badge.stories';
+ 
+<Meta of={BadgeStories} />
+ 
+<Title>Badge</Title>
+<Subtitle>Emphasize details with a status indicator</Subtitle>
+
+<Hero className="flex gap-4">
+    <Badge color="success" size="lg">Successful</Badge>
+    <Badge size="lg" className="gap-1.5"><LoadingIndicator /> In progress</Badge>
+    <Badge color="danger" size="lg">Failed</Badge>
+    <Badge color="warning" size="lg" pill><Beta /> Beta</Badge>
+</Hero>
+
+## Usage
+```jsx
+import { Badge } from "@openai/apps-sdk-ui/components/Badge";
+```
+<Canvas of={BadgeStories.Base} additionalActions={[
+  { title: 'View story', onClick: linkTo(BadgeStories.title, 'Base')}
+]} />
+
+## Reference
+
+<ArgTypes of={BadgeStories.Base} />
+
+## Examples
+
+### Colors & variants
+You can stylize the display of the badge using the `color` and `variant` props.
+<Canvas of={BadgeStories.Colors} sourceState="none" />
+
+### Size & roundness
+You can control the size and roundness of the badge with `size` and `pill` props. When `pill` is set, extra horizontal gutter is dynamically applied to the badge.
+
+<Canvas of={BadgeStories.Sizing} sourceState="none" />
+<div className="canvas-controls-only">
+<Controls of={BadgeStories.Sizing}/>
+</div>
+
+### Icon
+Content within the badge can be composed, like showing icons. Color, sizing, and spacing adapt by default.
+<Canvas of={BadgeStories.Icon} />
+
+### Loading
+In this example, additional gap is added with a Tailwind `gap-1.5` class to provide the appropriate visual spacing.
+<Canvas of={BadgeStories.Loading} />

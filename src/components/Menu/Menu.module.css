@@ -1,0 +1,320 @@
+.Menu {
+  /* Top-level selector needs to exist */
+}
+
+.MenuList {
+  overflow: auto;
+  width: var(--menu-width, auto);
+  min-width: var(--menu-min-width, 300px);
+  max-width: var(--radix-dropdown-menu-content-available-width);
+  max-height: min(
+    var(--radix-dropdown-menu-content-available-height),
+    var(--menu-max-height, 1200px)
+  );
+  padding: var(--menu-gutter);
+  border-radius: var(--menu-radius);
+  background: var(--color-surface-elevated);
+  box-shadow: var(--shadow), var(--shadow-hairline);
+  color: var(--color-text);
+  font-size: var(--menu-font-size);
+  line-height: var(--menu-line-height);
+  -webkit-overflow-scrolling: touch;
+  pointer-events: auto;
+  /* The transform-origin computed from the content and arrow positions/offsets */
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  will-change: transform;
+
+  /* Animation states applied to a wrapping parent */
+  .Menu[data-entering] & {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  .Menu[data-entering-active] &,
+  .Menu[data-entering][data-interrupted] & {
+    opacity: 1;
+    transform: scale(1);
+    transition-duration: 0.35s;
+    transition-property: opacity, transform;
+    transition-timing-function: var(--cubic-enter);
+  }
+
+  .Menu[data-exiting] & {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .Menu[data-exiting-active] &,
+  .Menu[data-exiting][data-interrupted] & {
+    opacity: 0;
+    transform: scale(0.95);
+    transition-duration: 0.2s;
+    transition-property: opacity, transform;
+    transition-timing-function: var(--cubic-exit);
+  }
+}
+
+.MenuItemContent {
+  padding: var(--menu-item-padding);
+}
+
+.MenuItem {
+  position: relative;
+  display: block;
+  /* Defaults to inherit from pressable wrapper, this container is not flex */
+  align-items: center;
+  gap: var(--menu-item-gap);
+  padding: var(--menu-item-padding);
+  color: var(--color-text);
+  cursor: pointer;
+  user-select: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  @mixin hover {
+    /* Prevent links from changing colors */
+    color: var(--color-text);
+  }
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: calc(var(--menu-radius) - var(--menu-gutter));
+    background: var(--menu-item-background-color);
+    content: "";
+    opacity: 0;
+    transform: scale(var(--scale, 0.98));
+    transition-duration: var(--transition-duration-basic);
+    transition-property: opacity, background-color, transform;
+    transition-timing-function: var(--cubic-enter);
+    will-change: opacity, transform;
+  }
+
+  &[data-state="open"],
+  &[data-highlighted] {
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &:has(.ItemActions:hover)::before {
+      opacity: 0.4;
+    }
+
+    &:not(:has(.ItemActions:hover)):active::before {
+      transform: scale(var(--scale, 0.98));
+    }
+
+    .ItemActions {
+      opacity: 1;
+    }
+  }
+
+  &[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.PressableInner {
+  position: relative;
+  display: flex;
+  /* Allow flex settings to be applied to the container, for className ergonomics */
+  align-items: inherit;
+  justify-content: inherit;
+  gap: inherit;
+}
+
+.ItemActions {
+  /* Prevent adding height to the MenuItem, and horizontally center */
+  display: flex;
+  align-items: center;
+  height: 0;
+  /* Magic number that pulls back the icon an equal gutter from the top/bottom */
+  margin-right: -5px;
+  opacity: 0;
+  transition-duration: var(--transition-duration-basic);
+  transition-property: opacity;
+  transition-timing-function: var(--cubic-enter);
+}
+
+.Separator {
+  height: 1px;
+  margin: var(--menu-separator-gutter);
+  background: var(--menu-separator-background-color);
+}
+
+.SubMenuItem {
+  justify-content: space-between;
+}
+
+.SubTriggerIcon {
+  /* slight visual offset of svg canvas */
+  margin-right: -2px;
+  opacity: 0.75;
+  transition: opacity var(--transition-duration-basic) var(--transition-ease-basic);
+
+  .SubMenuItem[data-state="open"] &,
+  .SubMenuItem[data-highlighted] & {
+    opacity: 1;
+  }
+}
+
+.RadioItem {
+  gap: spacing(2);
+
+  :where([data-indicator-position="end"]) & {
+    justify-content: space-between;
+    gap: spacing(3);
+  }
+}
+
+.RadioIndicatorActive {
+  position: relative;
+  display: inline-grid;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  &::before,
+  &::after {
+    display: block;
+    content: "";
+    grid-column-start: 1;
+    grid-row-start: 1;
+    place-self: center center;
+    will-change: transform;
+  }
+
+  /* Filled circle */
+  &::before {
+    width: var(--menu-radio-indicator-size);
+    height: var(--menu-radio-indicator-size);
+    border-radius: var(--radius-full);
+    animation: fade-in 0.4s var(--cubic-enter);
+    background-color: var(--radio-group-indicator-background-color);
+  }
+
+  /*  Empty middle circle */
+  &::after {
+    width: var(--menu-radio-indicator-hole-size);
+    height: var(--menu-radio-indicator-hole-size);
+    border-radius: var(--radius-full);
+    animation: scale-in 0.4s var(--cubic-enter);
+    background-color: var(--radio-group-indicator-hole-background-color);
+  }
+
+  /* Don't play the animation when entering */
+  [data-entering] &::before,
+  [data-entering] &::after {
+    animation-duration: 0s;
+  }
+}
+
+.RadioIndicator {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--menu-radio-indicator-size);
+  height: var(--menu-radio-indicator-size);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background-color: transparent;
+  box-shadow: 0 0 0 1px var(--radio-group-indicator-border-color) inset;
+  cursor: pointer;
+  transition-duration: var(--transition-duration-basic);
+  transition-property: box-shadow;
+  transition-timing-function: var(--transition-ease-basic);
+
+  [data-indicator-position="end"] & {
+    order: 1;
+  }
+
+  [data-highlighted] & {
+    box-shadow: 0 0 0 1px var(--radio-group-indicator-border-color-hover) inset;
+  }
+
+  [data-disabled] & {
+    cursor: not-allowed;
+  }
+
+  /* Can't be focused here anyway */
+  &:focus {
+    outline: none;
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.CheckboxItem {
+  gap: spacing(2);
+
+  &:where([data-indicator-position="end"]) {
+    justify-content: space-between;
+    gap: spacing(3);
+  }
+}
+
+.CheckboxIndicator {
+  flex-shrink: 0;
+  width: var(--menu-checkbox-indicator-size);
+  height: var(--menu-checkbox-indicator-size);
+
+  [data-indicator-position="end"] & {
+    order: 1;
+  }
+
+  [data-indicator-variant="solid"] & {
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 0 1px var(--radio-group-indicator-border-color) inset;
+  }
+}
+
+.CheckboxCircle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--menu-checkbox-indicator-size);
+  height: var(--menu-checkbox-indicator-size);
+  border-radius: var(--radius-full);
+  animation: fade-in 0.5s var(--cubic-enter);
+  background-color: var(--radio-group-indicator-background-color);
+  color: var(--radio-group-indicator-hole-background-color);
+
+  /* Don't play the animation when entering */
+  [data-entering] &::before,
+  [data-entering] &::after {
+    animation-duration: 0s;
+  }
+}

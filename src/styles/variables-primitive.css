@@ -1,0 +1,284 @@
+@layer theme {
+  :root,
+  :where([data-theme]) {
+    /* =============================================
+      Gray
+    ============================================= */
+    --gray-0: light-dark(#ffffff, #0d0d0d);
+    --gray-25: light-dark(#fcfcfc, #101010);
+    --gray-50: light-dark(#f9f9f9, #131313);
+    --gray-75: light-dark(#f3f3f3, #161616);
+    --gray-100: light-dark(#ededed, #181818);
+    --gray-150: light-dark(#dfdfdf, #1c1c1c);
+    --gray-200: light-dark(#cdcdcd, #212121);
+    --gray-250: light-dark(#b9b9b9, #282828);
+    --gray-300: light-dark(#afafaf, #303030);
+    --gray-350: light-dark(#9f9f9f, #393939);
+    --gray-400: light-dark(#8f8f8f, #414141);
+    --gray-450: light-dark(#767676, #4f4f4f);
+    --gray-500: #5d5d5d;
+    --gray-550: light-dark(#4f4f4f, #767676);
+    --gray-600: light-dark(#414141, #8f8f8f);
+    --gray-650: light-dark(#393939, #9f9f9f);
+    --gray-700: light-dark(#303030, #afafaf);
+    --gray-750: light-dark(#282828, #b9b9b9);
+    --gray-800: light-dark(#212121, #cdcdcd);
+    --gray-850: light-dark(#1c1c1c, #dcdcdc);
+    --gray-900: light-dark(#181818, #ededed);
+    --gray-925: light-dark(#161616, #f3f3f3);
+    --gray-950: light-dark(#131313, #f3f3f3);
+    --gray-975: light-dark(#101010, #f9f9f9);
+    --gray-1000: light-dark(#0d0d0d, #ffffff);
+
+    /* =============================================
+      Alpha transparency
+    ============================================= */
+    --alpha-base: light-dark(#0d0d0d, #ffffff);
+    --alpha-0: alpha(var(--alpha-base), 0%);
+    --alpha-02: alpha(var(--alpha-base), 2%);
+    --alpha-04: alpha(var(--alpha-base), 4%);
+    --alpha-05: alpha(var(--alpha-base), 5%);
+    --alpha-06: alpha(var(--alpha-base), 6%);
+    --alpha-08: alpha(var(--alpha-base), 8%);
+    --alpha-10: alpha(var(--alpha-base), 10%);
+    --alpha-12: alpha(var(--alpha-base), 12%);
+    --alpha-15: alpha(var(--alpha-base), 15%);
+    --alpha-16: alpha(var(--alpha-base), 16%);
+    --alpha-20: alpha(var(--alpha-base), 20%);
+    --alpha-25: alpha(var(--alpha-base), 25%);
+    --alpha-30: alpha(var(--alpha-base), 30%);
+    --alpha-35: alpha(var(--alpha-base), 35%);
+    --alpha-40: alpha(var(--alpha-base), 40%);
+    --alpha-50: alpha(var(--alpha-base), 50%);
+    --alpha-60: alpha(var(--alpha-base), 60%);
+    --alpha-70: alpha(var(--alpha-base), 70%);
+
+    /* =============================================
+      Consistent contrast
+    ============================================= */
+    --white: #ffffff;
+    --black: #000000;
+
+    /* =============================================
+      Green
+    ============================================= */
+    --green-25: #edfaf2;
+    --green-50: #d9f4e4;
+    --green-75: #b8ebcc;
+    --green-100: #8cdfad;
+    --green-200: #66d492;
+    --green-300: #40c977;
+    --green-400: #04b84c;
+    --green-500: #00a240;
+    --green-600: #008635;
+    --green-700: #00692a;
+    --green-800: #004f1f;
+    --green-900: #003716;
+    --green-950: #011c0b;
+    --green-1000: #001207;
+    --green-a25: alpha(var(--green-400), 8%);
+    --green-a50: alpha(var(--green-400), 15%);
+    --green-a75: alpha(var(--green-400), 29%);
+    --green-a100: alpha(var(--green-400), 45%);
+    --green-a200: alpha(var(--green-400), 60%);
+    --green-a300: alpha(var(--green-400), 75%);
+
+    /* =============================================
+      Red
+    ============================================= */
+    --red-25: #fff0f0;
+    --red-50: #ffd9d9;
+    --red-75: #ffc6c5;
+    --red-100: #ffa4a2;
+    --red-200: #ff8583;
+    --red-300: #ff6764;
+    --red-400: #fa423e;
+    --red-500: #e02e2a;
+    --red-600: #ba2623;
+    --red-700: #911e1b;
+    --red-800: #6e1615;
+    --red-900: #4d100e;
+    --red-950: #280b0a;
+    --red-1000: #1f0909;
+    --red-a25: alpha(var(--red-400), 8%);
+    --red-a50: alpha(var(--red-400), 16%);
+    --red-a75: alpha(var(--red-400), 30%);
+    --red-a100: alpha(var(--red-400), 48%);
+    --red-a200: alpha(var(--red-400), 64%);
+    --red-a300: alpha(var(--red-400), 79%);
+
+    /* =============================================
+      Pink
+    ============================================= */
+    --pink-25: #fff4f9;
+    --pink-50: #ffe8f3;
+    --pink-75: #ffd4e8;
+    --pink-100: #ffbada;
+    --pink-200: #ffa3ce;
+    --pink-300: #ff8cc1;
+    --pink-400: #ff66ad;
+    --pink-500: #e04c91;
+    --pink-600: #ba437a;
+    --pink-700: #963c67;
+    --pink-800: #6e2c4a;
+    --pink-900: #4d1f34;
+    --pink-950: #29101c;
+    --pink-1000: #1a0a11;
+    --pink-a25: alpha(var(--pink-400), 8%);
+    --pink-a50: alpha(var(--pink-400), 16%);
+    --pink-a75: alpha(var(--pink-400), 28%);
+    --pink-a100: alpha(var(--pink-400), 45%);
+    --pink-a200: alpha(var(--pink-400), 60%);
+    --pink-a300: alpha(var(--pink-400), 76%);
+
+    /* =============================================
+      Orange
+    ============================================= */
+    --orange-25: #fff5f0;
+    --orange-50: #ffe7d9;
+    --orange-75: #ffcfb4;
+    --orange-100: #ffb790;
+    --orange-200: #ff9e6c;
+    --orange-300: #ff8549;
+    --orange-400: #fb6a22;
+    --orange-500: #e25507;
+    --orange-600: #b9480d;
+    --orange-700: #923b0f;
+    --orange-800: #6d2e0f;
+    --orange-900: #4a2206;
+    --orange-950: #281105;
+    --orange-1000: #211107;
+    --orange-a25: alpha(var(--orange-400), 7%);
+    --orange-a50: alpha(var(--orange-400), 16%);
+    --orange-a75: alpha(var(--orange-400), 33%);
+    --orange-a100: alpha(var(--orange-400), 48%);
+    --orange-a200: alpha(var(--orange-400), 65%);
+    --orange-a300: alpha(var(--orange-400), 81%);
+
+    /* =============================================
+      Yellow
+    ============================================= */
+    --yellow-25: #fffbed;
+    --yellow-50: #fff6d9;
+    --yellow-75: #ffeeb8;
+    --yellow-100: #ffe48c;
+    --yellow-200: #ffdb66;
+    --yellow-300: #ffd240;
+    --yellow-400: #ffc300;
+    --yellow-500: #e0ac00;
+    --yellow-600: #ba8e00;
+    --yellow-700: #916f00;
+    --yellow-800: #6e5400;
+    --yellow-900: #4d3b00;
+    --yellow-950: #261d00;
+    --yellow-1000: #1a1400;
+    --yellow-a25: alpha(var(--yellow-400), 8%);
+    --yellow-a50: alpha(var(--yellow-400), 15%);
+    --yellow-a75: alpha(var(--yellow-400), 27%);
+    --yellow-a100: alpha(var(--yellow-400), 45%);
+    --yellow-a200: alpha(var(--yellow-400), 59%);
+    --yellow-a300: alpha(var(--yellow-400), 74%);
+
+    /* =============================================
+      Purple
+    ============================================= */
+    --purple-25: #f9f5fe;
+    --purple-50: #efe5fe;
+    --purple-75: #e0cefd;
+    --purple-100: #ceb0fb;
+    --purple-200: #be95fa;
+    --purple-300: #ad7bf9;
+    --purple-400: #924ff7;
+    --purple-500: #8046d9;
+    --purple-600: #6b3ab4;
+    --purple-700: #532d8d;
+    --purple-800: #3f226a;
+    --purple-900: #2c184a;
+    --purple-950: #160c25;
+    --purple-1000: #100a19;
+    --purple-a25: alpha(var(--purple-400), 6%);
+    --purple-a50: alpha(var(--purple-400), 15%);
+    --purple-a75: alpha(var(--purple-400), 28%);
+    --purple-a100: alpha(var(--purple-400), 45%);
+    --purple-a200: alpha(var(--purple-400), 60%);
+    --purple-a300: alpha(var(--purple-400), 75%);
+
+    /* =============================================
+      Blue
+    ============================================= */
+    --blue-25: #f5faff;
+    --blue-50: #e5f3ff;
+    --blue-75: #cce6ff;
+    --blue-100: #99ceff;
+    --blue-200: #66b5ff;
+    --blue-300: #339cff;
+    --blue-400: #0285ff;
+    --blue-500: #0169cc;
+    --blue-600: #004f99;
+    --blue-700: #003f7a;
+    --blue-800: #013566;
+    --blue-900: #00284d;
+    --blue-950: #000e1a;
+    --blue-1000: #000d19;
+    --blue-a25: alpha(var(--blue-400), 4%);
+    --blue-a50: alpha(var(--blue-400), 13%);
+    --blue-a75: alpha(var(--blue-400), 25%);
+    --blue-a100: alpha(var(--blue-400), 40%);
+    --blue-a200: alpha(var(--blue-400), 60%);
+    --blue-a300: alpha(var(--blue-400), 80%);
+
+    /* =============================================
+    Sizes
+    ============================================= */
+    --hairline: 1px;
+
+    @media (resolution >= 150dpi), (resolution >= 1.5dppx) {
+      --hairline: 0.5px;
+    }
+
+    /* =============================================
+    Shadows
+    ============================================= */
+    /* Color */
+    --shadow-color: 0 0 0;
+    /* Geometry – x | y | blur | spread */
+    --elevation-100-geo: 0 1px 2px -1px;
+    --elevation-200-geo: 0 2px 4px -1px;
+    --elevation-300-geo: 0 4px 8px -2px;
+    --elevation-400-geo: 0 8px 16px -4px;
+  }
+
+  :where(:root),
+  :where([data-theme="light"]) {
+    /* Alpha */
+    --shadow-alpha-100: 0.08;
+    --shadow-alpha-200: 0.08;
+    --shadow-alpha-300: 0.1;
+    --shadow-alpha-400: 0.12;
+    --shadow-hairline-width: 1px;
+    --shadow-hairline-color: rgb(0 0 0 / 8%);
+
+    @media (resolution >= 150dpi), (resolution >= 1.5dppx) {
+      --shadow-hairline-width: 0.5px;
+      --shadow-hairline-color: rgb(0 0 0 / 10%);
+    }
+  }
+
+  :where([data-theme="dark"]) {
+    --shadow-alpha-100: 0.2;
+    --shadow-alpha-200: 0.2;
+    --shadow-alpha-300: 0.36;
+    --shadow-alpha-400: 0.3;
+    --shadow-hairline-width: 1px;
+    --shadow-hairline-color: rgb(255 255 255 / 10%);
+
+    @media (resolution >= 150dpi), (resolution >= 1.5dppx) {
+      --shadow-hairline-width: 0.5px;
+      --shadow-hairline-color: rgb(255 255 255 / 12%);
+    }
+
+    [data-surface="elevated"] {
+      --shadow-hairline: 0 0 rgb(0 0 0 / 0%); /* no edge on lighter gray */
+    }
+  }
+}

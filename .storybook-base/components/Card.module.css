@@ -1,0 +1,70 @@
+.Card {
+  position: relative;
+  flex: 1;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  user-select: none;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--alpha-12);
+    border-radius: var(--radius-md);
+    background-color: transparent;
+    content: "";
+    transition:
+      background-color 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  &[data-interactive="false"]::before {
+    opacity: 0.6;
+  }
+
+  &[data-interactive="true"] {
+    cursor: pointer;
+
+    &:hover {
+      &::before {
+        background-color: light-dark(var(--alpha-02), var(--alpha-04));
+      }
+    }
+
+    &:active {
+      &::before {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+.CardInner {
+  position: relative;
+}
+
+.Title {
+  padding: 0;
+  margin: 0 0 1px;
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+
+  .FooterCard & {
+    margin: 3px 0 0;
+  }
+}
+
+.Subtitle {
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+
+  .FooterCard & {
+    font-size: 14px;
+  }
+}
+
+.Icon {
+  margin: 0 0 8px;
+  font-size: 24px;
+}

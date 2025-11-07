@@ -1,0 +1,876 @@
+.Button {
+  position: relative;
+  display: inline-block;
+  gap: var(--button-gap); /* Propagates down to .ButtonInner */
+  flex-shrink: 0;
+  height: var(--button-size);
+  padding: 0 var(--button-gutter);
+  border-radius: var(--button-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  line-height: 1;
+  transition-duration: var(--transition-duration-basic);
+  transition-property: opacity, color;
+  transition-timing-function: var(--transition-ease-basic);
+  user-select: none;
+  white-space: nowrap;
+
+  /* Background / shape of the button */
+  &::before {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: inherit;
+    content: "";
+    transition-duration: var(--transition-duration-basic);
+    transition-property: opacity, background-color, transform, box-shadow, border-color;
+    transition-timing-function: var(--transition-ease-basic);
+    /* Composite layer seems required in some cases to avoid visual artifacts. */
+    will-change: transform;
+  }
+
+  /* Focus ring */
+  &::after {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: inherit;
+    content: "";
+    pointer-events: none;
+    transition-duration: var(--transition-duration-basic);
+    transition-property: transform;
+    transition-timing-function: var(--transition-ease-basic);
+    /* Composite layer seems required in some cases to avoid visual artifacts. */
+    will-change: transform;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    &::after {
+      outline: 2px solid var(--button-ring-color, var(--color-ring));
+      outline-offset: var(--button-ring-offset, 2px);
+    }
+  }
+
+  svg:where(:not([data-no-autosize])) {
+    width: var(--button-icon-size);
+    height: var(--button-icon-size);
+
+    :where(&:first-child:not(:only-child)) {
+      margin-left: var(--button-icon-offset, -1px);
+    }
+
+    :where(&:last-child:not(:only-child)) {
+      margin-right: var(--button-icon-offset, -1px);
+    }
+  }
+
+  /* =============================================
+    Optical alignment
+  ============================================= */
+  &:where([data-optically-align="start"]) {
+    margin-inline-start: calc(var(--button-gutter) * -1);
+  }
+
+  &:where([data-optically-align="end"]) {
+    margin-inline-end: calc(var(--button-gutter) * -1);
+  }
+
+  /* Uniform buttons zero-out button-gutter, requiring custom calcs */
+  &:where([data-optically-align="start"][data-uniform]) {
+    margin-inline-start: calc(((var(--button-size) - var(--button-icon-size)) / 2) * -1);
+  }
+
+  &:where([data-optically-align="end"][data-uniform]) {
+    margin-inline-end: calc(((var(--button-size) - var(--button-icon-size)) / 2) * -1);
+  }
+
+  /* =============================================
+    Sizes
+  ============================================= */
+  &:where([data-size="3xs"]) {
+    --button-size: var(--control-size-3xs);
+    --button-gutter: var(--control-gutter-2xs);
+    --button-font-size: var(--control-font-size-sm);
+    --button-icon-size: var(--control-icon-size-xs);
+    --button-gap: var(--button-gap-sm);
+    --button-radius: var(--control-radius-sm);
+    --button-icon-offset: -1px;
+    --indicator-size: 11px;
+    --circular-progress-size: 11px;
+  }
+
+  &:where([data-size="2xs"]) {
+    --button-size: var(--control-size-2xs);
+    --button-gutter: var(--control-gutter-xs);
+    --button-font-size: var(--control-font-size-sm);
+    --button-icon-size: var(--control-icon-size-sm);
+    --button-gap: var(--button-gap-md);
+    --button-radius: var(--control-radius-sm);
+    --button-icon-offset: -1px;
+    --indicator-size: 12px;
+    --circular-progress-size: 12px;
+  }
+
+  &:where([data-size="xs"]) {
+    --button-size: var(--control-size-xs);
+    --button-gutter: var(--control-gutter-xs);
+    --button-font-size: var(--control-font-size-md);
+    --button-icon-size: var(--control-icon-size-sm);
+    --button-gap: var(--button-gap-md);
+    --button-radius: var(--control-radius-sm);
+    --button-icon-offset: -1px;
+    --indicator-size: 13px;
+    --circular-progress-size: 14px;
+  }
+
+  &:where([data-size="sm"]) {
+    --button-size: var(--control-size-sm);
+    --button-gutter: var(--control-gutter-sm);
+    --button-font-size: var(--control-font-size-md);
+    --button-icon-size: var(--control-icon-size-md);
+    --button-gap: var(--button-gap-md);
+    --button-radius: var(--control-radius-sm);
+    --button-icon-offset: -1px;
+    --indicator-size: 15px;
+    --circular-progress-size: 15px;
+  }
+
+  &:where([data-size="md"]) {
+    --button-size: var(--control-size-md);
+    --button-gutter: var(--control-gutter-md);
+    --button-font-size: var(--control-font-size-md);
+    --button-icon-size: var(--control-icon-size-md);
+    --button-gap: var(--button-gap-lg);
+    --button-radius: var(--control-radius-md);
+    --button-icon-offset: -1px;
+    --indicator-size: 16px;
+    --circular-progress-size: 16px;
+  }
+
+  &:where([data-size="lg"]) {
+    --button-size: var(--control-size-lg);
+    --button-gutter: var(--control-gutter-md);
+    --button-font-size: var(--control-font-size-md);
+    --button-icon-size: var(--control-icon-size-md);
+    --button-gap: var(--button-gap-lg);
+    --button-radius: var(--control-radius-md);
+    --button-icon-offset: -1px;
+    --indicator-size: 16px;
+    --circular-progress-size: 16px;
+  }
+
+  &:where([data-size="xl"]) {
+    --button-size: var(--control-size-xl);
+    --button-gutter: var(--control-gutter-lg);
+    --button-font-size: var(--control-font-size-md);
+    --button-icon-size: var(--control-icon-size-md);
+    --button-gap: var(--button-gap-lg);
+    --button-radius: var(--control-radius-lg);
+    --button-icon-offset: -1px;
+    --indicator-size: 18px;
+    --circular-progress-size: 18px;
+  }
+
+  &:where([data-size="2xl"]) {
+    --button-size: var(--control-size-2xl);
+    --button-gutter: var(--control-gutter-lg);
+    --button-font-size: var(--control-font-size-lg);
+    --button-icon-size: var(--control-icon-size-lg);
+    --button-gap: var(--button-gap-lg);
+    --button-radius: var(--control-radius-xl);
+    --button-icon-offset: -2px;
+    --indicator-size: 18px;
+    --circular-progress-size: 18px;
+  }
+
+  &:where([data-size="3xl"]) {
+    --button-size: var(--control-size-3xl);
+    --button-gutter: var(--control-gutter-xl);
+    --button-font-size: var(--control-font-size-lg);
+    --button-icon-size: var(--control-icon-size-lg);
+    --button-gap: var(--button-gap-lg);
+    --button-radius: var(--control-radius-xl);
+    --button-icon-offset: -2px;
+    --indicator-size: 20px;
+    --circular-progress-size: 20px;
+  }
+
+  /* =============================================
+    Gutter sizes
+  ============================================= */
+  &:where([data-gutter-size="2xs"]) {
+    --button-gutter: var(--control-gutter-2xs);
+  }
+
+  &:where([data-gutter-size="xs"]) {
+    --button-gutter: var(--control-gutter-xs);
+  }
+
+  &:where([data-gutter-size="sm"]) {
+    --button-gutter: var(--control-gutter-sm);
+  }
+
+  &:where([data-gutter-size="md"]) {
+    --button-gutter: var(--control-gutter-md);
+  }
+
+  &:where([data-gutter-size="lg"]) {
+    --button-gutter: var(--control-gutter-lg);
+  }
+
+  &:where([data-gutter-size="xl"]) {
+    --button-gutter: var(--control-gutter-xl);
+  }
+
+  /* =============================================
+    Icon sizes
+  ============================================= */
+  &:where([data-icon-size="sm"]) {
+    --button-icon-size: var(--control-icon-size-sm);
+  }
+
+  &:where([data-icon-size="md"]) {
+    --button-icon-size: var(--control-icon-size-md);
+  }
+
+  &:where([data-icon-size="lg"]) {
+    --button-icon-size: var(--control-icon-size-lg);
+  }
+
+  &:where([data-icon-size="xl"]) {
+    --button-icon-size: var(--control-icon-size-xl);
+  }
+
+  &:where([data-icon-size="2xl"]) {
+    --button-icon-size: var(--control-icon-size-2xl);
+  }
+
+  /* =============================================
+    Pill
+  ============================================= */
+  &:where([data-pill]) {
+    --button-radius: var(--radius-full);
+
+    padding: 0 calc(var(--button-gutter) * var(--control-gutter-pill-scaling));
+  }
+
+  /* =============================================
+    Block
+  ============================================= */
+  &:where([data-block]) {
+    width: 100%;
+  }
+
+  /* =============================================
+    Uniform
+  ============================================= */
+  &[data-uniform] {
+    --button-gutter: 0;
+
+    width: var(--button-size);
+  }
+
+  /* =============================================
+    Ghost variant
+  ============================================= */
+  &[data-variant="ghost"] {
+    --button-ring-offset: -1px;
+
+    color: var(--button-text-color);
+
+    &::before {
+      background-color: var(--button-background-color);
+      opacity: 0;
+      transform: scale(var(--scale));
+    }
+
+    &[aria-expanded="true"],
+    &[data-state="open"] {
+      color: var(--button-text-color-hover);
+
+      &::before {
+        /* Slightly deemphasize */
+        opacity: 0.6;
+        transform: scale(1);
+      }
+    }
+
+    &[data-selected] {
+      color: var(--button-text-color-hover);
+
+      &::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    &:where(:not([data-disabled])) {
+      @mixin hover {
+        color: var(--button-text-color-hover);
+
+        &::before {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      &:active {
+        &::before {
+          background-color: var(--button-background-color-active);
+          opacity: 1;
+          transform: scale(var(--scale));
+        }
+
+        &::after {
+          transform: scale(var(--scale));
+        }
+      }
+    }
+
+    &:where([data-color="primary"]) {
+      --button-background-color: var(--color-background-primary-ghost-hover);
+      --button-background-color-active: var(--color-background-primary-ghost-active);
+      --button-text-color: var(--color-text-primary-ghost);
+      --button-text-color-hover: var(--color-text-primary-ghost-hover);
+      --button-ring-color: var(--color-ring-primary-ghost);
+    }
+
+    &:where([data-color="secondary"]) {
+      --button-background-color: var(--color-background-secondary-ghost-hover);
+      --button-background-color-active: var(--color-background-secondary-ghost-active);
+      --button-text-color: var(--color-text-secondary-ghost);
+      --button-text-color-hover: var(--color-text-secondary-ghost-hover);
+      --button-ring-color: var(--color-ring-secondary-ghost);
+    }
+
+    &:where([data-color="danger"]) {
+      --button-background-color: var(--color-background-danger-ghost-hover);
+      --button-background-color-active: var(--color-background-danger-ghost-active);
+      --button-text-color: var(--color-text-danger-ghost);
+      --button-text-color-hover: var(--color-text-danger-ghost-hover);
+      --button-ring-color: var(--color-ring-danger-ghost);
+    }
+
+    &:where([data-color="success"]) {
+      --button-background-color: var(--color-background-success-ghost-hover);
+      --button-background-color-active: var(--color-background-success-ghost-active);
+      --button-text-color: var(--color-text-success-ghost);
+      --button-text-color-hover: var(--color-text-success-ghost-hover);
+      --button-ring-color: var(--color-ring-success-ghost);
+    }
+
+    &:where([data-color="warning"]) {
+      --button-background-color: var(--color-background-warning-ghost-hover);
+      --button-background-color-active: var(--color-background-warning-ghost-active);
+      --button-text-color: var(--color-text-warning-ghost);
+      --button-text-color-hover: var(--color-text-warning-ghost-hover);
+      --button-ring-color: var(--color-ring-warning-ghost);
+    }
+
+    &:where([data-color="caution"]) {
+      --button-background-color: var(--color-background-caution-ghost-hover);
+      --button-background-color-active: var(--color-background-caution-ghost-active);
+      --button-text-color: var(--color-text-caution-ghost);
+      --button-text-color-hover: var(--color-text-caution-ghost-hover);
+      --button-ring-color: var(--color-ring-caution-ghost);
+    }
+
+    &:where([data-color="info"]) {
+      --button-background-color: var(--color-background-info-ghost-hover);
+      --button-background-color-active: var(--color-background-info-ghost-active);
+      --button-text-color: var(--color-text-info-ghost);
+      --button-text-color-hover: var(--color-text-info-ghost-hover);
+      --button-ring-color: var(--color-ring-info-ghost);
+    }
+
+    &:where([data-color="discovery"]) {
+      --button-background-color: var(--color-background-discovery-ghost-hover);
+      --button-background-color-active: var(--color-background-discovery-ghost-active);
+      --button-text-color: var(--color-text-discovery-ghost);
+      --button-text-color-hover: var(--color-text-discovery-ghost-hover);
+      --button-ring-color: var(--color-ring-discovery-ghost);
+    }
+  }
+
+  /* =============================================
+    Solid variant
+  ============================================= */
+  &[data-variant="solid"] {
+    color: var(--button-text-color);
+
+    &::before {
+      background-color: var(--button-background-color);
+    }
+
+    &[aria-expanded="true"],
+    &[data-state="open"],
+    &[data-selected] {
+      &::before {
+        background-color: var(--button-background-color-hover);
+      }
+    }
+
+    &:where(:not([data-disabled])) {
+      @mixin hover {
+        &::before {
+          background-color: var(--button-background-color-hover);
+        }
+      }
+
+      &:active {
+        &::before {
+          background-color: var(--button-background-color-active);
+        }
+
+        &::before,
+        &::after {
+          transform: scale(var(--scale));
+        }
+      }
+    }
+
+    &:where([data-color="primary"]) {
+      --button-background-color: var(--color-background-primary-solid);
+      --button-background-color-hover: var(--color-background-primary-solid-hover);
+      --button-background-color-active: var(--color-background-primary-solid-active);
+      --button-text-color: var(--color-text-primary-solid);
+      --button-ring-color: var(--color-ring-primary-solid);
+    }
+
+    &:where([data-color="secondary"]) {
+      --button-background-color: var(--color-background-secondary-solid);
+      --button-background-color-hover: var(--color-background-secondary-solid-hover);
+      --button-background-color-active: var(--color-background-secondary-solid-active);
+      --button-text-color: var(--color-text-secondary-solid);
+      --button-ring-color: var(--color-ring-secondary-solid);
+    }
+
+    &:where([data-color="success"]) {
+      --button-background-color: var(--color-background-success-solid);
+      --button-background-color-hover: var(--color-background-success-solid-hover);
+      --button-background-color-active: var(--color-background-success-solid-active);
+      --button-text-color: var(--color-text-success-solid);
+      --button-ring-color: var(--color-ring-success-solid);
+    }
+
+    &:where([data-color="danger"]) {
+      --button-background-color: var(--color-background-danger-solid);
+      --button-background-color-hover: var(--color-background-danger-solid-hover);
+      --button-background-color-active: var(--color-background-danger-solid-active);
+      --button-text-color: var(--color-text-danger-solid);
+      --button-ring-color: var(--color-ring-danger-solid);
+    }
+
+    &:where([data-color="warning"]) {
+      --button-background-color: var(--color-background-warning-solid);
+      --button-background-color-hover: var(--color-background-warning-solid-hover);
+      --button-background-color-active: var(--color-background-warning-solid-active);
+      --button-text-color: var(--color-text-warning-solid);
+      --button-ring-color: var(--color-ring-warning-solid);
+    }
+
+    &:where([data-color="caution"]) {
+      --button-background-color: var(--color-background-caution-solid);
+      --button-background-color-hover: var(--color-background-caution-solid-hover);
+      --button-background-color-active: var(--color-background-caution-solid-active);
+      --button-text-color: var(--color-text-caution-solid);
+      --button-ring-color: var(--color-ring-caution-solid);
+    }
+
+    &:where([data-color="info"]) {
+      --button-background-color: var(--color-background-info-solid);
+      --button-background-color-hover: var(--color-background-info-solid-hover);
+      --button-background-color-active: var(--color-background-info-solid-active);
+      --button-text-color: var(--color-text-info-solid);
+      --button-ring-color: var(--color-ring-info-solid);
+    }
+
+    &:where([data-color="discovery"]) {
+      --button-background-color: var(--color-background-discovery-solid);
+      --button-background-color-hover: var(--color-background-discovery-solid-hover);
+      --button-background-color-active: var(--color-background-discovery-solid-active);
+      --button-text-color: var(--color-text-discovery-solid);
+      --button-ring-color: var(--color-ring-discovery-solid);
+    }
+  }
+
+  /* =============================================
+    Soft variant
+  ============================================= */
+  &[data-variant="soft"] {
+    color: var(--button-text-color);
+
+    &::before {
+      background-color: var(--button-background-color);
+    }
+
+    &[aria-expanded="true"],
+    &[data-state="open"],
+    &[data-selected] {
+      &::before {
+        background-color: var(--button-background-color-hover);
+      }
+    }
+
+    &:where(:not([data-disabled])) {
+      @mixin hover {
+        &::before {
+          background-color: var(--button-background-color-hover);
+        }
+      }
+
+      &:active {
+        &::before {
+          background-color: var(--button-background-color-active);
+        }
+
+        &::before,
+        &::after {
+          transform: scale(var(--scale));
+        }
+      }
+    }
+
+    &:where([data-color="primary"]) {
+      --button-background-color: var(--color-background-primary-soft-alpha);
+      --button-background-color-hover: var(--color-background-primary-soft-alpha-hover);
+      --button-background-color-active: var(--color-background-primary-soft-alpha-active);
+      --button-text-color: var(--color-text-primary-soft);
+      --button-ring-color: var(--color-ring-primary-soft);
+    }
+
+    &:where([data-color="secondary"]) {
+      --button-background-color: var(--color-background-secondary-soft-alpha);
+      --button-background-color-hover: var(--color-background-secondary-soft-alpha-hover);
+      --button-background-color-active: var(--color-background-secondary-soft-alpha-active);
+      --button-text-color: var(--color-text-secondary-soft);
+      --button-ring-color: var(--color-ring-secondary-soft);
+    }
+
+    &:where([data-color="success"]) {
+      --button-background-color: var(--color-background-success-soft-alpha);
+      --button-background-color-hover: var(--color-background-success-soft-alpha-hover);
+      --button-background-color-active: var(--color-background-success-soft-alpha-active);
+      --button-text-color: var(--color-text-success-soft);
+      --button-ring-color: var(--color-ring-success-soft);
+    }
+
+    &:where([data-color="danger"]) {
+      --button-background-color: var(--color-background-danger-soft-alpha);
+      --button-background-color-hover: var(--color-background-danger-soft-alpha-hover);
+      --button-background-color-active: var(--color-background-danger-soft-alpha-active);
+      --button-text-color: var(--color-text-danger-soft);
+      --button-ring-color: var(--color-ring-danger-soft);
+    }
+
+    &:where([data-color="warning"]) {
+      --button-background-color: var(--color-background-warning-soft-alpha);
+      --button-background-color-hover: var(--color-background-warning-soft-alpha-hover);
+      --button-background-color-active: var(--color-background-warning-soft-alpha-active);
+      --button-text-color: var(--color-text-warning-soft);
+      --button-ring-color: var(--color-ring-warning-soft);
+    }
+
+    &:where([data-color="caution"]) {
+      --button-background-color: var(--color-background-caution-soft-alpha);
+      --button-background-color-hover: var(--color-background-caution-soft-alpha-hover);
+      --button-background-color-active: var(--color-background-caution-soft-alpha-active);
+      --button-text-color: var(--color-text-caution-soft);
+      --button-ring-color: var(--color-ring-caution-soft);
+    }
+
+    &:where([data-color="info"]) {
+      --button-background-color: var(--color-background-info-soft-alpha);
+      --button-background-color-hover: var(--color-background-info-soft-alpha-hover);
+      --button-background-color-active: var(--color-background-info-soft-alpha-active);
+      --button-text-color: var(--color-text-info-soft);
+      --button-ring-color: var(--color-ring-info-soft);
+    }
+
+    &:where([data-color="discovery"]) {
+      --button-background-color: var(--color-background-discovery-soft-alpha);
+      --button-background-color-hover: var(--color-background-discovery-soft-alpha-hover);
+      --button-background-color-active: var(--color-background-discovery-soft-alpha-active);
+      --button-text-color: var(--color-text-discovery-soft);
+      --button-ring-color: var(--color-ring-discovery-soft);
+    }
+  }
+
+  /* =============================================
+    Outline variant
+  ============================================= */
+  &[data-variant="outline"] {
+    --button-ring-offset: -1px;
+
+    color: var(--button-text-color);
+
+    &::before {
+      background-color: transparent;
+      box-shadow:
+        0 0 0 1px var(--button-border-color) inset,
+        var(--button-shadow-custom, 0 0 #00000000);
+    }
+
+    &[aria-expanded="true"],
+    &[data-state="open"],
+    &[data-selected] {
+      color: var(--button-text-color-hover);
+
+      &::before {
+        background-color: var(--button-background-color-hover);
+        box-shadow:
+          0 0 0 1px var(--button-border-color-hover) inset,
+          var(--button-shadow-custom, 0 0 #00000000);
+      }
+    }
+
+    &:where(:not([data-disabled])) {
+      @mixin hover {
+        color: var(--button-text-color-hover);
+
+        &::before {
+          background-color: var(--button-background-color-hover);
+          box-shadow:
+            0 0 0 1px var(--button-border-color-hover) inset,
+            var(--button-shadow-custom, 0 0 #00000000);
+        }
+      }
+
+      &:active {
+        &::before {
+          background-color: var(--button-background-color-active);
+          transform: scale(var(--scale));
+        }
+
+        &::after {
+          transform: scale(var(--scale));
+        }
+      }
+    }
+
+    &:where([data-color="primary"]) {
+      --button-background-color-hover: var(--color-background-primary-outline-hover);
+      --button-background-color-active: var(--color-background-primary-outline-active);
+      --button-border-color: var(--color-border-primary-outline);
+      --button-border-color-hover: var(--color-border-primary-outline-hover);
+      --button-text-color: var(--color-text-primary-outline);
+      --button-text-color-hover: var(--color-text-primary-outline-hover);
+      --button-ring-color: var(--color-ring-primary-outline);
+    }
+
+    &:where([data-color="secondary"]) {
+      --button-background-color-hover: var(--color-background-secondary-outline-hover);
+      --button-background-color-active: var(--color-background-secondary-outline-active);
+      --button-border-color: var(--color-border-secondary-outline);
+      --button-border-color-hover: var(--color-border-secondary-outline-hover);
+      --button-text-color: var(--color-text-secondary-outline);
+      --button-text-color-hover: var(--color-text-secondary-outline-hover);
+      --button-ring-color: var(--color-ring-secondary-outline);
+    }
+
+    &:where([data-color="danger"]) {
+      --button-background-color-hover: var(--color-background-danger-outline-hover);
+      --button-background-color-active: var(--color-background-danger-outline-active);
+      --button-border-color: var(--color-border-danger-outline);
+      --button-border-color-hover: var(--color-border-danger-outline-hover);
+      --button-text-color: var(--color-text-danger-outline);
+      --button-text-color-hover: var(--color-text-danger-outline-hover);
+      --button-ring-color: var(--color-ring-danger-outline);
+    }
+
+    &:where([data-color="success"]) {
+      --button-background-color-hover: var(--color-background-success-outline-hover);
+      --button-background-color-active: var(--color-background-success-outline-active);
+      --button-border-color: var(--color-border-success-outline);
+      --button-border-color-hover: var(--color-border-success-outline-hover);
+      --button-text-color: var(--color-text-success-outline);
+      --button-text-color-hover: var(--color-text-success-outline-hover);
+      --button-ring-color: var(--color-ring-success-outline);
+    }
+
+    &:where([data-color="warning"]) {
+      --button-background-color-hover: var(--color-background-warning-outline-hover);
+      --button-background-color-active: var(--color-background-warning-outline-active);
+      --button-border-color: var(--color-border-warning-outline);
+      --button-border-color-hover: var(--color-border-warning-outline-hover);
+      --button-text-color: var(--color-text-warning-outline);
+      --button-text-color-hover: var(--color-text-warning-outline-hover);
+      --button-ring-color: var(--color-ring-warning-outline);
+    }
+
+    &:where([data-color="caution"]) {
+      --button-background-color-hover: var(--color-background-caution-outline-hover);
+      --button-background-color-active: var(--color-background-caution-outline-active);
+      --button-border-color: var(--color-border-caution-outline);
+      --button-border-color-hover: var(--color-border-caution-outline-hover);
+      --button-text-color: var(--color-text-caution-outline);
+      --button-text-color-hover: var(--color-text-caution-outline-hover);
+      --button-ring-color: var(--color-ring-caution-outline);
+    }
+
+    &:where([data-color="info"]) {
+      --button-background-color-hover: var(--color-background-info-outline-hover);
+      --button-background-color-active: var(--color-background-info-outline-active);
+      --button-border-color: var(--color-border-info-outline);
+      --button-border-color-hover: var(--color-border-info-outline-hover);
+      --button-text-color: var(--color-text-info-outline);
+      --button-text-color-hover: var(--color-text-info-outline-hover);
+      --button-ring-color: var(--color-ring-info-outline);
+    }
+
+    &:where([data-color="discovery"]) {
+      --button-background-color-hover: var(--color-background-discovery-outline-hover);
+      --button-background-color-active: var(--color-background-discovery-outline-active);
+      --button-border-color: var(--color-border-discovery-outline);
+      --button-border-color-hover: var(--color-border-discovery-outline-hover);
+      --button-text-color: var(--color-text-discovery-outline);
+      --button-text-color-hover: var(--color-text-discovery-outline-hover);
+      --button-ring-color: var(--color-ring-discovery-outline);
+    }
+  }
+
+  /* =============================================
+    Disabled
+  ============================================= */
+  /* Non-visual disablement, akin to `inert` */
+  &[disabled] {
+    pointer-events: none;
+  }
+
+  /* Visual disablement */
+  &[data-disabled][data-variant] {
+    --button-background-color: var(--color-background-disabled);
+    --button-border-color: var(--color-border-disabled);
+    --button-text-color: var(--color-text-disabled);
+
+    cursor: not-allowed;
+    pointer-events: auto;
+
+    /* Don't press while disabled */
+    &:active::before {
+      transform: scale(1);
+    }
+
+    /* Relaxed disabled tone: keep disabled visuals, soften cursor */
+    &[data-disabled-tone="relaxed"] {
+      cursor: default;
+    }
+  }
+}
+
+.ButtonInner {
+  position: relative;
+  display: flex;
+  /* Allows overrides through className on .Button */
+  flex-direction: inherit;
+  align-items: center;
+  justify-content: center;
+  /* Allows overrides through className on .Button */
+  gap: inherit;
+  width: 100%;
+  /* Prevent padding-bottom from creating excess height (flexbox) */
+  height: 100%;
+  transition: opacity 0.15s ease 0.1s;
+
+  [data-loading] & {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+}
+
+.ButtonLoader {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  &[data-entering] {
+    opacity: 0;
+  }
+
+  &[data-exiting] {
+    opacity: 1;
+  }
+
+  &[data-entering-active],
+  &[data-entering][data-interrupted] {
+    opacity: 1;
+    transition: opacity 0.15s ease 0.1s;
+  }
+
+  &[data-exiting-active],
+  &[data-exiting][data-interrupted] {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+}
+
+/* .Kbd {
+  display: none;
+
+  @mixin breakpoint md {
+    display: block;
+    padding: 1px 3px;
+    border: 1px solid var(--kbd-border-color, transparent);
+    border-radius: 4px;
+    margin: 0 -2px 0 4px;
+    background: var(--kbd-bg, var(--alpha-10));
+    color: var(--kbd-color, inherit);
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease,
+      color 0.15s ease;
+
+    [data-size="2xs"] & {
+      margin-right: 0;
+      margin-left: 3px;
+      font-size: 12px;
+    }
+
+    [data-size="xs"] & {
+      font-size: 12px;
+    }
+
+    [data-size="sm"] & {
+      margin-right: -1px;
+    }
+
+    [data-size="xl"] & {
+      padding: 2px 3px;
+      font-size: 14px;
+    }
+
+    [data-pill] & {
+      border-radius: 8px;
+      margin-right: -5px;
+    }
+
+    [data-size="2xs"][data-pill] & {
+      margin-right: -4px;
+    }
+  }
+} */

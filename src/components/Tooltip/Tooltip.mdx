@@ -1,0 +1,35 @@
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import * as TooltipStories from './Tooltip.stories';
+ 
+<Meta of={TooltipStories} />
+ 
+<Title>Tooltip</Title>
+<Subtitle>Brief and informative hover text</Subtitle>
+
+## Usage
+```jsx
+import { Tooltip } from "@openai/apps-sdk-ui/components/Tooltip";
+```
+<Canvas of={TooltipStories.Base} />
+
+## Reference
+
+<ArgTypes of={TooltipStories.Base} />
+
+## Examples
+
+### Different triggers
+`Tooltip` provides an optional component, `Tooltip.TriggerDecorator`, to help create accessible tooltip triggers. However, any component can be used as a trigger.
+<Canvas of={TooltipStories.Triggers} />
+
+### Conditionally enabled
+Sometimes a tooltip should only be disabled under certain conditions, such as when a component is disabled, providing more context as to why that is. Below is an example of how to do this by conditionally passing in `null` content.
+<Canvas of={TooltipStories.Conditional} source={{code: `<Tooltip
+  content={disabled ? "This action is disabled for reasons" : null}
+>
+  <Button color="primary" size="lg" disabled={disabled}>
+    Sample button
+  </Button>
+</Tooltip>
+`}} />
+<Controls of={TooltipStories.Conditional} />

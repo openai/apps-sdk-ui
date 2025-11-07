@@ -1,0 +1,8 @@
+.Image {
+  opacity: 0;
+  transition: opacity 0.3s var(--transition-ease-basic);
+
+  &[data-loaded] {
+    opacity: 1;
+  }
+}

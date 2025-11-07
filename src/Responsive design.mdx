@@ -1,0 +1,96 @@
+import { Subtitle, Title, Meta } from "@storybook/blocks";
+import { NextPrev } from "@storybookComponents/NextPrev"
+
+<Meta title="Concepts/Responsive design" />
+
+<Title>Responsive design</Title>
+<Subtitle>Build adaptive interfaces with Apps SDK UI</Subtitle>
+
+## Approach
+Styles should be written **mobile-first**, meaning the base styles are applied to all screen sizes. Then, responsive styles are added that take effect at specific breakpoints and *above*.
+
+In practice this may look like starting with a single column layout, then introducing multiple columns at certain breakpoints, when sufficient screen width is available.
+
+## Default breakpoints
+Default breakpoints are provided out-of-the-box with Apps SDK UI, and are integrated into Tailwind and React utilities.
+
+<table>
+  <thead>
+    <tr>
+      <th className="text-left" style={{width: 60}}><strong>Name</strong></th>
+      <th className="text-left" style={{width: 100}}><strong>Size</strong></th>
+      <th className="text-left" style={{width: 160}}><strong>Common device</strong></th>
+      <th className="text-left"><strong>Example usage</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>xs</code></td>
+      <td><code>380px</code></td>
+      <td>Portrait mobile</td>
+      <td>Applying styles to very small screens (by default), then using this breakpoint to override</td>
+    </tr>
+    <tr>
+      <td><code>sm</code></td>
+      <td><code>576px</code></td>
+      <td>Landscape mobile, phablet</td>
+      <td>
+        Collapsed mobile menu<br />
+        Single-column list/detail views
+      </td>
+    </tr>
+    <tr>
+      <td><code>md</code></td>
+      <td><code>768px</code></td>
+      <td>Tablet</td>
+      <td>
+        Expanded primary navigation<br />
+        Fixed left sidebar navigation
+      </td>
+    </tr>
+    <tr>
+      <td><code>lg</code></td>
+      <td><code>1024px</code></td>
+      <td>Laptop</td>
+      <td>
+        Tight column layouts<br />
+        Sticky sidebar in API Ref
+      </td>
+    </tr>
+    <tr>
+      <td><code>xl</code></td>
+      <td><code>1280px</code></td>
+      <td>Desktop</td>
+      <td>Spacious column layouts</td>
+    </tr>
+    <tr>
+      <td><code>2xl</code></td>
+      <td><code>1536px</code></td>
+      <td>Widescreen</td>
+      <td>Largest screen sizes, widescreen viewing</td>
+    </tr>
+  </tbody>
+</table>
+
+## Usage
+### Tailwind
+Use standard Tailwind paradigms for writing responsive utility classes. See the [Tailwind documentation](https://tailwindcss.com/docs/responsive-design) for more details.
+```tsx
+// Use flex columns by default, then convert to flex row at "lg" and up
+<div className="flex flex-col lg:flex-row"></div>
+```
+
+### React
+Use our React hook for detecting breakpoints in your components.
+```tsx
+import { useBreakpoint } from "@openai/apps-sdk-ui/hooks/useBreakpoint";
+
+function SampleComponent() {
+  const isMediumBreakpoint = useBreakpoint("md"); // true or false
+}
+```
+
+<NextPrev
+  prev={{title: 'Dark mode', path: 'concepts-dark-mode' }}
+  next={{title: 'Typography', path: 'concepts-typography' }}
+/>

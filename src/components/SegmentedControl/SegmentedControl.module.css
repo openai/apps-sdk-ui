@@ -1,0 +1,235 @@
+.SegmentedControl {
+  --segmented-control-option-radius: calc(
+    var(--segmented-control-radius) - var(--segmented-control-gutter)
+  );
+
+  position: relative;
+  overflow: auto;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: var(--segmented-control-gap);
+  height: var(--segmented-control-size);
+  padding: var(--segmented-control-gutter);
+  border-radius: var(--segmented-control-radius);
+  background: var(--segmented-control-background);
+  font-size: var(--segmented-control-font-size);
+  font-weight: var(--segmented-control-font-weight);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  /* Remove inline-flex baseline gap */
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  &:where([data-block]) {
+    overflow: hidden;
+    display: flex;
+    width: 100%;
+    white-space: wrap;
+  }
+
+  /* =============================================
+    Sizes
+  ============================================= */
+  &:where([data-size="3xs"]) {
+    --segmented-control-size: var(--control-size-3xs);
+    --segmented-control-font-size: var(--control-font-size-sm);
+    --segmented-control-radius: var(--control-radius-sm);
+    --segmented-control-option-gutter: var(--control-gutter-xs);
+  }
+
+  &:where([data-size="2xs"]) {
+    --segmented-control-size: var(--control-size-2xs);
+    --segmented-control-font-size: var(--control-font-size-sm);
+    --segmented-control-radius: var(--control-radius-sm);
+    --segmented-control-option-gutter: var(--control-gutter-xs);
+  }
+
+  &:where([data-size="xs"]) {
+    --segmented-control-size: var(--control-size-xs);
+    --segmented-control-font-size: var(--control-font-size-md);
+    --segmented-control-radius: var(--control-radius-sm);
+    --segmented-control-option-gutter: var(--control-gutter-xs);
+  }
+
+  &:where([data-size="sm"]) {
+    --segmented-control-size: var(--control-size-sm);
+    --segmented-control-font-size: var(--control-font-size-md);
+    --segmented-control-radius: var(--control-radius-md);
+    --segmented-control-option-gutter: var(--control-gutter-sm);
+  }
+
+  &:where([data-size="md"]) {
+    --segmented-control-size: var(--control-size-md);
+    --segmented-control-font-size: var(--control-font-size-md);
+    --segmented-control-radius: var(--control-radius-md);
+    --segmented-control-option-gutter: var(--control-gutter-md);
+  }
+
+  &:where([data-size="lg"]) {
+    --segmented-control-size: var(--control-size-lg);
+    --segmented-control-font-size: var(--control-font-size-md);
+    --segmented-control-radius: var(--control-radius-md);
+    --segmented-control-option-gutter: var(--control-gutter-md);
+  }
+
+  &:where([data-size="xl"]) {
+    --segmented-control-size: var(--control-size-xl);
+    --segmented-control-font-size: var(--control-font-size-md);
+    --segmented-control-radius: var(--control-radius-lg);
+    --segmented-control-option-gutter: var(--control-gutter-lg);
+  }
+
+  &:where([data-size="2xl"]) {
+    --segmented-control-size: var(--control-size-2xl);
+    --segmented-control-font-size: var(--control-font-size-lg);
+    --segmented-control-radius: var(--control-radius-xl);
+    --segmented-control-option-gutter: var(--control-gutter-xl);
+  }
+
+  &:where([data-size="3xl"]) {
+    --segmented-control-size: var(--control-size-3xl);
+    --segmented-control-font-size: var(--control-font-size-lg);
+    --segmented-control-radius: var(--control-radius-xl);
+    --segmented-control-option-gutter: var(--control-gutter-xl);
+  }
+
+  /* =============================================
+    Gutter sizes
+  ============================================= */
+  &:where([data-gutter-size="2xs"]) {
+    --segmented-control-option-gutter: var(--control-gutter-2xs);
+  }
+
+  &:where([data-gutter-size="xs"]) {
+    --segmented-control-option-gutter: var(--control-gutter-xs);
+  }
+
+  &:where([data-gutter-size="sm"]) {
+    --segmented-control-option-gutter: var(--control-gutter-sm);
+  }
+
+  &:where([data-gutter-size="md"]) {
+    --segmented-control-option-gutter: var(--control-gutter-md);
+  }
+
+  &:where([data-gutter-size="lg"]) {
+    --segmented-control-option-gutter: var(--control-gutter-lg);
+  }
+
+  &:where([data-gutter-size="xl"]) {
+    --segmented-control-option-gutter: var(--control-gutter-xl);
+  }
+
+  /* =============================================
+    Pill
+  ============================================= */
+  &:where([data-pill]) {
+    --segmented-control-radius: var(--radius-full);
+    --segmented-control-option-radius: var(--radius-full);
+  }
+}
+
+.SegmentedControlOption {
+  position: relative;
+  padding: 0 var(--segmented-control-option-gutter);
+  border-radius: var(--segmented-control-option-radius);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  line-height: 1;
+  transition-duration: var(--transition-duration-basic);
+  transition-property: opacity, background-color, color;
+  transition-timing-function: var(--transition-ease-basic);
+
+  &:focus {
+    outline: 0;
+  }
+
+  :where(.SegmentedControl[data-block]) & {
+    flex: 1;
+  }
+
+  :where(.SegmentedControl[data-pill]) & {
+    padding: 0 calc(var(--segmented-control-option-gutter) * var(--control-gutter-pill-scaling));
+  }
+
+  &[data-state="on"]:focus-visible {
+    outline: 2px solid var(--color-ring);
+  }
+
+  &::before {
+    position: absolute;
+    inset: var(--segmented-control-option-highlight-gutter);
+    border-radius: var(--segmented-control-option-radius);
+    background: var(--segmented-control-option-highlight-background-color);
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1);
+    transition-duration: var(--transition-duration-basic);
+    transition-property: opacity, transform;
+    transition-timing-function: var(--transition-ease-basic);
+    will-change: transform;
+  }
+
+  &:active::before {
+    transform: scale(var(--scale), 0.97);
+  }
+
+  svg {
+    display: block;
+  }
+
+  &[data-state="off"]:where(:not([disabled])) {
+    @mixin hover {
+      color: var(--color-text);
+
+      &::before {
+        opacity: 0.5;
+      }
+    }
+
+    &:focus-visible {
+      color: var(--color-text);
+      outline: 2px solid var(--color-ring);
+    }
+
+    &:active::before {
+      opacity: 0.75;
+    }
+  }
+
+  &[data-state="on"] {
+    color: var(--color-text);
+  }
+
+  &[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &::before {
+      opacity: 0 !important;
+    }
+  }
+}
+
+.SegmentedControlThumb {
+  position: absolute;
+  top: var(--segmented-control-gutter);
+  bottom: var(--segmented-control-gutter);
+  left: 0;
+  border-radius: var(--segmented-control-option-radius);
+  background: var(--segmented-control-thumb-background);
+  box-shadow: var(--segmented-control-thumb-shadow);
+  pointer-events: none;
+  will-change: transform;
+}

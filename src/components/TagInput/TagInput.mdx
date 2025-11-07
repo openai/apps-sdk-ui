@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+import * as TagInputStories from './TagInput.stories';
+ 
+<Meta of={TagInputStories} />
+ 
+<Title>TagInput</Title>
+<Subtitle>Enter multiple unique tags</Subtitle>
+
+### Usage
+```jsx
+import { TagInput } from "@openai/apps-sdk-ui/components/TagInput";
+```
+
+### Reference
+<Canvas of={TagInputStories.Base} />
+
+<Controls of={TagInputStories.Base} />

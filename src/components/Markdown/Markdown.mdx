@@ -1,0 +1,24 @@
+import { ArgTypes, Canvas, Meta, Subtitle, Title } from "@storybook/blocks"
+
+import * as MarkdownStories from "./Markdown.stories"
+
+<Meta of={MarkdownStories} />
+
+<Title>Markdown</Title>
+<Subtitle>Render rich formatted content</Subtitle>
+
+## Usage
+```jsx
+import { Markdown } from "@openai/apps-sdk-ui/components/Markdown"
+```
+
+<Canvas of={MarkdownStories.Base} layout="padded" />
+
+## Reference
+<ArgTypes of={MarkdownStories.Base} />
+
+## Math
+
+Use `includeMath` to enable LaTeX rendering.
+
+<Canvas of={MarkdownStories.Math} layout="padded" />

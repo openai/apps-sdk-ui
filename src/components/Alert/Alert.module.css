@@ -1,0 +1,199 @@
+.Alert {
+  display: flex;
+  align-items: center;
+  gap: var(--alert-gap);
+  width: 100%;
+  padding: var(--alert-gutter);
+  border-radius: var(--alert-border-radius);
+  font-size: var(--alert-font-size);
+  line-height: var(--alert-line-height);
+
+  &:where([data-actions-placement="bottom"]) {
+    align-items: flex-start;
+  }
+
+  /* =============================================
+    Variants
+  ============================================= */
+  &[data-variant="soft"] {
+    background-color: var(--alert-background-color);
+    box-shadow: 0 0 0 1px var(--alert-border-color) inset;
+    color: var(--alert-text-color);
+
+    &:where([data-color="primary"]) {
+      --alert-background-color: var(--color-background-primary-surface);
+      --alert-border-color: var(--color-border-primary-surface);
+      --alert-text-color: var(--color-text);
+    }
+
+    &:where([data-color="success"]) {
+      --alert-background-color: var(--color-background-success-surface);
+      --alert-border-color: var(--color-border-success-surface);
+      --alert-text-color: var(--color-text-success-surface);
+    }
+
+    &:where([data-color="warning"]) {
+      --alert-background-color: var(--color-background-warning-surface);
+      --alert-border-color: var(--color-border-warning-surface);
+      --alert-text-color: var(--color-text-warning-surface);
+    }
+
+    &:where([data-color="caution"]) {
+      --alert-background-color: var(--color-background-caution-surface);
+      --alert-border-color: var(--color-border-caution-surface);
+      --alert-text-color: var(--color-text-caution-surface);
+    }
+
+    &:where([data-color="danger"]) {
+      --alert-background-color: var(--color-background-danger-surface);
+      --alert-border-color: var(--color-border-danger-surface);
+      --alert-text-color: var(--color-text-danger-surface);
+    }
+
+    &:where([data-color="info"]) {
+      --alert-background-color: var(--color-background-info-surface);
+      --alert-border-color: var(--color-border-info-surface);
+      --alert-text-color: var(--color-text-info-surface);
+    }
+
+    &:where([data-color="discovery"]) {
+      --alert-background-color: var(--color-background-discovery-surface);
+      --alert-border-color: var(--color-border-discovery-surface);
+      --alert-text-color: var(--color-text-discovery-surface);
+    }
+  }
+
+  &[data-variant="solid"] {
+    background-color: var(--alert-background-color);
+    color: var(--alert-text-color);
+
+    &:where([data-color="primary"]) {
+      --alert-background-color: var(--color-background-primary-solid);
+      --alert-text-color: var(--color-text-primary-solid);
+    }
+
+    &:where([data-color="success"]) {
+      --alert-background-color: var(--color-background-success-solid);
+      --alert-text-color: var(--color-text-success-solid);
+    }
+
+    &:where([data-color="warning"]) {
+      --alert-background-color: var(--color-background-warning-solid);
+      --alert-text-color: var(--color-text-warning-solid);
+    }
+
+    &:where([data-color="caution"]) {
+      --alert-background-color: var(--color-background-caution-solid);
+      --alert-text-color: var(--color-text-caution-solid);
+    }
+
+    &:where([data-color="danger"]) {
+      --alert-background-color: var(--color-background-danger-solid);
+      --alert-text-color: var(--color-text-danger-solid);
+    }
+
+    &:where([data-color="info"]) {
+      --alert-background-color: var(--color-background-info-solid);
+      --alert-text-color: var(--color-text-info-solid);
+    }
+
+    &:where([data-color="discovery"]) {
+      --alert-background-color: var(--color-background-discovery-solid);
+      --alert-text-color: var(--color-text-discovery-solid);
+    }
+  }
+
+  &[data-variant="outline"] {
+    box-shadow: 0 0 0 1px var(--alert-border-color) inset;
+    color: var(--alert-text-color);
+
+    &:where([data-color="primary"]) {
+      --alert-border-color: var(--color-border);
+      --alert-text-color: var(--color-text);
+    }
+
+    &:where([data-color="success"]) {
+      --alert-border-color: var(--color-border-success-outline);
+      --alert-text-color: var(--color-text-success-outline);
+    }
+
+    &:where([data-color="warning"]) {
+      --alert-border-color: var(--color-border-warning-outline);
+      --alert-text-color: var(--color-text-warning-outline);
+    }
+
+    &:where([data-color="caution"]) {
+      --alert-border-color: var(--color-border-caution-outline);
+      --alert-text-color: var(--color-text-caution-outline);
+    }
+
+    &:where([data-color="danger"]) {
+      --alert-border-color: var(--color-border-danger-outline);
+      --alert-text-color: var(--color-text-danger-outline);
+    }
+
+    &:where([data-color="info"]) {
+      --alert-border-color: var(--color-border-info-outline);
+      --alert-text-color: var(--color-text-info-outline);
+    }
+
+    &:where([data-color="discovery"]) {
+      --alert-border-color: var(--color-border-discovery-outline);
+      --alert-text-color: var(--color-text-discovery-outline);
+    }
+  }
+}
+
+.Content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  min-width: 0;
+
+  :where(.Alert[data-actions-placement="bottom"]) & {
+    display: block;
+  }
+}
+
+.Indicator {
+  svg {
+    width: var(--alert-indicator-size, 20px);
+    height: var(--alert-indicator-size, 20px);
+  }
+}
+
+.Message {
+  flex: 1;
+  min-width: 0;
+}
+
+.Title {
+  font-weight: var(--alert-title-font-weight);
+  text-wrap: pretty;
+
+  /* Slight spacing when paired with a description */
+  ~ .Description {
+    margin-top: 2px;
+  }
+}
+
+.Description {
+  opacity: 1;
+  text-wrap: pretty;
+}
+
+.Actions {
+  display: flex;
+  gap: spacing(2);
+
+  :where(.Alert[data-actions-placement="end"]) & {
+    align-self: center;
+    /* Additional padding between right side or actions */
+    margin-left: var(--alert-gutter);
+  }
+
+  :where(.Alert[data-actions-placement="bottom"]) & {
+    margin-top: var(--alert-gutter);
+  }
+}

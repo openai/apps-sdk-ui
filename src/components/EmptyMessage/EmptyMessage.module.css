@@ -1,0 +1,87 @@
+.EmptyMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &[data-fill="static"] {
+    width: 100%;
+    height: 100%;
+  }
+
+  &[data-fill="absolute"] {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.IconBadge {
+  --badge-size: 40px;
+  --icon-size: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--badge-size);
+  height: var(--badge-size);
+  border-radius: var(--radius-md);
+  margin: 0 0 12px;
+  background: var(--badge-background-color);
+  color: var(--badge-text-color);
+
+  svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  &[data-size="sm"] {
+    --badge-size: 32px;
+    --icon-size: 20px;
+  }
+
+  &[data-color="secondary"] {
+    --badge-background-color: var(--color-background-secondary-soft);
+    --badge-text-color: var(--color-text-secondary-soft);
+  }
+
+  &[data-color="warning"] {
+    --badge-background-color: var(--color-background-warning-soft);
+    --badge-text-color: var(--color-text-warning-soft);
+  }
+
+  &[data-color="danger"] {
+    --badge-background-color: var(--color-background-danger-soft);
+    --badge-text-color: var(--color-text-danger-soft);
+  }
+}
+
+.Title {
+  max-width: 90%;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  text-wrap: balance;
+
+  &:where([data-color="danger"]) {
+    color: var(--color-text-danger);
+  }
+
+  &:where([data-color="warning"]) {
+    color: var(--color-text-warning);
+  }
+}
+
+.Description {
+  max-width: 90%;
+  margin: 6px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.ActionRow {
+  margin-top: spacing(4);
+}

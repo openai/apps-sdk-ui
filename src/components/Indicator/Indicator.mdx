@@ -1,0 +1,121 @@
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks'
+import { linkTo } from '@storybook/addon-links'
+import { Hero } from '@storybookComponents/Hero'
+import { LoadingIndicator, LoadingDots, CircularProgress } from "./"
+
+import * as IndicatorStories from './Indicator.stories'
+
+<Meta of={IndicatorStories} />
+
+<Title>Indicators</Title>
+<Subtitle>Display loading and progress states to users</Subtitle>
+
+<Hero className="flex items-center gap-6">
+  <LoadingIndicator size={20} />
+  <IndicatorStories.ContinuousCircularProgress size={24} />
+  <LoadingDots />
+</Hero>
+
+## `LoadingIndicator`
+
+Simple spinning indicator for general loading states.
+
+
+### Usage
+
+```jsx
+import { LoadingIndicator } from "@openai/apps-sdk-ui/components/Indicator";
+```
+
+<Canvas of={IndicatorStories.LoadingIndicatorBase} />
+
+### Reference
+
+<ArgTypes of={IndicatorStories.LoadingIndicatorBase} />
+
+### Sizing & stroke
+
+By default, the indicator adapts to the surrounding `font-size` and `color` of text.
+
+You can control the size of the `LoadingIndicator` using the `--indicator-size` CSS custom property.
+
+<Canvas of={IndicatorStories.LoadingIndicatorSizing} />
+<div className="canvas-controls-only">
+<Controls of={IndicatorStories.LoadingIndicatorSizing}/>
+</div>
+
+
+### Color
+
+The indicator defaults to `currentcolor`, inheriting the surrounding text color. This can also be customized by altering the `--indicator-color` variable around the DOM scope of the component.
+
+<Canvas of={IndicatorStories.LoadingIndicatorColor} />
+
+### Duration
+
+You can control the rotation speed of the spinner with `--indicator-rotate-duration`.
+
+<Canvas of={IndicatorStories.LoadingIndicatorSpeed} />
+
+<hr />
+
+## `CircularProgress`
+
+Circular progress ring with simulated progress animation.
+
+### Usage
+
+```jsx
+import { CircularProgress } from "@openai/apps-sdk-ui/components/Indicator";
+```
+
+<Canvas of={IndicatorStories.CircularProgressBase} />
+
+<ArgTypes of={IndicatorStories.CircularProgressBase} />
+
+
+### Progress
+
+Use `progress` to define a static progress and prevent the animation.
+
+<Canvas of={IndicatorStories.CircularProgressStaticProgress} />
+
+### Sizing & stroke
+
+Use `size` and `strokeWidth` to control the sizing and thickness of the loader.
+
+You can also control these values with CSS variables by targeting `--circular-progress-size` and `--circular-progress-stroke`.
+
+<Canvas of={IndicatorStories.CircularProgressSizing} />
+<div className="canvas-controls-only">
+<Controls of={IndicatorStories.CircularProgressSizing}/>
+</div>
+
+### Color
+
+Customize the color of the indicator with the `--circular-progress-track-color` and `--circular-progress-track-active-color` variables.
+
+<Canvas of={IndicatorStories.CircularProgressColor} />
+
+<hr />
+
+## `LoadingDots`
+
+Indicate typing progress with staggered pulsing dot animation.
+
+
+### Usage
+
+```jsx
+import { LoadingDots } from "@openai/apps-sdk-ui/components/Indicator";
+```
+
+<Canvas of={IndicatorStories.LoadingDotsBase} />
+
+### Color
+
+The indicator defaults to `currentcolor`, inheriting the surrounding text color.
+
+You can customize the color by providing a different `color` value or context.
+
+<Canvas of={IndicatorStories.LoadingDotsColor} />

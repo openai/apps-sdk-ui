@@ -1,0 +1,31 @@
+.Container {
+  position: relative;
+  width: var(--circular-progress-size, 28px);
+  height: var(--circular-progress-size, 28px);
+
+  circle {
+    stroke-width: var(--circular-progress-stroke, 2px);
+  }
+}
+
+.Track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  stroke: var(--circular-progress-track-color, light-dark(#deede9, var(--green-a50)));
+  transition: stroke 0.15s ease;
+}
+
+.TrackProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  stroke: var(--circular-progress-track-active-color, var(--green-500));
+  stroke-dasharray: 50px;
+  stroke-dashoffset: 50px;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transition: stroke-dashoffset 0.3s ease;
+  will-change: transform;
+}

@@ -1,0 +1,14 @@
+/* Tailwind & Reset */
+@import "./base";
+/* Tier 1 tokens: Primitives */
+@import "./variables-primitive";
+/* Tier 2 tokens: Semantic */
+@import "./variables-semantic";
+/* Tier 3 tokens: Components */
+@import "./variables-components";
+/* Tailwind-only variables for utility classes */
+@import "./tailwind-utilities";
+/* Opinionated globals */
+@import "./globals";
+/* Katex bundled global CSS */
+@import "./katex.min.css" layer(base);

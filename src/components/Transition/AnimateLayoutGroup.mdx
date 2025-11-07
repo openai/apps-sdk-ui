@@ -1,0 +1,82 @@
+import { Canvas, Controls, Meta, Subtitle, Title, ArgTypes } from "@storybook/blocks"
+
+import * as AnimateLayoutGroupStories from './AnimateLayoutGroup.stories';
+ 
+<Meta of={AnimateLayoutGroupStories} />
+ 
+<Title>AnimateLayoutGroup</Title>
+<Subtitle>Animate width & height of lists of components as they enter and exit</Subtitle>
+
+### Usage
+
+```jsx
+import { AnimateLayoutGroup } from "@openai/apps-sdk-ui/components/Transition"
+```
+
+### Overview
+
+`<AnimateLayoutGroup>` is an abstraction around `<TransitionGroup>` specifically designed for rendering lists of components, while batteries-included transition animations that can also animate `height` and `width` of transitions.
+
+All of the same properties from `<Animate>` are supported here, as well as new properties for customizing the timing of layout transitions - `layoutEnter`, `layoutExit`, and `layoutMove`.
+
+### When to use
+
+`<AnimateLayoutGroup>` is great for animating lists of components that should naturally affect layout of surrounding DOM nodes.
+
+## Examples
+
+### Vertical list
+
+<div className="story-example">
+  <Canvas
+    of={AnimateLayoutGroupStories.VerticalList}
+    source={{
+      code: `
+<>
+  <Line className="py-2" />
+  <AnimateLayoutGroup
+    initial={{ y: -10, opacity: 0, blur: 0 }}
+    enter={{ y: 0, delay: 150, duration: 600 }}
+    exit={{ scale: 0.8, blur: 10, duration: 500 }}
+    layoutEnter={{ duration: 400, timingFunction: "ease" }}
+    layoutExit={{ delay: 150 }}
+  >
+    {list.map(({ id }) => (
+      <div key={id} className="py-2">
+        <PrimaryLine onClick={() => handleRemove(id)} />
+      </div>
+    ))}
+  </AnimateLayoutGroup>
+  <Line className="py-2" />
+<>
+`,
+    }}
+  />
+</div>
+
+### Horizontal list
+
+<div className="story-example">
+  <Canvas
+    of={AnimateLayoutGroupStories.HorizontalList}
+    source={{
+      code: `
+<>
+  <Square className="px-2" />
+  <AnimateLayoutGroup dimension="width">
+    {list.map(({ id }) => (
+      <div key={id} className="px-2">
+        <PrimarySquare onClick={() => handleRemove(id)} />
+      </div>
+    ))}
+  </AnimateLayoutGroup>
+  <Square className="px-2" />
+<>
+`,
+    }}
+  />
+</div>
+
+## Props
+
+<ArgTypes of={AnimateLayoutGroupStories.VerticalList} />

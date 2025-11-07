@@ -1,0 +1,987 @@
+@import "tailwindcss";
+@import "../src/styles/index.css";
+
+:root {
+  --story-example-background-color: hsl(347deg 70% 98% / 100%);
+  --story-example-secondary-color: hsl(346deg 56% 86% / 100%);
+  --story-example-primary-color: hsl(348deg 81% 82% / 100%);
+}
+
+[data-theme="dark"] {
+  --story-example-background-color: hsl(334deg 17.77% 35.62%);
+  --story-example-secondary-color: hsl(334deg 23% 54% / 80%);
+  --story-example-primary-color: hsl(334deg 48.07% 60.81%);
+}
+
+html,
+body {
+  background: var(--color-surface);
+}
+
+/* When the document doesn't know its theme, keep it hidden */
+html:not([data-theme]) {
+  visibility: hidden;
+}
+
+/***** Reset fixes *****/
+
+input[type="radio"] {
+  appearance: auto;
+}
+
+/***** Loading screens *****/
+
+.sb-preparing-story,
+.sb-preparing-docs {
+  background: var(--color-surface) !important;
+
+  .sb-loader {
+    /* Kind of just nicer without this flash... */
+    display: none !important;
+
+    /* 👇 Visual styles if restored */
+    border-color: var(--gray-300) !important;
+    border-top-color: var(--color-text) !important;
+    mix-blend-mode: normal !important;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .sb-previewBlock {
+    border: 0 !important;
+    background: var(--color-surface) !important;
+    box-shadow: none !important;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .sb-previewBlock_header {
+    box-shadow: none !important;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .sb-previewBlock_icon {
+    background: var(--color-surface) !important;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .sb-argstableBlock {
+    tr {
+      border-top-color: var(--color-surface) !important;
+    }
+
+    th span,
+    button,
+    td,
+    td span {
+      background: var(--color-surface) !important;
+    }
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .sb-argstableBlock-body {
+    box-shadow: none !important;
+  }
+}
+
+/***** Docs *****/
+.sbdocs-wrapper {
+  display: block !important;
+  padding-top: 20px !important;
+}
+
+/* @media (width >= 370px) {
+  .sbdocs-wrapper {
+    padding-top: 58px !important;
+  }
+} */
+
+@media (width >= 769px) {
+  .sbdocs-wrapper {
+    padding-top: 58px !important;
+    padding-right: 260px !important;
+    padding-left: 40px !important;
+  }
+
+  [data-docs-toc="hidden"] .sbdocs-wrapper {
+    padding-right: 40px !important;
+  }
+}
+
+/*
+ * Table of contents
+ * Rules:
+ * - Maximum two-levels of nesting.
+ * - Never have first-level heading wrap.
+ * - Avoid very long single-words (e.g., Option vs. SegmentedControl.Option) because they will be clipped.
+ */
+
+/* Wrapper */
+.sbdocs-wrapper > div:not(.sbdocs-content) {
+  position: absolute !important;
+  top: 0 !important;
+  right: 40px !important;
+  width: 182px !important;
+}
+
+/* Inner wrapper */
+.sbdocs-wrapper > div:not(.sbdocs-content) > div {
+  top: 4px;
+  width: 182px !important;
+}
+
+.toc-wrapper > .toc-list {
+  border-left: 2px solid light-dark(var(--gray-100), var(--gray-350)) !important;
+
+  .toc-list {
+    border: 0 !important;
+    margin: 8px 0 0 !important;
+  }
+}
+
+/* Prevent nested headers from stretching to their nested contents */
+.toc-wrapper > .toc-list > .toc-list-item::before {
+  max-height: 22px !important;
+}
+
+/* Items */
+.toc-list-item {
+  padding: 0 !important;
+  margin: 0 0 8px !important;
+
+  &::before {
+    bottom: 0 !important;
+    left: -2px !important;
+    height: auto !important;
+    border-left: 2px solid var(--color-text) !important;
+    transform: none !important;
+  }
+
+  > a {
+    display: inline-block !important;
+    padding-left: 14px !important;
+    color: var(--color-text-secondary) !important;
+    font-size: 14px !important;
+    line-height: 22px !important;
+    text-decoration: none !important;
+    text-wrap: pretty !important;
+    transition: color 0.15s ease !important;
+
+    &:hover {
+      color: var(--color-text) !important;
+    }
+  }
+
+  .toc-list a {
+    padding-left: 28px !important;
+  }
+
+  &.is-active-li {
+    > a {
+      color: var(--color-text) !important;
+      font-weight: var(--font-weight-semibold) !important;
+    }
+  }
+}
+
+.sbdocs-content {
+  flex: 1 !important;
+  min-width: 200px !important;
+  max-width: 780px !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  background: var(--color-surface) !important;
+  color: var(--color-text) !important;
+
+  [data-docs-toc="hidden"] & {
+    max-width: 1000px !important;
+  }
+
+  > ol {
+    list-style-type: decimal !important;
+  }
+
+  /* Basic <p> styles (taken from Storybook) */
+  > :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)),
+  > ul :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)),
+  > ol :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) {
+    color: var(--color-text) !important;
+    font-size: var(--font-text-md-size) !important;
+    line-height: var(--font-text-md-line-height) !important;
+
+    /* Inline code tags */
+    code {
+      border: 1px solid var(--alpha-12) !important;
+      border-radius: 4px !important;
+      background-color: light-dark(var(--gray-25), var(--alpha-08)) !important;
+      color: var(--color-text) !important;
+      line-height: 12px !important;
+    }
+  }
+
+  > :where(ul:not(.sb-anchor, .sb-unstyled, .sb-unstyled ul)) {
+    margin-bottom: 28px !important;
+  }
+
+  > :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) code {
+    padding-right: 2px !important;
+    padding-left: 2px !important;
+    border: 1px solid var(--alpha-12) !important;
+    border-radius: 4px !important;
+    background-color: light-dark(var(--gray-25), var(--alpha-08)) !important;
+    color: var(--color-text) !important;
+    font-size: 0.93em !important;
+    line-height: 12px !important;
+  }
+
+  > :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr:nth-of-type(2n) {
+    background-color: var(--color-surface) !important;
+  }
+
+  > h2:not(.sbdocs-subtitle) {
+    padding: 0 !important;
+    border: 0 !important;
+    margin-top: 40px !important;
+    margin-bottom: 10px !important;
+    font-weight: var(--font-weight-semibold) !important;
+
+    > a:first-child[aria-hidden="true"] svg {
+      top: 10px !important;
+    }
+
+    + h3,
+    + h4 {
+      margin-top: 22px !important;
+    }
+  }
+
+  > h4 {
+    font-size: 16px !important;
+    font-weight: var(--font-weight-semibold) !important;
+  }
+
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    color: var(--color-text) !important;
+
+    code {
+      border: 1px solid var(--alpha-12) !important;
+      border-radius: 4px !important;
+      background-color: light-dark(var(--gray-25), var(--alpha-08)) !important;
+      color: var(--color-text) !important;
+      font-size: 0.9375em;
+    }
+
+    /* Switching themes causes StyledComponents to mess up. */
+
+    /* This re-declares a style that exists normally */
+    > a:first-child[aria-hidden="true"] {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -22px;
+      margin: 0 !important;
+
+      svg {
+        top: 6px !important;
+      }
+    }
+
+    /* Paragraphs immediately after headings don't need margin */
+    + p {
+      margin-top: 0 !important;
+    }
+  }
+
+  > h3 {
+    margin: 26px 0 10px !important;
+    color: var(--color-text) !important;
+    font-size: 18px !important;
+    font-weight: var(--font-weight-semibold) !important;
+  }
+
+  > blockquote {
+    border-left-color: light-dark(var(--alpha-15), var(--alpha-20)) !important;
+    margin-top: 16px !important;
+    margin-bottom: 40px !important;
+
+    p {
+      font-size: 15px !important;
+    }
+
+    code {
+      border: 1px solid var(--alpha-12);
+      border-radius: 4px;
+      background-color: light-dark(var(--gray-25), var(--alpha-08));
+      color: var(--color-text);
+      line-height: 12px !important;
+    }
+
+    .link {
+      color: currentcolor !important;
+      cursor: pointer !important;
+      text-decoration: underline !important;
+    }
+  }
+
+  > :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) {
+    overflow: hidden;
+    width: 100%;
+    border-style: hidden;
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 0 1px light-dark(var(--alpha-08), var(--gray-350)) !important;
+
+    thead th {
+      border-right: 0 !important;
+      border-left: 0 !important;
+      background: light-dark(var(--gray-50), var(--gray-300)) !important;
+      color: var(--color-text-secondary) !important;
+      font-size: 13px !important;
+      font-weight: var(--font-weight-semibold);
+    }
+
+    tbody td {
+      border-right: 0 !important;
+      border-left: 0 !important;
+      background: none !important;
+    }
+  }
+
+  .sbdocs-a {
+    color: var(--color-text) !important;
+    text-decoration: underline !important;
+    text-decoration-color: color-mix(in srgb, currentcolor 80%, transparent) !important;
+    text-underline-offset: 1px !important;
+    transition-duration: var(--transition-duration-basic);
+    transition-property: color, box-shadow, text-decoration-color;
+    transition-timing-function: var(--transition-ease-basic);
+
+    &:hover {
+      color: var(--color-text-secondary) !important;
+    }
+  }
+
+  h1.sbdocs-title {
+    margin-bottom: 10px !important;
+    color: var(--color-text) !important;
+    font-size: 32px !important;
+    letter-spacing: var(--tracking-tight) !important;
+    line-height: 36px !important;
+  }
+
+  h2.sbdocs-subtitle {
+    margin-bottom: 30px !important;
+    color: var(--color-text-secondary) !important;
+    font-size: 18px !important;
+    line-height: 1.5 !important;
+  }
+
+  @media (width >= 769px) {
+    h1.sbdocs-title {
+      font-size: 36px !important;
+      line-height: 42px !important;
+    }
+
+    h2.sbdocs-subtitle {
+      font-size: 20px !important;
+    }
+  }
+}
+
+/***** ArgsTable *****/
+
+.docblock-argstable {
+  margin-top: 20px !important;
+  border-collapse: separate;
+}
+
+.docblock-argstable-head {
+  th {
+    padding: 8px 14px !important;
+    border-top: 1px solid light-dark(var(--alpha-08), var(--gray-350)) !important;
+    background: light-dark(var(--gray-50), var(--gray-300)) !important;
+    color: var(--color-text-secondary) !important;
+    font-size: 13px !important;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  th:first-child {
+    border-left: 1px solid light-dark(var(--alpha-08), var(--gray-350)) !important;
+    border-top-left-radius: var(--radius-md) !important;
+  }
+
+  th:last-of-type {
+    border-right: 1px solid light-dark(var(--alpha-08), var(--gray-350)) !important;
+    border-top-right-radius: var(--radius-md) !important;
+  }
+}
+
+.docblock-argstable-body {
+  filter: none !important;
+  font-size: 14px !important;
+
+  tr > td:first-child > span:first-child {
+    flex: 0 0 auto;
+    max-width: 100%;
+    padding: 2px 5px;
+    border: 1px solid var(--alpha-12);
+    border-radius: 4px;
+    margin: 0 4px 4px 0;
+    background-color: light-dark(var(--gray-25), var(--alpha-08));
+    color: var(--color-text);
+    font-family: "SF Mono", SFMono-Regular, ui-monospace, consolas, "liberation mono", menlo,
+      monospace;
+    font-size: 12px;
+    font-weight: var(--font-weight-semibold);
+    line-height: 13px;
+    white-space: normal;
+    word-break: break-all;
+  }
+
+  > tr:first-of-type > td:first-of-type {
+    border-top-left-radius: 0 !important;
+  }
+
+  > tr:first-of-type > td:last-of-type {
+    border-top-right-radius: 0 !important;
+  }
+
+  > tr:last-of-type > td:first-of-type {
+    border-bottom-left-radius: var(--radius-md) !important;
+  }
+
+  > tr:last-of-type > td:last-of-type {
+    border-bottom-right-radius: var(--radius-md) !important;
+  }
+
+  td {
+    padding: 8px 14px !important;
+    border-color: light-dark(var(--alpha-10), var(--gray-350)) !important;
+    background: transparent !important;
+    color: var(--color-text) !important;
+
+    /* Very awkward to select tags */
+    div p code,
+    div span code,
+    div:not([aria-readonly]) > span[class],
+    &:nth-child(3) > span[class] {
+      border: 1px solid var(--alpha-12);
+      border-radius: 4px;
+      background-color: light-dark(var(--gray-25), var(--alpha-08));
+      color: var(--color-text);
+      line-height: 12px !important;
+    }
+
+    /* "Set [value]" buttons */
+    button {
+      background: var(--gray-100) !important;
+      box-shadow: none !important;
+      color: var(--color-text) !important;
+      font-weight: var(--font-weight-semibold) !important;
+
+      @mixin dark {
+        background: var(--gray-200) !important;
+      }
+    }
+
+    /* Show N+ more... button for long enums */
+    &:nth-child(2) button {
+      padding: 2px 4px !important;
+      border: 1px solid var(--alpha-12) !important;
+      border-radius: 4px !important;
+      background-color: light-dark(var(--gray-25), var(--alpha-08)) !important;
+      color: var(--color-text) !important;
+      font-size: 12px !important;
+      font-weight: var(--font-weight-normal) !important;
+      line-height: 1 !important;
+    }
+
+    /* Hide JSDoc tables which are meant for IDE's and not Storybook */
+    table {
+      display: none !important;
+    }
+  }
+
+  /* Boolean toggle */
+  label[aria-disabled="false"][for^="control-"] {
+    background: var(--gray-100) !important;
+
+    @mixin dark {
+      background: var(--gray-25) !important;
+    }
+
+    input:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  input[type="text"],
+  input[type="search"],
+  input[type="number"],
+  textarea {
+    border: 1px solid var(--gray-150) !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--gray-0) !important;
+    box-shadow: none !important;
+    color: var(--color-text) !important;
+    resize: none;
+    transition: border-color 0.15s ease;
+
+    &:hover {
+      border-color: var(--gray-250) !important;
+    }
+
+    &:focus {
+      border-color: var(--gray-350) !important;
+    }
+
+    @mixin dark {
+      background: #29292b !important;
+    }
+  }
+
+  select {
+    border: 1px solid var(--gray-150) !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--gray-0) !important;
+    box-shadow: none !important;
+    color: var(--color-text) !important;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+
+    @mixin dark {
+      background: #29292b !important;
+    }
+  }
+
+  /* Sliders */
+  input[type="range"]::-webkit-slider-thumb {
+    position: relative !important;
+    top: 1px !important;
+    width: 16px !important;
+    height: 16px !important;
+    border: 1px solid #ffffff !important;
+    appearance: none !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 25%) !important;
+    cursor: pointer !important;
+    transform: none !important;
+    transition: border-color 0.15s ease !important;
+
+    &:hover {
+      border: 1px solid var(--gray-200) !important;
+
+      @mixin dark {
+        border: 1px solid #2e95d3 !important;
+      }
+    }
+
+    @mixin dark {
+      box-shadow: 0 1px 10px rgb(0 0 0 / 100%) !important;
+    }
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    border-radius: var(--radius-md) !important;
+    background: var(--gray-100) !important;
+  }
+}
+
+@media (width <= 599px) {
+  .docblock-argstable {
+    .docblock-argstable-head th:nth-child(4),
+    .docblock-argstable-body td:nth-child(4) {
+      display: none !important;
+    }
+
+    .docblock-argstable-head th:nth-child(3) {
+      border-right: 1px solid light-dark(var(--alpha-08), var(--gray-350)) !important;
+      border-top-right-radius: var(--radius-md) !important;
+    }
+
+    .docblock-argstable-body td:nth-child(3) {
+      border-right-width: 1px !important;
+      border-right-style: solid !important;
+    }
+
+    .docblock-argstable-body tr:last-of-type > td:nth-child(3) {
+      border-bottom-right-radius: var(--radius-md) !important;
+    }
+  }
+}
+
+/***** IconGallery *****/
+
+.docblock-icongallery {
+  /* Wrapper around the icon */
+  > div > div:first-child {
+    border: 1px solid var(--alpha-10);
+    border-radius: var(--radius-md);
+    background: transparent;
+    box-shadow: none !important;
+  }
+
+  div {
+    overflow: hidden;
+    color: var(--color-text) !important;
+    font-size: 13px !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  svg {
+    color: var(--color-text) !important;
+  }
+}
+
+/***** Canvas *****/
+
+.sbdocs-preview {
+  border-color: var(--alpha-10) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow:
+    0 4px 12px -3px light-dark(rgba(0 0 0 / 12%), rgba(0 0 0 / 60%)),
+    0 4px 4px -4px light-dark(rgba(0 0 0 / 15%), rgba(0 0 0 / 60%)) !important;
+
+  .docs-story {
+    /* Preview area */
+    > div:first-child {
+      min-height: 180px;
+    }
+
+    /* Hiding the "show/hide code" button, because it should be visible */
+    .docblock-code-toggle {
+      display: none !important;
+    }
+
+    > div:last-child {
+      right: 8px;
+      bottom: 10px;
+    }
+
+    > div:last-child button {
+      border: 0 !important;
+      border-radius: 6px !important;
+      background: var(--color-background-primary-soft) !important;
+      box-shadow: none !important;
+      color: var(--color-text-primary-soft) !important;
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: 0 !important;
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: var(--color-background-primary-soft-hover) !important;
+      }
+    }
+
+    /* Code block */
+    + div {
+      border-top: 1px solid light-dark(var(--alpha-08), var(--alpha-20)) !important;
+      background: var(--gray-25) !important;
+      box-shadow: none !important;
+      color: var(--color-text) !important;
+
+      @mixin dark {
+        background: var(--gray-0) !important;
+      }
+
+      /* Container of the Copy button */
+      > div:last-child {
+        right: -1px !important;
+        bottom: -1px !important;
+        z-index: auto !important;
+        background: none !important;
+      }
+
+      /* The copy button itself */
+      button {
+        border: 1px solid light-dark(var(--alpha-12), var(--alpha-15));
+        border-radius: var(--radius-md) 0 var(--radius-md) 0 !important;
+        border-right: 0;
+        border-bottom: 0;
+        background: light-dark(#ffffff, var(--gray-25)) !important;
+        color: var(--color-text) !important;
+      }
+    }
+  }
+}
+
+/***** Source *****/
+
+.docblock-source {
+  border-color: var(--alpha-10) !important;
+  border-radius: var(--radius-md) !important;
+  margin: 18px 0 24px !important;
+  background: var(--gray-25) !important;
+  box-shadow: none !important;
+
+  @mixin dark {
+    border: 0 !important;
+    background: var(--gray-0) !important;
+  }
+
+  /* Container of the Copy button */
+  > div:last-child {
+    right: -1px !important;
+    bottom: -1px !important;
+    z-index: auto !important;
+    background: none !important;
+  }
+
+  /* The copy button itself */
+  button {
+    border: 1px solid light-dark(var(--alpha-10), var(--alpha-15));
+    border-radius: var(--radius-md) 0 var(--radius-md) 0 !important;
+    border-right: 0;
+    border-bottom: 0;
+    background: light-dark(#ffffff, var(--gray-25)) !important;
+    color: var(--color-text) !important;
+  }
+}
+
+.docblock-source,
+.sbdocs-preview > div:nth-child(2) {
+  .prismjs {
+    padding: 14px 20px !important;
+    font-size: 1em !important;
+
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: light-dark(var(--gray-400), var(--gray-600)) !important;
+      font-style: italic !important;
+    }
+
+    .token.tag,
+    .token.selector {
+      color: var(--pink-500) !important;
+    }
+
+    .token.namespace {
+      opacity: 0.7 !important;
+    }
+
+    .token.attr-value,
+    .token.string {
+      color: var(--green-600) !important;
+
+      @mixin dark {
+        color: var(--green-300) !important;
+      }
+    }
+
+    .token.url,
+    .token.symbol,
+    .token.number,
+    .token.boolean,
+    .token.variable,
+    .token.constant,
+    .token.inserted {
+      color: light-dark(var(--pink-500), var(--pink-300)) !important;
+    }
+
+    .token.atrule,
+    .token.keyword,
+    .language-autohotkey .token.selector,
+    .language-json .token.boolean,
+    .language-json .token.number,
+    code[class*="language-css"] {
+      color: light-dark(var(--pink-500), var(--pink-300)) !important;
+    }
+
+    .token.function {
+      color: light-dark(#0f786d, var(--yellow-100)) !important;
+    }
+
+    .token.deleted,
+    .language-autohotkey .token.tag {
+      color: #9a050f !important;
+    }
+
+    .token.important {
+      color: #ee9900 !important;
+    }
+
+    .token.selector,
+    .language-autohotkey .token.keyword,
+    .token.class-name,
+    .token.maybe-class-name {
+      color: light-dark(var(--purple-500), var(--purple-300)) !important;
+    }
+
+    .token.plain-text {
+      color: var(--color-text) !important;
+    }
+
+    .token.keyword,
+    .token.function-variable {
+      color: light-dark(var(--blue-600), var(--blue-100)) !important;
+    }
+
+    .token.important,
+    .token.bold {
+      font-weight: var(--font-weight-semibold) !important;
+    }
+
+    .token.italic {
+      font-style: italic !important;
+    }
+
+    .token.attr-name,
+    .token.property,
+    .token.regex,
+    .token.entity {
+      color: light-dark(var(--blue-600), var(--blue-100)) !important;
+    }
+
+    .token.directive.tag .tag {
+      color: #393a34 !important;
+    }
+
+    .token.punctuation,
+    .token.operator {
+      color: light-dark(var(--gray-400), var(--gray-800)) !important;
+    }
+  }
+}
+
+/***** Custom examples *****/
+.canvas-controls-only {
+  border: 1px solid var(--alpha-10) !important;
+  border-radius: var(--radius-md) !important;
+  margin: -32px 0 40px !important;
+  box-shadow:
+    0 4px 12px -3px light-dark(rgba(0 0 0 / 12%), rgba(0 0 0 / 20%)),
+    0 4px 4px -4px light-dark(rgba(0 0 0 / 15%), rgba(0 0 0 / 20%)) !important;
+
+  .docblock-argstable {
+    padding: 0 !important;
+    margin: 0 !important;
+
+    select {
+      width: auto !important;
+      padding: 4px 33px 4px 8px !important;
+      margin-left: auto !important;
+    }
+
+    label {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .docblock-argstable-head {
+    display: none !important;
+  }
+
+  .docblock-argstable-body td:nth-child(2),
+  .docblock-argstable-body td:nth-child(3) {
+    display: none !important;
+  }
+
+  .docblock-argstable-body td:nth-child(4) {
+    text-align: right !important;
+  }
+
+  .docblock-argstable-body tr:first-child td {
+    border-top: 0 !important;
+  }
+
+  .docblock-argstable-body td {
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    background: none !important;
+    vertical-align: middle !important;
+  }
+}
+
+.story-example {
+  .docs-story {
+    background: var(--story-example-background-color);
+  }
+}
+
+.story-example-secondary {
+  background: var(--story-example-secondary-color);
+}
+
+.story-example-primary {
+  background: var(--story-example-primary-color);
+}
+
+/* accordion example uses this */
+.story-example-plus {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  transition: transform 350ms var(--cubic-move);
+  will-change: transform;
+
+  [data-state="open"] & {
+    transform: rotate(-90deg);
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    display: block;
+    width: 2px;
+    height: 12px;
+    background-color: var(--color-text);
+    content: "";
+  }
+
+  &::after {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    display: block;
+    width: 12px;
+    height: 2px;
+    background-color: var(--color-text);
+    content: "";
+    transition: transform 350ms var(--cubic-move);
+  }
+
+  [data-state="open"] &::after {
+    transform: rotate(-90deg);
+  }
+}
+
+.storybook-tg {
+  &[data-entering] {
+    opacity: 0;
+  }
+
+  &[data-exiting] {
+    opacity: 1;
+  }
+
+  &[data-entering-active],
+  &[data-exiting][data-interrupted] {
+    box-shadow: 0 0 0 5px green;
+    opacity: 1;
+    transition:
+      opacity 2s ease,
+      box-shadow 2s ease;
+  }
+
+  &[data-exiting-active],
+  &[data-entering][data-interrupted] {
+    box-shadow: 0 0 0 5px red;
+    opacity: 0;
+    transition:
+      opacity 1s ease,
+      box-shadow 1s ease;
+  }
+}
+
+.scrollable-story {
+  .docs-story > div {
+    overflow: hidden !important;
+  }
+}

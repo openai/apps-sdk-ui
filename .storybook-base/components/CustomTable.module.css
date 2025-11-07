@@ -1,0 +1,27 @@
+.Table {
+  width: 100%;
+  margin: 28px 0 32px;
+
+  th {
+    padding: 0 6px 4px;
+    color: var(--color-text-tertiary);
+    font-size: 13px;
+    font-weight: var(--font-weight-medium);
+    text-align: left;
+  }
+
+  td {
+    padding: 12px 6px;
+    border-top: 1px solid var(--alpha-10);
+    text-align: left;
+  }
+}
+
+.Value {
+  padding: 2px 4px;
+  border: 1px solid var(--alpha-12);
+  border-radius: var(--radius-sm);
+  background-color: light-dark(var(--gray-50), var(--alpha-08));
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+}

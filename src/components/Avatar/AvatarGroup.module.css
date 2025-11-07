@@ -1,0 +1,28 @@
+.Group {
+  display: flex;
+
+  > * ~ * {
+    box-shadow: 0 0 0 var(--avatar-group-cutout-width) var(--avatar-group-cutout-color);
+
+    /*
+     * Mask approach avoids the need to apply a specific color, however:
+     * -radial masks currently have very harsh anti-aliasing
+     * - sizing must be set statically, and cannot use % sizing. You trade one imperative value for another.
+     * mask-image: radial-gradient(circle 22px at -15px, transparent 99%, #fff 100%);
+     */
+  }
+
+  &[data-stack="start"] {
+    flex-direction: row-reverse;
+
+    > * ~ * {
+      margin-inline-end: var(--avatar-group-spacing);
+    }
+  }
+
+  &[data-stack="end"] {
+    > * ~ * {
+      margin-inline-start: var(--avatar-group-spacing);
+    }
+  }
+}

@@ -1,0 +1,60 @@
+import { Popover } from "./";
+import { ArgTypes, Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+import * as PopoverStories from './Popover.stories';
+ 
+<Meta of={PopoverStories} />
+ 
+<Title>Popover</Title>
+<Subtitle>Generic floating UI utility for contextual actions</Subtitle>
+
+## Usage
+```jsx
+import { Popover } from "@openai/apps-sdk-ui/components/Popover";
+```
+
+<Canvas of={PopoverStories.Base} />
+
+## Reference
+
+<h3 id="popover-root" data-heading-label="Root">`Popover`</h3>
+
+<ArgTypes of={Popover} />
+
+<h3 id="popover-trigger" data-heading-label="Trigger">`Popover.Trigger`</h3>
+
+Renders the element that toggles the popover. The trigger should be the user's point of interaction for revealing the popup.
+
+<h3 id="popover-content" data-heading-label="Content">`Popover.Content`</h3>
+
+<ArgTypes of={Popover.Content} />
+
+## Examples
+
+### Sizing the popover
+
+The popover can be sized with any combination of `width`, `minWidth`, or `maxWidth`. All popovers default to a `minWidth` of `300px`, and a `maxWidth` of Radix's viewport detection.
+
+<Canvas of={PopoverStories.NaturalSizing} />
+
+
+### Open on hover
+
+Use `showOnHover` to create popovers that appear on hover and focus events. This should be used sparingly and with clear intention.
+
+By default, hover popovers will not alter the focused element on the page, nor restore focus to the trigger on close. However, if interactive content is present in the popover, and `tab` is used to navigate into the popover, focus will be restored to the trigger on close.
+
+<Canvas of={PopoverStories.Hover} />
+
+### Using the controller
+
+You can access `usePopoverController()` controller context from components within `Popover.Content`. The hook exposes two methods, `close()` and `shake()`. They do exactly what you think they do.
+
+- Attempting to submit an empty form calls the `shake()` method
+- After async submission occurs (faked loading state), the `close()` method is called to close the popup imperatively.
+
+<Canvas of={PopoverStories.Controller} />
+
+### Nesting
+All floating UI components in Apps SDK UI can be infinitely nested by relying on `z-index: auto;` and natural stacking order.
+
+Additionally, `esc` keypresses are handled independently as a stacking order.

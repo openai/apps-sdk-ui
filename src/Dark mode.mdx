@@ -1,0 +1,141 @@
+import { Subtitle, Title, Meta } from "@storybook/blocks"
+import { NextPrev } from "@storybookComponents/NextPrev"
+
+<Meta title="Concepts/Dark mode" />
+
+<Title>Dark mode</Title>
+<Subtitle>Configure light & dark mode in your app</Subtitle>
+
+## Overview
+
+Light and dark mode are fully supported, but your app is in control of how the attribute is applied and persisted.
+
+To set a view mode, apply a `[data-theme]` attribute to the `html` element of your DOM.
+
+```html
+<html data-theme="dark">
+  <!-- ... -->
+</html>
+```
+
+Light and dark mode can also be nested within your content:
+
+```html
+<html data-theme="dark">
+  <body>
+    <div>Dark mode content (root scope)</div>
+    <div data-theme="light">Light mode content (nested scope)</div>
+  </body>
+</html>
+```
+
+## Tailwind
+
+Tailwind is configured to look for the `[data-theme]` attribute, and will work as expected with dark mode classes.
+
+For more details, refer to the [Tailwind documentation](https://tailwindcss.com/docs/dark-mode).
+
+```html
+<div class="bg-white dark:bg-black">
+  <!-- ... -->
+</div>
+```
+
+## JavaScript
+
+### `applyDocumentTheme`
+
+Helper for applying a given view state to the root element
+
+```tsx
+import { applyDocumentTheme } from "@openai/apps-sdk-ui/theme"
+
+applyDocumentTheme("dark")
+```
+
+### `getDocumentTheme`
+
+Helper for reading the current view state on the root element.
+
+```tsx
+import { getDocumentTheme } from "@openai/apps-sdk-ui/theme"
+
+const currentTheme = getDocumentTheme() // "light" or "dark"
+```
+
+### `useDocumentTheme`
+
+Hook for reading the latest view state on the root element. The hook will return a live value, as it listens to attribute changes on the `html` element via a `MutationObserver`.
+
+```tsx
+import { useDocumentTheme } from "@openai/apps-sdk-ui/theme"
+
+const SomeComponent = () => {
+  const currentTheme = useDocumentTheme() // "light" or "dark"
+}
+```
+
+## Reference example
+
+Below is a full example of persistent light/dark mode using a Zustand store, handling applying the initial theme, listening for OS theme changes, subscribing to state changes, and storing user preferences in localStorage.
+
+The concepts can be ported to whichever ergonomic best suits your application.
+
+```tsx
+import { applyDocumentTheme } from "@openai/apps-sdk-ui/theme"
+import { create } from "zustand"
+import { createJSONStorage, persist } from "zustand/middleware"
+
+export type Theme = "light" | "dark" | "system"
+type ThemeState = {
+  theme: Theme
+}
+
+const INITIAL_STATE: ThemeState = {
+  theme: "system",
+}
+
+const store = create(
+  persist(() => INITIAL_STATE, {
+    name: "oai:user:theme",
+    storage: createJSONStorage(() => localStorage),
+  }),
+)
+
+// Apply when store is created / updated
+store.subscribe((state) => applyDocumentTheme(resolveTheme(state.theme)))
+
+// Apply when system theme changes
+window
+  .matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", () => applyDocumentTheme(resolveTheme(store.getState().theme)))
+
+function getSystemTheme(): "light" | "dark" {
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+}
+
+function resolveTheme(theme?: Theme): "light" | "dark" {
+  if (theme == null || theme === "system") {
+    return getSystemTheme()
+  }
+
+  return theme
+}
+
+export function setTheme(theme: Theme) {
+  store.setState({ theme })
+}
+
+export function useSelectedTheme() {
+  return store((state) => state.theme)
+}
+
+export function useCurrentTheme() {
+  return store((state) => resolveTheme(state.theme))
+}
+```
+
+<NextPrev
+  prev={{ title: "Installation", path: "overview-installation" }}
+  next={{ title: "Responsive design", path: "concepts-responsive-design" }}
+/>

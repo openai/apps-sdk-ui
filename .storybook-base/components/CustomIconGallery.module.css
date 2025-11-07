@@ -1,0 +1,55 @@
+.StickyContainer {
+  position: sticky;
+  top: 0;
+  padding-top: 14px;
+  margin-top: -10px;
+  background: var(--color-surface);
+}
+
+.Container {
+  position: relative;
+}
+
+.Input {
+  display: block;
+  width: 100%;
+  padding: 12px 20px 12px 44px;
+  border: 1px solid var(--alpha-10);
+  border-radius: var(--radius-md);
+  margin: 0 0 24px;
+  background: var(--color-surface);
+  font-size: 15px;
+  transition: border-color 0.15s ease;
+
+  &::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  &:hover {
+    border-color: var(--alpha-15);
+  }
+
+  &:focus {
+    border-color: var(--alpha-20);
+    outline: 0;
+  }
+}
+
+.InputIcon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+
+.EmptyMessage {
+  padding-top: 30px;
+}
+
+.SearchTerm {
+  font-weight: var(--font-weight-semibold);
+}

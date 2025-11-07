@@ -1,0 +1,57 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+ 
+import * as SliderStories from './Slider.stories';
+ 
+<Meta of={SliderStories} />
+ 
+<Title>Slider</Title>
+<Subtitle>Fine-tune values within a set range</Subtitle>
+
+### Usage
+```jsx
+import { Slider } from "@openai/apps-sdk-ui/components/Slider";
+```
+
+### Reference
+<Canvas of={SliderStories.Base} />
+
+<Controls of={SliderStories.Base} />
+
+## Examples
+
+### Adding a tooltip
+A tooltip can easily be added to the Slider label by providing JSX instead of a simple string.
+<Canvas of={SliderStories.Tooltips} source={{code: `  <Slider
+    label={(
+        <Tooltip content="More details about this field">
+            <TriggerDecorator>Example field</TriggerDecorator>
+        </Tooltip>
+    )}
+    max={2000}
+    min={0}
+    onChange={() => {}}
+    resetValue={1000}
+    step={10}
+    unit="ms"
+    value={1000}
+  />
+`}} />
+
+### Marks
+Slider marks can be easily added by passing an array of values to the `marks` prop. Responsive behaviors are handled automatically.
+<Canvas of={SliderStories.Marks} source={{code: `<Slider
+    value={value}
+    onChange={() => {}}
+    label="Passing grade"
+    min={1}
+    max={3}
+    step={1}
+    marks={[
+        { value: 1, label: "Inaccurate" },
+        { value: 2, label: "Some inaccuracies" },
+        { value: 3, label: "Accurate" },
+    ]}
+    trackColor="#61C454"
+    rangeColor="#EF4146"
+/>
+`}} />

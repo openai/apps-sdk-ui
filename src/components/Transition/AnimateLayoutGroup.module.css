@@ -1,0 +1,73 @@
+.LayoutItem {
+  position: relative;
+  flex-shrink: 0;
+
+  /* Enter & Exit staging occurs in JS */
+
+  &[data-entering-active],
+  &[data-entering][data-interrupted] {
+    transition:
+      height var(--tg-layout-enter-duration) var(--tg-layout-enter-timing-function)
+        var(--tg-layout-enter-delay),
+      width var(--tg-layout-enter-duration) var(--tg-layout-enter-timing-function)
+        var(--tg-layout-enter-delay);
+  }
+
+  &[data-exiting-active],
+  &[data-exiting][data-interrupted] {
+    transition:
+      height var(--tg-layout-exit-duration) var(--tg-layout-exit-timing-function)
+        var(--tg-layout-exit-delay),
+      width var(--tg-layout-exit-duration) var(--tg-layout-exit-timing-function)
+        var(--tg-layout-exit-delay);
+  }
+}
+
+.TransitionItem {
+  display: block;
+  will-change: var(--tg-will-change);
+
+  .LayoutItem[data-entering] > & {
+    filter: var(--tg-initial-filter);
+    opacity: var(--tg-initial-opacity);
+    transform: var(--tg-initial-transform);
+  }
+
+  .LayoutItem[data-exiting] > & {
+    filter: var(--tg-enter-filter);
+    opacity: var(--tg-enter-opacity);
+    transform: var(--tg-enter-transform);
+  }
+
+  /* Width cannot be measured like height can in some scenarios */
+  .LayoutItem[data-entering] > &[data-dimension="width"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* Interruptions are allowed to experience delay, as opposed to <Animate> */
+  /* This is because they may involve interplay with a non-clipped container, which then creates */
+  /* unintended visual artifacts if the interruption is not delayed. */
+  .LayoutItem[data-entering-active] > &,
+  .LayoutItem[data-entering][data-interrupted] > & {
+    filter: var(--tg-enter-filter);
+    opacity: var(--tg-enter-opacity);
+    transform: var(--tg-enter-transform);
+    transition:
+      opacity var(--tg-enter-duration) var(--tg-enter-timing-function) var(--tg-enter-delay),
+      transform var(--tg-enter-duration) var(--tg-enter-timing-function) var(--tg-enter-delay),
+      filter var(--tg-enter-duration) var(--tg-enter-timing-function) var(--tg-enter-delay);
+  }
+
+  .LayoutItem[data-exiting-active] > &,
+  .LayoutItem[data-exiting][data-interrupted] > & {
+    filter: var(--tg-exit-filter);
+    opacity: var(--tg-exit-opacity, 0);
+    transform: var(--tg-exit-transform);
+    transition:
+      opacity var(--tg-exit-duration) var(--tg-exit-timing-function) var(--tg-exit-delay),
+      transform var(--tg-exit-duration) var(--tg-exit-timing-function) var(--tg-exit-delay),
+      filter var(--tg-exit-duration) var(--tg-exit-timing-function) var(--tg-exit-delay);
+  }
+}

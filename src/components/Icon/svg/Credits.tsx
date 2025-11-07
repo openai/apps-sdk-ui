@@ -1,0 +1,12 @@
+import type { SVGProps } from "react"
+const Credits = (props: SVGProps<SVGSVGElement>) => (
+  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM13.4142 8L16 10.5858C16.781 11.3668 16.7811 12.6332 16 13.4142L13.4142 16C12.6332 16.781 11.3668 16.7811 10.5858 16L8 13.4142C7.21895 12.6332 7.21895 11.3668 8 10.5858L10.5858 8C11.3668 7.21895 12.6332 7.21895 13.4142 8ZM14.5858 12L12 9.41421L9.41421 12L12 14.5858L14.5858 12Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+export default Credits

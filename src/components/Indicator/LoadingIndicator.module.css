@@ -1,0 +1,40 @@
+.LoadingIndicator {
+  position: relative;
+  width: var(--indicator-size, 1em);
+  height: var(--indicator-size, 1em);
+  animation: rotate var(--indicator-rotate-duration, 0.8s) linear infinite;
+  transition: opacity 0.15s ease;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border: var(--indicator-stroke, 2px) solid var(--indicator-color, currentcolor);
+    border-radius: 50%;
+    content: "";
+    mask-image: conic-gradient(rgb(0 0 0 / 0%), rgb(0 0 0));
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: block;
+    width: var(--indicator-stroke, 2px);
+    height: var(--indicator-stroke, 2px);
+    border-radius: 100%;
+    margin-left: calc(var(--indicator-stroke, 2px) * -1 / 2);
+    background-color: var(--indicator-color, currentcolor);
+    content: "";
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(1turn);
+  }
+}

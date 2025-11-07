@@ -1,0 +1,100 @@
+/* =============================================
+  Opinionated resets
+============================================= */
+@layer base {
+  html,
+  :host {
+    /* Disallow browsers from synthesizing bold weights when missing */
+    font-synthesis-weight: none;
+  }
+
+  textarea {
+    /* Prevent resizing by default */
+    resize: none;
+  }
+
+  img,
+  svg {
+    flex-grow: 0;
+    /* Prevent flexbox from forcing visual assets to shrink/grow size unintentionally */
+    flex-shrink: 0;
+  }
+
+  input,
+  textarea,
+  select,
+  optgroup {
+    /* Normalize mobile Safari styles */
+    appearance: none;
+    box-shadow: none;
+    /* Prevent Firefox autofill coloring (preview and confirmed modes) */
+    filter: none;
+    /* Normalize default outline offset and width in Safari */
+    outline-offset: 0;
+    outline-width: 2px;
+  }
+
+  /*
+   * Prevent non-standard gestures on interactive Elements, like double-tap to zoom.
+   * Single taps will be dispatched immediately, instead of delayed.
+   */
+  a,
+  button,
+  input,
+  label,
+  select,
+  textarea,
+  :where([aria-role="button"]) {
+    touch-action: manipulation;
+  }
+
+  button {
+    /* Reset default transform */
+    text-transform: none;
+    /* Remove gap below button in certain conditions where inline-block is used */
+    vertical-align: middle;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    /* Normalize cursor to pointer type */
+    cursor: pointer;
+  }
+
+  pre {
+    /* Avoid overflow by default in preformatted text */
+    white-space: pre-wrap;
+  }
+
+  table {
+    /* Remove gaps between table borders by default */
+    border-spacing: 0;
+  }
+
+  /* Remove default quote elements */
+  blockquote,
+  q {
+    quotes: none;
+  }
+
+  blockquote::before,
+  blockquote::after,
+  q::before,
+  q::after {
+    content: none;
+  }
+}
+
+/* =============================================
+  Directives
+============================================= */
+@custom-variant hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant light (&:where([data-theme=light], [data-theme=light] *));

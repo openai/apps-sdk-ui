@@ -1,0 +1,121 @@
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from "@storybook/blocks"
+
+import * as AnimateStories from './Animate.stories'
+ 
+<Meta of={AnimateStories} />
+ 
+<Title>Animate</Title>
+<Subtitle>Animate components as they mount and unmount</Subtitle>
+
+### Usage
+
+```jsx
+import { Animate } from "@openai/apps-sdk-ui/components/Transition"
+```
+
+### Overview
+
+`<Animate>` is an abstraction around `<TransitionGroup>` for batteries-included transition animations.
+
+`enter`, `exit`, and `initial` props allow you to define the behavior of the animation from a set of GPU-accelerated properties. Animatable properties include `opacity`, `x`, `y`, `scale`, `rotate`, `skewX`, `skewY`, and `blur`.
+
+### When to use
+
+`<Animate>` is great for transitions that don't need to affect the layout of surrounding DOM nodes. Typically, this will mean components with a fixed size or `absolute` positioning.
+
+These animations should be for transitioning between two states that occupy _the same space_, such as:
+
+- _nothing_ → Component
+- Component → _nothing_
+- Component → AnotherComponent
+
+## Examples
+
+### Fade
+
+By default, `<Animate>` provides a simple fade in/out transition, using `ease` timing functions.
+
+<div className="story-example">
+  <Canvas
+    of={AnimateStories.Fade}
+    source={{
+      code: `
+<Animate className="w-[200px] h-[200px]">
+  {visible && <Square key="s" />}
+</Animate>
+`,
+    }}
+  />
+</div>
+
+### Grow
+
+You can extend the basic fade behavior by providing transform properties to `enter`, `exit`, and `initial`.
+
+When transform properties are passed, our cubic timing functions (`--cubic-enter` and `--cubic-ext`) are automatically applied.
+
+<div className="story-example">
+  <Canvas
+    of={AnimateStories.Grow}
+    source={{
+      code: `
+<Animate
+  className="w-[200px] h-[200px]"
+  enter={{ scale: 1 }}
+  exit={{ scale: 0.5, blur: 20 }}
+>
+  {visible && <Square key="s" />}
+</Animate>
+`,
+    }}
+  />
+</div>
+
+### Continuous transitions
+
+By default, `<Animate>` basically "toggles" between `enter` and `exit` definitions. You can differentiate entrance and exit transitions by using the `initial` property.
+
+This example is a bit silly, but a practical example would be creating transitions with an emphasized entrance and subtle exit.
+
+<div className="story-example">
+  <Canvas
+    of={AnimateStories.Continuous}
+    source={{
+      code: `
+<Animate
+  className="w-[200px] h-[200px]"
+  initial={{ x: 120, skewX: 30 }}
+  enter={{ duration: 800 }}
+  exit={{ x: -120, skewX: -8, duration: 500 }}
+>
+  {visible && <Square key="s" />}
+</Animate>
+`,
+    }}
+  />
+</div>
+
+### Cross fade
+
+Easily create cross fade effects between components, like `<CopyButton>`'s icon animation, or larger elements like page transitions.
+
+<Canvas
+  of={AnimateStories.CrossFade}
+  source={{
+    code: `
+<Button size="2xl" iconSize="xl" variant="soft" onClick={handleClick}>
+  <Animate
+    className="w-[var(--button-icon-size)] h-[var(--button-icon-size)]"
+    enter={{ scale: 1, delay: 150, duration: 400 }}
+    exit={{ scale: 0.6, duration: 150 }}
+  >
+    {copied ? <Check key="copied" /> : <Copy key="copy" />}
+  </Animate>
+</Button>
+`,
+  }}
+/>
+
+## Props
+
+<ArgTypes of={AnimateStories.Fade} />

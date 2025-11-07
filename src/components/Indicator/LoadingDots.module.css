@@ -1,0 +1,38 @@
+.LoadingDots {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  /* Match line-height of message to avoid reflow when swapped with text */
+  height: var(--font-text-md-line-height);
+}
+
+.Dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  animation: pulse 1s infinite both;
+  background-color: currentcolor;
+
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.15;
+  }
+
+  20% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 0.15;
+  }
+}

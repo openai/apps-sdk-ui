@@ -1,0 +1,45 @@
+/* =============================================
+  Opinionated globals
+============================================= */
+@layer base {
+  html,
+  :host {
+    /* Apply default color */
+    color: var(--color-text);
+    /* Smooth font rendering by default */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Apply default letter-spacing */
+    letter-spacing: var(--tracking-normal);
+  }
+
+  [data-theme="light"] {
+    color-scheme: light;
+  }
+
+  [data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  * {
+    /* Aesthetic scrollbar defaults */
+    scrollbar-color: var(--scrollbar-color) transparent;
+    scrollbar-width: thin;
+  }
+
+  /* All exiting <TransitionGroup> components should be non-interactive */
+  [data-exiting] {
+    pointer-events: none;
+  }
+
+  /* Default placeholder text color */
+  ::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  /* Use semibold weight as the defacto bold */
+  b,
+  strong {
+    font-weight: var(--font-weight-semibold);
+  }
+}

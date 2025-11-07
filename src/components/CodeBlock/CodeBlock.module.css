@@ -1,0 +1,94 @@
+.CodeBlock {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--codeblock-background-color);
+}
+
+.CopyButtonContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 10px 0 0;
+  border-radius: inherit;
+  background-color: var(--codeblock-background-color);
+}
+
+.SyntaxHighlighter {
+  --syntax1: var(--codeblock-syntax-1);
+  --syntax2: var(--codeblock-syntax-2);
+  --syntax3: var(--codeblock-syntax-3);
+  --syntax4: var(--codeblock-syntax-4);
+  --syntax5: var(--codeblock-syntax-5);
+
+  overflow: auto;
+  display: block;
+  /* Padding inside the overflow: auto container */
+  padding: 14px 40px 14px 16px;
+  margin: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.875em; /* 14px to a 16px baseline */
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5em;
+
+  /* stylelint-disable selector-class-pattern */
+  :global {
+    .token.property,
+    .token.variable,
+    .token.attr-name,
+    .token.unit,
+    .token.id,
+    .token.selector,
+    .token.entity,
+    .token.tag,
+    .token.type {
+      color: var(--syntax4);
+    }
+
+    .token.url,
+    .token.boolean,
+    .token.number,
+    .token.important {
+      color: var(--syntax5);
+    }
+
+    .token.builtin,
+    .token.function,
+    .token.class-name {
+      color: var(--syntax1);
+    }
+
+    /* Order matters here, for nested tokens */
+    .token.keyword,
+    .token.constant,
+    .token.symbol,
+    .token.deleted {
+      color: var(--syntax2);
+    }
+
+    .token.string,
+    .token.char,
+    .token.regex,
+    .token.attr-value,
+    .token.inserted {
+      color: var(--syntax3);
+    }
+
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: alpha(var(--color-text), 0.5);
+    }
+
+    .token.punctuation,
+    .token.operator {
+      color: alpha(var(--color-text), 0.6);
+    }
+
+    .token.console {
+      color: var(--color-text);
+    }
+  }
+}

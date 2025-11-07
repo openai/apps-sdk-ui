@@ -1,0 +1,21 @@
+.StepperControl {
+  padding-right: calc((var(--select-control-size) - var(--clear-size)) / 2);
+  padding-left: calc((var(--select-control-size) - var(--clear-size)) / 2);
+}
+
+.StepperPrevious,
+.StepperNext {
+  --button-size: var(--clear-size);
+  --button-icon-size: var(--clear-icon-size);
+}
+
+.RangeText {
+  display: inline-block;
+  font-variant: tabular-nums;
+}
+
+.RangeTextSeparator {
+  margin: 0 spacing(1);
+  font-size: var(--font-text-sm-size);
+  letter-spacing: 0;
+}

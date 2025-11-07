@@ -1,0 +1,1316 @@
+/* stylelint-disable custom-property-pattern -- Tailwind requires this sometimes */
+
+/*
+ * Exposing to Tailwind classes, but not necessary to always generate
+ * These are pointers to variables that already exist, and shouldn't be used by CSS modules.
+ */
+@theme {
+  /* =============================================
+    Text sizes
+  ============================================= */
+  --text-*: initial;
+  --text-lg: var(--font-text-lg-size);
+  --text-lg--line-height: var(--font-text-lg-line-height);
+  --text-lg--font-weight: var(--font-text-lg-weight);
+  --text-lg--letter-spacing: var(--font-text-lg-tracking);
+  --text-base: var(--font-text-md-size);
+  --text-base--line-height: var(--font-text-md-line-height);
+  --text-base--font-weight: var(--font-text-md-weight);
+  --text-base--letter-spacing: var(--font-text-md-tracking);
+  --text-sm: var(--font-text-sm-size);
+  --text-sm--line-height: var(--font-text-sm-line-height);
+  --text-sm--font-weight: var(--font-text-sm-weight);
+  --text-sm--letter-spacing: var(--font-text-sm-tracking);
+  --text-xs: var(--font-text-xs-size);
+  --text-xs--line-height: var(--font-text-xs-line-height);
+  --text-xs--font-weight: var(--font-text-xs-weight);
+  --text-xs--letter-spacing: var(--font-text-xs-tracking);
+  --text-2xs: var(--font-text-2xs-size);
+  --text-2xs--line-height: var(--font-text-2xs-line-height);
+  --text-2xs--font-weight: var(--font-text-2xs-weight);
+  --text-2xs--letter-spacing: var(--font-text-2xs-tracking);
+  --text-3xs: var(--font-text-3xs-size);
+  --text-3xs--line-height: var(--font-text-3xs-line-height);
+  --text-3xs--font-weight: var(--font-text-3xs-weight);
+  --text-3xs--letter-spacing: var(--font-text-3xs-tracking);
+  /* Maintaining parity with Tailwind defaults, but use heading classes instead of these! */
+  --text-xl: var(--font-heading-md-size);
+  --text-xl--line-height: var(--font-heading-md-line-height);
+  --text-xl--font-weight: var(--font-text-lg-weight);
+  --text-xl--letter-spacing: var(--font-heading-md-tracking);
+  --text-2xl: var(--font-heading-lg-size);
+  --text-2xl--line-height: var(--font-heading-lg-line-height);
+  --text-2xl--font-weight: var(--font-text-lg-weight);
+  --text-2xl--letter-spacing: var(--font-heading-lg-tracking);
+  --text-3xl: var(--font-heading-xl-size);
+  --text-3xl--line-height: var(--font-heading-xl-line-height);
+  --text-3xl--font-weight: var(--font-text-lg-weight);
+  --text-3xl--letter-spacing: var(--font-heading-xl-tracking);
+  --text-4xl: var(--font-heading-2xl-size);
+  --text-4xl--line-height: var(--font-heading-2xl-line-height);
+  --text-4xl--font-weight: var(--font-text-lg-weight);
+  --text-4xl--letter-spacing: var(--font-heading-2xl-tracking);
+  --text-5xl: var(--font-heading-3xl-size);
+  --text-5xl--line-height: var(--font-heading-3xl-line-height);
+  --text-5xl--font-weight: var(--font-text-lg-weight);
+  --text-5xl--letter-spacing: var(--font-heading-3xl-tracking);
+  --text-6xl: var(--font-heading-4xl-size);
+  --text-6xl--line-height: var(--font-heading-4xl-line-height);
+  --text-6xl--font-weight: var(--font-text-lg-weight);
+  --text-6xl--letter-spacing: var(--font-heading-4xl-tracking);
+  /* Unsupported by Typography scale beyond 5xl */
+  --text-7xl: var(--font-heading-5xl-size);
+  --text-7xl--line-height: var(--font-heading-5xl-line-height);
+  --text-7xl--font-weight: var(--font-text-lg-weight);
+  --text-7xl--letter-spacing: var(--font-heading-5xl-tracking);
+  --text-8xl: 6rem;
+  --text-8xl--line-height: 1;
+  --text-8xl--letter-spacing: var(--font-heading-4xl-tracking);
+  --text-9xl: 8rem;
+  --text-9xl--line-height: 1;
+  --text-9xl--letter-spacing: var(--font-heading-4xl-tracking);
+
+  /* =============================================
+    Font tracking
+  ============================================= */
+  --tracking-*: initial;
+  --tracking-wide: var(--font-tracking-wide);
+  --tracking-normal: var(--font-tracking-normal);
+  --tracking-tight: var(--font-tracking-tight);
+
+  /* =============================================
+    Shadows
+  ============================================= */
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --shadow-*: initial;
+  --shadow-sm: var(--shadow-100);
+  --shadow-md: var(--shadow-200);
+  --shadow-lg: var(--shadow-300);
+  --shadow-xl: var(--shadow-400);
+  --shadow-hairline: var(--shadow-hairline);
+  --inset-shadow-hairline: inset var(--shadow-hairline);
+
+  /* =============================================
+    Color palettes
+  ============================================= */
+  --color-*: initial;
+  /* Grays */
+  --color-gray-0: var(--gray-0);
+  --color-gray-25: var(--gray-25);
+  --color-gray-50: var(--gray-50);
+  --color-gray-75: var(--gray-75);
+  --color-gray-100: var(--gray-100);
+  --color-gray-150: var(--gray-150);
+  --color-gray-200: var(--gray-200);
+  --color-gray-250: var(--gray-250);
+  --color-gray-300: var(--gray-300);
+  --color-gray-350: var(--gray-350);
+  --color-gray-400: var(--gray-400);
+  --color-gray-450: var(--gray-450);
+  --color-gray-500: var(--gray-500);
+  --color-gray-550: var(--gray-550);
+  --color-gray-600: var(--gray-600);
+  --color-gray-650: var(--gray-650);
+  --color-gray-700: var(--gray-700);
+  --color-gray-750: var(--gray-750);
+  --color-gray-800: var(--gray-800);
+  --color-gray-850: var(--gray-850);
+  --color-gray-900: var(--gray-900);
+  --color-gray-950: var(--gray-950);
+  --color-gray-975: var(--gray-975);
+  --color-gray-1000: var(--gray-1000);
+  /* Greens */
+  --color-green-25: var(--green-25);
+  --color-green-50: var(--green-50);
+  --color-green-75: var(--green-75);
+  --color-green-100: var(--green-100);
+  --color-green-200: var(--green-200);
+  --color-green-300: var(--green-300);
+  --color-green-400: var(--green-400);
+  --color-green-500: var(--green-500);
+  --color-green-600: var(--green-600);
+  --color-green-700: var(--green-700);
+  --color-green-800: var(--green-800);
+  --color-green-900: var(--green-900);
+  --color-green-1000: var(--green-1000);
+  /* Reds */
+  --color-red-25: var(--red-25);
+  --color-red-50: var(--red-50);
+  --color-red-75: var(--red-75);
+  --color-red-100: var(--red-100);
+  --color-red-200: var(--red-200);
+  --color-red-300: var(--red-300);
+  --color-red-400: var(--red-400);
+  --color-red-500: var(--red-500);
+  --color-red-600: var(--red-600);
+  --color-red-700: var(--red-700);
+  --color-red-800: var(--red-800);
+  --color-red-900: var(--red-900);
+  --color-red-1000: var(--red-1000);
+  /* Pinks */
+  --color-pink-25: var(--pink-25);
+  --color-pink-50: var(--pink-50);
+  --color-pink-75: var(--pink-75);
+  --color-pink-100: var(--pink-100);
+  --color-pink-200: var(--pink-200);
+  --color-pink-300: var(--pink-300);
+  --color-pink-400: var(--pink-400);
+  --color-pink-500: var(--pink-500);
+  --color-pink-600: var(--pink-600);
+  --color-pink-700: var(--pink-700);
+  --color-pink-800: var(--pink-800);
+  --color-pink-900: var(--pink-900);
+  --color-pink-1000: var(--pink-1000);
+  /* Oranges */
+  --color-orange-25: var(--orange-25);
+  --color-orange-50: var(--orange-50);
+  --color-orange-75: var(--orange-75);
+  --color-orange-100: var(--orange-100);
+  --color-orange-200: var(--orange-200);
+  --color-orange-300: var(--orange-300);
+  --color-orange-400: var(--orange-400);
+  --color-orange-500: var(--orange-500);
+  --color-orange-600: var(--orange-600);
+  --color-orange-700: var(--orange-700);
+  --color-orange-800: var(--orange-800);
+  --color-orange-900: var(--orange-900);
+  --color-orange-1000: var(--orange-1000);
+  /* Yellows */
+  --color-yellow-25: var(--yellow-25);
+  --color-yellow-50: var(--yellow-50);
+  --color-yellow-75: var(--yellow-75);
+  --color-yellow-100: var(--yellow-100);
+  --color-yellow-200: var(--yellow-200);
+  --color-yellow-300: var(--yellow-300);
+  --color-yellow-400: var(--yellow-400);
+  --color-yellow-500: var(--yellow-500);
+  --color-yellow-600: var(--yellow-600);
+  --color-yellow-700: var(--yellow-700);
+  --color-yellow-800: var(--yellow-800);
+  --color-yellow-900: var(--yellow-900);
+  --color-yellow-1000: var(--yellow-1000);
+  /* Purples */
+  --color-purple-25: var(--purple-25);
+  --color-purple-50: var(--purple-50);
+  --color-purple-75: var(--purple-75);
+  --color-purple-100: var(--purple-100);
+  --color-purple-200: var(--purple-200);
+  --color-purple-300: var(--purple-300);
+  --color-purple-400: var(--purple-400);
+  --color-purple-500: var(--purple-500);
+  --color-purple-600: var(--purple-600);
+  --color-purple-700: var(--purple-700);
+  --color-purple-800: var(--purple-800);
+  --color-purple-900: var(--purple-900);
+  --color-purple-1000: var(--purple-1000);
+  /* Blues */
+  --color-blue-25: var(--blue-25);
+  --color-blue-50: var(--blue-50);
+  --color-blue-75: var(--blue-75);
+  --color-blue-100: var(--blue-100);
+  --color-blue-200: var(--blue-200);
+  --color-blue-300: var(--blue-300);
+  --color-blue-400: var(--blue-400);
+  --color-blue-500: var(--blue-500);
+  --color-blue-600: var(--blue-600);
+  --color-blue-700: var(--blue-700);
+  --color-blue-800: var(--blue-800);
+  --color-blue-900: var(--blue-900);
+  --color-blue-1000: var(--blue-1000);
+  /* Alphas (e.g., bg-alpha/15, color-alpha/75) */
+  --color-alpha: var(--alpha-base);
+  /* Consistent contrast */
+  --color-white: var(--white);
+  --color-black: var(--black);
+
+  /* =============================================
+    Motion
+  ============================================= */
+  --ease-*: initial;
+  --duration-basic: var(--transition-duration-basic);
+  --ease-basic: var(--transition-ease-basic);
+  --ease-cubic-enter: var(--cubic-enter);
+  --ease-cubic-exit: var(--cubic-exit);
+  --ease-cubic-exit-snappy: var(--cubic-exit-snappy);
+  --ease-cubic-move: var(--cubic-move);
+}
+
+/* =============================================
+  Heading utilities
+============================================= */
+@utility heading-5xl {
+  font-size: var(--font-heading-5xl-size);
+  font-weight: var(--font-heading-5xl-weight);
+  letter-spacing: var(--font-heading-5xl-tracking);
+  line-height: var(--font-heading-5xl-line-height);
+}
+
+@utility heading-4xl {
+  font-size: var(--font-heading-4xl-size);
+  font-weight: var(--font-heading-4xl-weight);
+  letter-spacing: var(--font-heading-4xl-tracking);
+  line-height: var(--font-heading-4xl-line-height);
+}
+
+@utility heading-3xl {
+  font-size: var(--font-heading-3xl-size);
+  font-weight: var(--font-heading-3xl-weight);
+  letter-spacing: var(--font-heading-3xl-tracking);
+  line-height: var(--font-heading-3xl-line-height);
+}
+
+@utility heading-2xl {
+  font-size: var(--font-heading-2xl-size);
+  font-weight: var(--font-heading-2xl-weight);
+  letter-spacing: var(--font-heading-2xl-tracking);
+  line-height: var(--font-heading-2xl-line-height);
+}
+
+@utility heading-xl {
+  font-size: var(--font-heading-xl-size);
+  font-weight: var(--font-heading-xl-weight);
+  letter-spacing: var(--font-heading-xl-tracking);
+  line-height: var(--font-heading-xl-line-height);
+}
+
+@utility heading-lg {
+  font-size: var(--font-heading-lg-size);
+  font-weight: var(--font-heading-lg-weight);
+  letter-spacing: var(--font-heading-lg-tracking);
+  line-height: var(--font-heading-lg-line-height);
+}
+
+@utility heading-md {
+  font-size: var(--font-heading-md-size);
+  font-weight: var(--font-heading-md-weight);
+  letter-spacing: var(--font-heading-md-tracking);
+  line-height: var(--font-heading-md-line-height);
+}
+
+@utility heading-sm {
+  font-size: var(--font-heading-sm-size);
+  font-weight: var(--font-heading-sm-weight);
+  letter-spacing: var(--font-heading-sm-tracking);
+  line-height: var(--font-heading-sm-line-height);
+}
+
+@utility heading-xs {
+  font-size: var(--font-heading-xs-size);
+  font-weight: var(--font-heading-xs-weight);
+  letter-spacing: var(--font-heading-xs-tracking);
+  line-height: var(--font-heading-xs-line-height);
+}
+
+/* =============================================
+  Text utilities
+============================================= */
+@utility text-default {
+  color: var(--color-text);
+}
+
+@utility text-secondary {
+  color: var(--color-text-secondary);
+}
+
+@utility text-tertiary {
+  color: var(--color-text-tertiary);
+}
+
+@utility text-inverse {
+  color: var(--color-text-inverse);
+}
+
+@utility fill-default {
+  fill: var(--color-text);
+}
+
+@utility fill-secondary {
+  fill: var(--color-text-secondary);
+}
+
+@utility fill-tertiary {
+  fill: var(--color-text-tertiary);
+}
+
+/* =============================================
+  Surface utilities
+============================================= */
+@utility bg-surface {
+  background-color: var(--color-surface);
+}
+
+@utility bg-surface-secondary {
+  background-color: var(--color-surface-secondary);
+}
+
+@utility bg-surface-tertiary {
+  background-color: var(--color-surface-tertiary);
+}
+
+@utility bg-surface-elevated {
+  background-color: var(--color-surface-elevated);
+}
+
+@utility bg-surface-elevated-secondary {
+  background-color: var(--color-surface-elevated-secondary);
+}
+
+/* =============================================
+  Border utilities
+============================================= */
+@utility border-default {
+  border-color: var(--color-border);
+}
+
+@utility border-subtle {
+  border-color: var(--color-border-subtle);
+}
+
+@utility border-strong {
+  border-color: var(--color-border-strong);
+}
+
+/* =============================================
+  Info semantic utilities
+============================================= */
+@utility text-info {
+  color: var(--color-text-info);
+}
+
+/* Soft */
+@utility bg-info-soft {
+  background-color: var(--color-background-info-soft);
+}
+
+@utility bg-info-soft-hover {
+  background-color: var(--color-background-info-soft-hover);
+}
+
+@utility bg-info-soft-active {
+  background-color: var(--color-background-info-soft-active);
+}
+
+@utility bg-info-soft-alpha {
+  background-color: var(--color-background-info-soft-alpha);
+}
+
+@utility bg-info-soft-alpha-hover {
+  background-color: var(--color-background-info-soft-alpha-hover);
+}
+
+@utility bg-info-soft-alpha-active {
+  background-color: var(--color-background-info-soft-alpha-active);
+}
+
+@utility text-info-soft {
+  color: var(--color-text-info-soft);
+}
+
+/* Solid */
+@utility bg-info-solid {
+  background-color: var(--color-background-info-solid);
+}
+
+@utility bg-info-solid-hover {
+  background-color: var(--color-background-info-solid-hover);
+}
+
+@utility bg-info-solid-active {
+  background-color: var(--color-background-info-solid-active);
+}
+
+@utility text-info-solid {
+  color: var(--color-text-info-solid);
+}
+
+/* Outline */
+@utility bg-info-outline-hover {
+  background-color: var(--color-background-info-outline-hover);
+}
+
+@utility bg-info-outline-active {
+  background-color: var(--color-background-info-outline-active);
+}
+
+@utility border-info-outline {
+  border-color: var(--color-border-info-outline);
+}
+
+@utility border-info-outline-hover {
+  border-color: var(--color-border-info-outline-hover);
+}
+
+@utility text-info-outline {
+  color: var(--color-text-info-outline);
+}
+
+@utility text-info-outline-hover {
+  color: var(--color-text-info-outline-hover);
+}
+
+/* Ghost */
+@utility bg-info-ghost-hover {
+  background-color: var(--color-background-info-ghost-hover);
+}
+
+@utility bg-info-ghost-active {
+  background-color: var(--color-background-info-ghost-active);
+}
+
+@utility text-info-ghost {
+  color: var(--color-text-info-ghost);
+}
+
+@utility text-info-ghost-hover {
+  color: var(--color-text-info-ghost-hover);
+}
+
+/* Ring */
+@utility ring-info {
+  outline-color: var(--color-ring-info);
+}
+
+/* Surface */
+@utility bg-info-surface {
+  background-color: var(--color-background-info-surface);
+}
+
+@utility border-info-surface {
+  border-color: var(--color-border-info-surface);
+}
+
+@utility text-info-surface {
+  color: var(--color-text-info-surface);
+}
+
+/* =============================================
+  Primary semantic utilities
+============================================= */
+@utility text-primary {
+  color: var(--color-text-primary);
+}
+
+/* Soft */
+@utility bg-primary-soft {
+  background-color: var(--color-background-primary-soft);
+}
+
+@utility bg-primary-soft-hover {
+  background-color: var(--color-background-primary-soft-hover);
+}
+
+@utility bg-primary-soft-active {
+  background-color: var(--color-background-primary-soft-active);
+}
+
+@utility bg-primary-soft-alpha {
+  background-color: var(--color-background-primary-soft-alpha);
+}
+
+@utility bg-primary-soft-alpha-hover {
+  background-color: var(--color-background-primary-soft-alpha-hover);
+}
+
+@utility bg-primary-soft-alpha-active {
+  background-color: var(--color-background-primary-soft-alpha-active);
+}
+
+@utility text-primary-soft {
+  color: var(--color-text-primary-soft);
+}
+
+/* Surface */
+@utility bg-primary-surface {
+  background-color: var(--color-background-primary-surface);
+}
+
+@utility border-primary-surface {
+  border-color: var(--color-border-primary-surface);
+}
+
+@utility text-primary-surface {
+  color: var(--color-text-primary-surface);
+}
+
+/* Solid */
+@utility bg-primary-solid {
+  background-color: var(--color-background-primary-solid);
+}
+
+@utility bg-primary-solid-hover {
+  background-color: var(--color-background-primary-solid-hover);
+}
+
+@utility bg-primary-solid-active {
+  background-color: var(--color-background-primary-solid-active);
+}
+
+@utility text-primary-solid {
+  color: var(--color-text-primary-solid);
+}
+/* Outline */
+@utility bg-primary-outline-hover {
+  background-color: var(--color-background-primary-outline-hover);
+}
+
+@utility bg-primary-outline-active {
+  background-color: var(--color-background-primary-outline-active);
+}
+
+@utility border-primary-outline {
+  border-color: var(--color-border-primary-outline);
+}
+
+@utility border-primary-outline-hover {
+  border-color: var(--color-border-primary-outline-hover);
+}
+
+@utility text-primary-outline {
+  color: var(--color-text-primary-outline);
+}
+
+@utility text-primary-outline-hover {
+  color: var(--color-text-primary-outline-hover);
+}
+/* Ghost */
+@utility bg-primary-ghost-hover {
+  background-color: var(--color-background-primary-ghost-hover);
+}
+
+@utility bg-primary-ghost-active {
+  background-color: var(--color-background-primary-ghost-active);
+}
+
+@utility text-primary-ghost {
+  color: var(--color-text-primary-ghost);
+}
+
+@utility text-primary-ghost-hover {
+  color: var(--color-text-primary-ghost-hover);
+}
+/* Ring */
+@utility ring-primary {
+  outline-color: var(--color-ring-primary);
+}
+
+/* =============================================
+  Secondary semantic utilities
+============================================= */
+/* Soft */
+@utility text-secondary-soft {
+  color: var(--color-text-secondary-soft);
+}
+
+@utility bg-secondary-soft {
+  background-color: var(--color-background-secondary-soft);
+}
+
+@utility bg-secondary-soft-hover {
+  background-color: var(--color-background-secondary-soft-hover);
+}
+
+@utility bg-secondary-soft-active {
+  background-color: var(--color-background-secondary-soft-active);
+}
+
+@utility bg-secondary-soft-alpha {
+  background-color: var(--color-background-secondary-soft-alpha);
+}
+
+@utility bg-secondary-soft-alpha-hover {
+  background-color: var(--color-background-secondary-soft-alpha-hover);
+}
+
+@utility bg-secondary-soft-alpha-active {
+  background-color: var(--color-background-secondary-soft-alpha-active);
+}
+
+@utility bg-secondary-soft-alt {
+  background-color: var(--color-background-secondary-soft-alt);
+}
+
+@utility border-secondary-soft-alt {
+  border-color: var(--color-border-secondary-soft-alt);
+}
+
+@utility text-secondary-soft-alt {
+  color: var(--color-text-secondary-soft-alt);
+}
+
+/* Solid */
+@utility bg-secondary-solid {
+  background-color: var(--color-background-secondary-solid);
+}
+
+@utility bg-secondary-solid-hover {
+  background-color: var(--color-background-secondary-solid-hover);
+}
+
+@utility bg-secondary-solid-active {
+  background-color: var(--color-background-secondary-solid-active);
+}
+
+@utility text-secondary-solid {
+  color: var(--color-text-secondary-solid);
+}
+
+/* Outline */
+@utility bg-secondary-outline-hover {
+  background-color: var(--color-background-secondary-outline-hover);
+}
+
+@utility bg-secondary-outline-active {
+  background-color: var(--color-background-secondary-outline-active);
+}
+
+@utility border-secondary-outline {
+  border-color: var(--color-border-secondary-outline);
+}
+
+@utility border-secondary-outline-hover {
+  border-color: var(--color-border-secondary-outline-hover);
+}
+
+@utility text-secondary-outline {
+  color: var(--color-text-secondary-outline);
+}
+
+@utility text-secondary-outline-hover {
+  color: var(--color-text-secondary-outline-hover);
+}
+
+/* Ghost */
+@utility bg-secondary-ghost-hover {
+  background-color: var(--color-background-secondary-ghost-hover);
+}
+
+@utility bg-secondary-ghost-active {
+  background-color: var(--color-background-secondary-ghost-active);
+}
+
+@utility text-secondary-ghost {
+  color: var(--color-text-secondary-ghost);
+}
+
+@utility text-secondary-ghost-hover {
+  color: var(--color-text-secondary-ghost-hover);
+}
+
+/* Ring */
+@utility ring-secondary {
+  outline-color: var(--color-ring-secondary);
+}
+
+/* =============================================
+  Danger semantic utilities
+============================================= */
+@utility text-danger {
+  color: var(--color-text-danger);
+}
+
+/* Soft */
+@utility bg-danger-soft {
+  background-color: var(--color-background-danger-soft);
+}
+
+@utility bg-danger-soft-hover {
+  background-color: var(--color-background-danger-soft-hover);
+}
+
+@utility bg-danger-soft-active {
+  background-color: var(--color-background-danger-soft-active);
+}
+
+@utility bg-danger-soft-alpha {
+  background-color: var(--color-background-danger-soft-alpha);
+}
+
+@utility bg-danger-soft-alpha-hover {
+  background-color: var(--color-background-danger-soft-alpha-hover);
+}
+
+@utility bg-danger-soft-alpha-active {
+  background-color: var(--color-background-danger-soft-alpha-active);
+}
+
+@utility text-danger-soft {
+  color: var(--color-text-danger-soft);
+}
+
+/* Surface */
+@utility bg-danger-surface {
+  background-color: var(--color-background-danger-surface);
+}
+
+@utility border-danger-surface {
+  border-color: var(--color-border-danger-surface);
+}
+
+@utility text-danger-surface {
+  color: var(--color-text-danger-surface);
+}
+
+/* Solid */
+@utility bg-danger-solid {
+  background-color: var(--color-background-danger-solid);
+}
+
+@utility bg-danger-solid-hover {
+  background-color: var(--color-background-danger-solid-hover);
+}
+
+@utility bg-danger-solid-active {
+  background-color: var(--color-background-danger-solid-active);
+}
+
+@utility text-danger-solid {
+  color: var(--color-text-danger-solid);
+}
+
+/* Outline */
+@utility bg-danger-outline-hover {
+  background-color: var(--color-background-danger-outline-hover);
+}
+
+@utility bg-danger-outline-active {
+  background-color: var(--color-background-danger-outline-active);
+}
+
+@utility border-danger-outline {
+  border-color: var(--color-border-danger-outline);
+}
+
+@utility border-danger-outline-hover {
+  border-color: var(--color-border-danger-outline-hover);
+}
+
+@utility text-danger-outline {
+  color: var(--color-text-danger-outline);
+}
+
+@utility text-danger-outline-hover {
+  color: var(--color-text-danger-outline-hover);
+}
+
+/* Ghost */
+@utility bg-danger-ghost-hover {
+  background-color: var(--color-background-danger-ghost-hover);
+}
+
+@utility bg-danger-ghost-active {
+  background-color: var(--color-background-danger-ghost-active);
+}
+
+@utility text-danger-ghost {
+  color: var(--color-text-danger-ghost);
+}
+
+@utility text-danger-ghost-hover {
+  color: var(--color-text-danger-ghost-hover);
+}
+
+/* Ring */
+@utility ring-danger {
+  outline-color: var(--color-ring-danger);
+}
+
+/* =============================================
+  Warning semantic utilities
+============================================= */
+@utility text-warning {
+  color: var(--color-text-warning);
+}
+
+/* Soft */
+@utility bg-warning-soft {
+  background-color: var(--color-background-warning-soft);
+}
+
+@utility bg-warning-soft-hover {
+  background-color: var(--color-background-warning-soft-hover);
+}
+
+@utility bg-warning-soft-active {
+  background-color: var(--color-background-warning-soft-active);
+}
+
+@utility bg-warning-soft-alpha {
+  background-color: var(--color-background-warning-soft-alpha);
+}
+
+@utility bg-warning-soft-alpha-hover {
+  background-color: var(--color-background-warning-soft-alpha-hover);
+}
+
+@utility bg-warning-soft-alpha-active {
+  background-color: var(--color-background-warning-soft-alpha-active);
+}
+
+@utility text-warning-soft {
+  color: var(--color-text-warning-soft);
+}
+
+/* Surface */
+@utility bg-warning-surface {
+  background-color: var(--color-background-warning-surface);
+}
+
+@utility border-warning-surface {
+  border-color: var(--color-border-warning-surface);
+}
+
+@utility text-warning-surface {
+  color: var(--color-text-warning-surface);
+}
+
+/* Solid */
+@utility bg-warning-solid {
+  background-color: var(--color-background-warning-solid);
+}
+
+@utility bg-warning-solid-hover {
+  background-color: var(--color-background-warning-solid-hover);
+}
+
+@utility bg-warning-solid-active {
+  background-color: var(--color-background-warning-solid-active);
+}
+
+@utility text-warning-solid {
+  color: var(--color-text-warning-solid);
+}
+
+/* Outline */
+@utility bg-warning-outline-hover {
+  background-color: var(--color-background-warning-outline-hover);
+}
+
+@utility bg-warning-outline-active {
+  background-color: var(--color-background-warning-outline-active);
+}
+
+@utility border-warning-outline {
+  border-color: var(--color-border-warning-outline);
+}
+
+@utility border-warning-outline-hover {
+  border-color: var(--color-border-warning-outline-hover);
+}
+
+@utility text-warning-outline {
+  color: var(--color-text-warning-outline);
+}
+
+@utility text-warning-outline-hover {
+  color: var(--color-text-warning-outline-hover);
+}
+
+/* Ghost */
+@utility bg-warning-ghost-hover {
+  background-color: var(--color-background-warning-ghost-hover);
+}
+
+@utility bg-warning-ghost-active {
+  background-color: var(--color-background-warning-ghost-active);
+}
+
+@utility text-warning-ghost {
+  color: var(--color-text-warning-ghost);
+}
+
+@utility text-warning-ghost-hover {
+  color: var(--color-text-warning-ghost-hover);
+}
+
+/* Ring */
+@utility ring-warning {
+  outline-color: var(--color-ring-warning);
+}
+
+/* =============================================
+  Caution semantic utilities
+============================================= */
+@utility text-caution {
+  color: var(--color-text-caution);
+}
+
+/* Soft */
+@utility bg-caution-soft {
+  background-color: var(--color-background-caution-soft);
+}
+
+@utility bg-caution-soft-hover {
+  background-color: var(--color-background-caution-soft-hover);
+}
+
+@utility bg-caution-soft-active {
+  background-color: var(--color-background-caution-soft-active);
+}
+
+@utility bg-caution-soft-alpha {
+  background-color: var(--color-background-caution-soft-alpha);
+}
+
+@utility bg-caution-soft-alpha-hover {
+  background-color: var(--color-background-caution-soft-alpha-hover);
+}
+
+@utility bg-caution-soft-alpha-active {
+  background-color: var(--color-background-caution-soft-alpha-active);
+}
+
+@utility text-caution-soft {
+  color: var(--color-text-caution-soft);
+}
+
+/* Surface */
+@utility bg-caution-surface {
+  background-color: var(--color-background-caution-surface);
+}
+
+@utility border-caution-surface {
+  border-color: var(--color-border-caution-surface);
+}
+
+@utility text-caution-surface {
+  color: var(--color-text-caution-surface);
+}
+
+/* Solid */
+@utility bg-caution-solid {
+  background-color: var(--color-background-caution-solid);
+}
+
+@utility bg-caution-solid-hover {
+  background-color: var(--color-background-caution-solid-hover);
+}
+
+@utility bg-caution-solid-active {
+  background-color: var(--color-background-caution-solid-active);
+}
+
+@utility text-caution-solid {
+  color: var(--color-text-caution-solid);
+}
+
+/* Outline */
+@utility bg-caution-outline-hover {
+  background-color: var(--color-background-caution-outline-hover);
+}
+
+@utility bg-caution-outline-active {
+  background-color: var(--color-background-caution-outline-active);
+}
+
+@utility border-caution-outline {
+  border-color: var(--color-border-caution-outline);
+}
+
+@utility border-caution-outline-hover {
+  border-color: var(--color-border-caution-outline-hover);
+}
+
+@utility text-caution-outline {
+  color: var(--color-text-caution-outline);
+}
+
+@utility text-caution-outline-hover {
+  color: var(--color-text-caution-outline-hover);
+}
+
+/* Ghost */
+@utility bg-caution-ghost-hover {
+  background-color: var(--color-background-caution-ghost-hover);
+}
+
+@utility bg-caution-ghost-active {
+  background-color: var(--color-background-caution-ghost-active);
+}
+
+@utility text-caution-ghost {
+  color: var(--color-text-caution-ghost);
+}
+
+@utility text-caution-ghost-hover {
+  color: var(--color-text-caution-ghost-hover);
+}
+
+/* Ring */
+@utility ring-caution {
+  outline-color: var(--color-ring-caution);
+}
+
+/* =============================================
+  Success semantic utilities
+============================================= */
+@utility text-success {
+  color: var(--color-text-success);
+}
+
+/* Soft */
+@utility bg-success-soft {
+  background-color: var(--color-background-success-soft);
+}
+
+@utility bg-success-soft-hover {
+  background-color: var(--color-background-success-soft-hover);
+}
+
+@utility bg-success-soft-active {
+  background-color: var(--color-background-success-soft-active);
+}
+
+@utility bg-success-soft-alpha {
+  background-color: var(--color-background-success-soft-alpha);
+}
+
+@utility bg-success-soft-alpha-hover {
+  background-color: var(--color-background-success-soft-alpha-hover);
+}
+
+@utility bg-success-soft-alpha-active {
+  background-color: var(--color-background-success-soft-alpha-active);
+}
+
+@utility text-success-soft {
+  color: var(--color-text-success-soft);
+}
+
+/* Surface */
+@utility bg-success-surface {
+  background-color: var(--color-background-success-surface);
+}
+
+@utility border-success-surface {
+  border-color: var(--color-border-success-surface);
+}
+
+@utility text-success-surface {
+  color: var(--color-text-success-surface);
+}
+
+/* Solid */
+@utility bg-success-solid {
+  background-color: var(--color-background-success-solid);
+}
+
+@utility bg-success-solid-hover {
+  background-color: var(--color-background-success-solid-hover);
+}
+
+@utility bg-success-solid-active {
+  background-color: var(--color-background-success-solid-active);
+}
+
+@utility text-success-solid {
+  color: var(--color-text-success-solid);
+}
+
+/* Outline */
+@utility bg-success-outline-hover {
+  background-color: var(--color-background-success-outline-hover);
+}
+
+@utility bg-success-outline-active {
+  background-color: var(--color-background-success-outline-active);
+}
+
+@utility border-success-outline {
+  border-color: var(--color-border-success-outline);
+}
+
+@utility border-success-outline-hover {
+  border-color: var(--color-border-success-outline-hover);
+}
+
+@utility text-success-outline {
+  color: var(--color-text-success-outline);
+}
+
+@utility text-success-outline-hover {
+  color: var(--color-text-success-outline-hover);
+}
+
+/* Ghost */
+@utility bg-success-ghost-hover {
+  background-color: var(--color-background-success-ghost-hover);
+}
+
+@utility bg-success-ghost-active {
+  background-color: var(--color-background-success-ghost-active);
+}
+
+@utility text-success-ghost {
+  color: var(--color-text-success-ghost);
+}
+
+@utility text-success-ghost-hover {
+  color: var(--color-text-success-ghost-hover);
+}
+
+/* Ring */
+@utility ring-success {
+  outline-color: var(--color-ring-success);
+}
+
+/* =============================================
+  Discovery semantic utilities
+============================================= */
+@utility text-discovery {
+  color: var(--color-text-discovery);
+}
+
+/* Soft */
+@utility bg-discovery-soft {
+  background-color: var(--color-background-discovery-soft);
+}
+
+@utility bg-discovery-soft-hover {
+  background-color: var(--color-background-discovery-soft-hover);
+}
+
+@utility bg-discovery-soft-active {
+  background-color: var(--color-background-discovery-soft-active);
+}
+
+@utility bg-discovery-soft-alpha {
+  background-color: var(--color-background-discovery-soft-alpha);
+}
+
+@utility bg-discovery-soft-alpha-hover {
+  background-color: var(--color-background-discovery-soft-alpha-hover);
+}
+
+@utility bg-discovery-soft-alpha-active {
+  background-color: var(--color-background-discovery-soft-alpha-active);
+}
+
+@utility text-discovery-soft {
+  color: var(--color-text-discovery-soft);
+}
+
+/* Surface */
+@utility bg-discovery-surface {
+  background-color: var(--color-background-discovery-surface);
+}
+
+@utility border-discovery-surface {
+  border-color: var(--color-border-discovery-surface);
+}
+
+@utility text-discovery-surface {
+  color: var(--color-text-discovery-surface);
+}
+
+/* Solid */
+@utility bg-discovery-solid {
+  background-color: var(--color-background-discovery-solid);
+}
+
+@utility bg-discovery-solid-hover {
+  background-color: var(--color-background-discovery-solid-hover);
+}
+
+@utility bg-discovery-solid-active {
+  background-color: var(--color-background-discovery-solid-active);
+}
+
+@utility text-discovery-solid {
+  color: var(--color-text-discovery-solid);
+}
+
+/* Outline */
+@utility bg-discovery-outline-hover {
+  background-color: var(--color-background-discovery-outline-hover);
+}
+
+@utility bg-discovery-outline-active {
+  background-color: var(--color-background-discovery-outline-active);
+}
+
+@utility border-discovery-outline {
+  border-color: var(--color-border-discovery-outline);
+}
+
+@utility border-discovery-outline-hover {
+  border-color: var(--color-border-discovery-outline-hover);
+}
+
+@utility text-discovery-outline {
+  color: var(--color-text-discovery-outline);
+}
+
+@utility text-discovery-outline-hover {
+  color: var(--color-text-discovery-outline-hover);
+}
+
+/* Ghost */
+@utility bg-discovery-ghost-hover {
+  background-color: var(--color-background-discovery-ghost-hover);
+}
+
+@utility bg-discovery-ghost-active {
+  background-color: var(--color-background-discovery-ghost-active);
+}
+
+@utility text-discovery-ghost {
+  color: var(--color-text-discovery-ghost);
+}
+
+@utility text-discovery-ghost-hover {
+  color: var(--color-text-discovery-ghost-hover);
+}
+
+/* Ring */
+@utility ring-discovery {
+  outline-color: var(--color-ring-discovery);
+}
+
+/* =============================================
+  Disabled semantic utilities
+============================================= */
+@utility bg-disabled {
+  background-color: var(--color-background-disabled);
+}
+
+@utility border-disabled {
+  border-color: var(--color-border-disabled);
+}
+
+@utility text-disabled {
+  color: var(--color-text-disabled);
+}
+
+/* =============================================
+  Icon size utilities
+============================================= */
+@utility icon-xs {
+  width: var(--control-icon-size-xs);
+  height: var(--control-icon-size-xs);
+}
+
+@utility icon-sm {
+  width: var(--control-icon-size-sm);
+  height: var(--control-icon-size-sm);
+}
+
+@utility icon-md {
+  width: var(--control-icon-size-md);
+  height: var(--control-icon-size-md);
+}
+
+@utility icon-lg {
+  width: var(--control-icon-size-lg);
+  height: var(--control-icon-size-lg);
+}
+
+@utility icon-xl {
+  width: var(--control-icon-size-xl);
+  height: var(--control-icon-size-xl);
+}
+
+@utility icon-2xl {
+  width: var(--control-icon-size-2xl);
+  height: var(--control-icon-size-2xl);
+}

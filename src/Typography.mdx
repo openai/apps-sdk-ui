@@ -1,0 +1,227 @@
+import { Subtitle, Title, Meta, Canvas, Unstyled } from "@storybook/blocks"
+import { CustomTable, Value } from "@storybookComponents/CustomTable"
+import { ArrowRight } from "./components/Icon"
+import { TextLink } from "./components/TextLink"
+import { NextPrev } from "@storybookComponents/NextPrev"
+import { linkTo } from "@storybook/addon-links"
+import * as TypographyStories from "./Typography.stories"
+
+<Meta title="Concepts/Typography" />
+
+<Title>Typography</Title>
+<Subtitle>Using type treatments in Apps SDK UI</Subtitle>
+
+## Scales
+
+Scales include sizing for heading and text sizes, with combinations of `font-size`,`font-weight`, and `line-height`.
+
+<CustomTable>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col" width="80">Size</th>
+      <th scope="col" width="60">Weight</th>
+      <th scope="col" width="80">Tracking</th>
+      <th scope="col" width="60">Line</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><span class="heading-5xl">heading-5xl</span></td>
+      <td><Value>72px</Value></td>
+      <td><Value>600</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>72px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="heading-4xl">heading-4xl</span></td>
+      <td><Value>60px</Value></td>
+      <td><Value>600</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>60px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="heading-3xl">heading-3xl</span></td>
+      <td><Value>48px</Value></td>
+      <td><Value>600</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>48px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="heading-2xl">heading-2xl</span></td>
+      <td><Value>36px</Value></td>
+      <td><Value>600</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>42px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="heading-xl">heading-xl</span></td>
+      <td><Value>32px</Value></td>
+      <td><Value>600</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>38px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="heading-lg">heading-lg</span></td>
+      <td><Value>24px</Value></td>
+      <td><Value>600</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>28px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="heading-md">heading-md</span></td>
+      <td><Value>20px</Value></td>
+      <td><Value>600</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>26px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="heading-sm">heading-sm</span></td>
+      <td><Value>18px</Value></td>
+      <td><Value>600</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>26px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="heading-xs">heading-xs</span></td>
+      <td><Value>16px</Value></td>
+      <td><Value>600</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>24px</Value></td>
+    </tr>
+        <tr>
+      <td><span class="text-lg">text-lg</span></td>
+      <td><Value>18px</Value></td>
+      <td><Value>400</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>29px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="text-md">text-md</span></td>
+      <td><Value>16px</Value></td>
+      <td><Value>400</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>24px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="text-sm">text-sm</span></td>
+      <td><Value>14px</Value></td>
+      <td><Value>400</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>20px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="text-xs">text-xs</span></td>
+      <td><Value>12px</Value></td>
+      <td><Value>400</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>18px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="text-2xs">text-2xs</span></td>
+      <td><Value>10px</Value></td>
+      <td><Value>400</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>14px</Value></td>
+    </tr>
+    <tr>
+      <td><span class="text-3xs">text-3xs</span></td>
+      <td><Value>8px</Value></td>
+      <td><Value>400</Value></td>
+      <td><Value>0em</Value></td>
+      <td><Value>12px</Value></td>
+    </tr>
+  </tbody>
+</CustomTable>
+
+All text sizes are exposed to Tailwind, with custom utilities for `heading-*` and `text-*` classes.
+
+<Canvas
+  of={TypographyStories.Sizes}
+  source={{
+    code: `
+<h5 className="text-secondary mb-1">Get started</h5>
+<h2 className="heading-xl mb-3">Building your first app</h2>
+<p className="text-md">
+  Inline cards in Apps SDK UI keep copy short and actionable. Provide just enough
+  context for the task, then pair it with a clear next step.
+</p>
+`,
+  }}
+/>
+
+The underlying CSS variables can be referenced directly in CSS, as needed.
+
+```css
+/* Headings */
+--font-heading-xl-size: 2rem; /* 32px  */
+--font-heading-xl-line-height: 2.375rem; /* 38px */
+--font-heading-xl-weight: var(--font-weight-semibold);
+/* Text */
+--font-text-md-size: 1rem; /* 16px  */
+--font-text-md-line-height: 1.5; /* 24px  */
+--font-text-md-weight: var(--font-weight-normal);
+```
+
+## Colors
+
+Four semantic text colors are provided by default &ndash; base, emphasis, prose, secondary, and tertiary.
+
+<Canvas
+  of={TypographyStories.Colors}
+  source={{
+    code: `
+<p className="text-default">text-default</p>
+<p className="text-secondary">text-secondary</p>
+<p className="text-tertiary">text-tertiary</p>
+`,
+  }}
+/>
+
+<Unstyled>
+  For more details on using semantic color variables directly,{" "}
+  <TextLink onClick={linkTo("foundations-design-tokens", "docs")}>
+    explore our design tokens
+  </TextLink>
+  .
+</Unstyled>
+
+## Weights
+
+The available weights are fairly standard. Semibold is the most common bolded value.
+
+<Canvas
+  of={TypographyStories.Weights}
+  source={{
+    code: `
+<p className="font-normal">font-normal</p>
+<p className="font-medium">font-medium</p>
+<p className="font-semibold">font-semibold</p>
+<p className="font-bold">font-bold</p>
+`,
+  }}
+/>
+
+CSS variables are exposed in the common Tailwind pattern of `font-weight-*`:
+
+```css
+--font-weight-normal: 400;
+--font-weight-medium: 500;
+--font-weight-semibold: 600;
+--font-weight-bold: 700;
+```
+
+## Line height
+
+Line heights are optimized for readability and tailored to how each `font-size` sits on the baseline.
+
+Values are designed to create optimal centering with `align-items: center` for that given `font-size`, which ultimately means aligning to an odd or even pixel value.
+
+<Canvas of={TypographyStories.LineHeight} sourceState="hidden" />
+
+
+<NextPrev
+  prev={{ title: "Responsive design", path: "concepts-responsive-design" }}
+  next={{ title: "Colors", path: "foundations-colors" }}
+/>

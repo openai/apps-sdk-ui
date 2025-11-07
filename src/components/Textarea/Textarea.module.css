@@ -1,0 +1,259 @@
+.Container {
+  --textarea-line-height: 20px;
+  --textarea-font-weight: var(--font-weight-normal);
+  --textarea-color: var(--color-text);
+  --textarea-gutter-y: calc(0.5 * calc(var(--textarea-base-height) - var(--textarea-line-height)));
+  --textarea-min-height: calc(
+    (var(--textarea-gutter-y) * 2) + (var(--textarea-line-height) * var(--textarea-min-rows))
+  );
+  --textarea-max-height: calc(
+    (var(--textarea-gutter-y) * 2) + (var(--textarea-line-height) * var(--textarea-max-rows))
+  );
+
+  /* ============================================ */
+  /* Sizes */
+  /* ============================================ */
+  &:where([data-size="3xs"]) {
+    --textarea-base-height: var(--control-size-3xs);
+    --textarea-font-size: var(--control-font-size-sm);
+    --textarea-radius: var(--control-radius-sm);
+    --textarea-gutter-x: var(--control-gutter-xs);
+  }
+
+  &:where([data-size="2xs"]) {
+    --textarea-base-height: var(--control-size-2xs);
+    --textarea-font-size: var(--control-font-size-sm);
+    --textarea-radius: var(--control-radius-sm);
+    --textarea-gutter-x: var(--control-gutter-xs);
+  }
+
+  &:where([data-size="xs"]) {
+    --textarea-base-height: var(--control-size-xs);
+    --textarea-font-size: var(--control-font-size-md);
+    --textarea-radius: var(--control-radius-sm);
+    --textarea-gutter-x: var(--control-gutter-xs);
+  }
+
+  &:where([data-size="sm"]) {
+    --textarea-base-height: var(--control-size-sm);
+    --textarea-font-size: var(--control-font-size-md);
+    --textarea-radius: var(--control-radius-md);
+    --textarea-gutter-x: var(--control-gutter-sm);
+  }
+
+  /* ("md" is applied by default, set above) */
+  &:where([data-size="md"]) {
+    --textarea-base-height: var(--control-size-md);
+    --textarea-font-size: var(--control-font-size-md);
+    --textarea-radius: var(--control-radius-md);
+    --textarea-gutter-x: var(--control-gutter-md);
+  }
+
+  &:where([data-size="lg"]) {
+    --textarea-base-height: var(--control-size-lg);
+    --textarea-font-size: var(--control-font-size-md);
+    --textarea-radius: var(--control-radius-md);
+    --textarea-gutter-x: var(--control-gutter-md);
+  }
+
+  &:where([data-size="xl"]) {
+    --textarea-base-height: var(--control-size-xl);
+    --textarea-font-size: var(--control-font-size-lg);
+    --textarea-radius: var(--control-radius-lg);
+    --textarea-gutter-x: var(--control-gutter-lg);
+  }
+
+  &:where([data-size="2xl"]) {
+    --textarea-base-height: var(--control-size-2xl);
+    --textarea-font-size: var(--control-font-size-lg);
+    --textarea-radius: var(--control-radius-xl);
+    --textarea-gutter-x: var(--control-gutter-xl);
+  }
+
+  &:where([data-size="3xl"]) {
+    --textarea-base-height: var(--control-size-3xl);
+    --textarea-font-size: var(--control-font-size-lg);
+    --textarea-radius: var(--control-radius-xl);
+    --textarea-gutter-x: var(--control-gutter-xl);
+  }
+
+  /* ============================================ */
+  /* Gutter sizes */
+  /* ============================================ */
+  &:where([data-gutter-size="2xs"]) {
+    --textarea-gutter-x: var(--control-gutter-2xs);
+  }
+
+  &:where([data-gutter-size="xs"]) {
+    --textarea-gutter-x: var(--control-gutter-xs);
+  }
+
+  &:where([data-gutter-size="sm"]) {
+    --textarea-gutter-x: var(--control-gutter-sm);
+  }
+
+  &:where([data-gutter-size="md"]) {
+    --textarea-gutter-x: var(--control-gutter-md);
+  }
+
+  &:where([data-gutter-size="lg"]) {
+    --textarea-gutter-x: var(--control-gutter-lg);
+  }
+
+  &:where([data-gutter-size="xl"]) {
+    --textarea-gutter-x: var(--control-gutter-xl);
+  }
+
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  border-radius: var(--textarea-radius);
+  color: var(--textarea-color);
+  cursor: text;
+  font-size: var(--textarea-font-size);
+  font-weight: var(--textarea-font-weight);
+  transition-duration: var(--transition-duration-basic);
+  transition-property: color, box-shadow, background-color;
+  transition-timing-function: var(--transition-ease-basic);
+
+  /* =============================================
+    Outline variant
+  ============================================= */
+  &:where([data-variant="outline"]) {
+    /* NOTE: Don't add box-model size here, as the <textarea> defines all height sizing */
+    box-shadow: 0 0 0 1px var(--input-outline-border-color) inset;
+
+    &:not([data-disabled]) {
+      @mixin hover {
+        box-shadow: 0 0 0 1px var(--input-outline-border-color-hover) inset;
+      }
+
+      &[data-focused="true"] {
+        box-shadow: 0 0 0 1px var(--input-outline-border-color-focus) inset;
+      }
+
+      &[data-invalid] {
+        box-shadow: 0 0 0 1px var(--input-border-color-invalid) inset;
+      }
+    }
+  }
+
+  /* =============================================
+    Soft variant
+  ============================================= */
+  &:where([data-variant="soft"]) {
+    background-color: var(--input-soft-background-color);
+
+    &:not([data-disabled]) {
+      &[data-focused="true"] {
+        box-shadow: 0 0 0 1px var(--input-soft-border-color-focus) inset;
+      }
+
+      &[data-invalid] {
+        box-shadow: 0 0 0 1px var(--input-border-color-invalid) inset;
+      }
+    }
+  }
+
+  /* =============================================
+    Invalid
+  ============================================= */
+  &[data-invalid] {
+    ::selection {
+      background-color: var(--red-a50);
+    }
+  }
+
+  /* =============================================
+    Disabled
+  ============================================= */
+  &[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.Textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: var(--textarea-min-height);
+  max-height: var(--textarea-max-height);
+  padding: var(--textarea-gutter-y) var(--textarea-gutter-x);
+  border: 0;
+  border-radius: 0;
+  appearance: none;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  /* Prevent Firefox autofill coloring (preview and confirmed modes) */
+  filter: none;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: var(--textarea-line-height);
+  resize: none;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: var(--input-placeholder-text-color);
+    /* Normalize placeholder coloring across browsers. Firefox specifically uses `opacity` instead of a different `color`. */
+    opacity: 1;
+  }
+
+  /* Applying an animation on autofill allows us to listen for the event in JS */
+  &:-webkit-autofill {
+    animation: native-autofill-in 1ms;
+  }
+
+  /* Prevent auto-fill coloring */
+  &:-webkit-autofill,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:hover {
+    color: var(--color-text) !important;
+    -webkit-text-fill-color: var(--color-text) !important;
+    /* Prevent all color changes by delaying their effect for a very long time */
+    /* We cannot beat the specificity of user-agent stylesheet declarations, so we must delay them. */
+    transition:
+      background-color 0s 50000s,
+      box-shadow 0s 50000s,
+      filter 0s 50000s !important;
+  }
+  /* Identical to block above, but must keep separate for browsers to recognize their own selector */
+  &:-webkit-autofill-and-obscured,
+  &:-webkit-autofill-strong-password,
+  &:-webkit-autofill-strong-password-viewable {
+    color: var(--color-text) !important;
+    -webkit-text-fill-color: var(--color-text) !important;
+    transition:
+      background-color 0s 50000s,
+      box-shadow 0s 50000s,
+      filter 0s 50000s !important;
+  }
+  /* Prevent strange autofill size adjustments */
+  &:-webkit-autofill::first-line {
+    font-size: 16px !important;
+    transition: font-size 0s 50000s !important;
+  }
+
+  &::-webkit-resizer {
+    visibility: hidden;
+  }
+}
+
+@keyframes native-autofill-in {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

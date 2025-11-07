@@ -1,0 +1,53 @@
+.TransitionItem {
+  will-change: var(--tg-will-change);
+
+  /* Removing natural DOM position allows multiple layers to occupy the same space without stacking */
+  [data-transition-position="absolute"] &[data-exiting],
+  /* This should never occur, but is technically a fix for if TransitionGroup gets rendering wrong for a single paint as a new item enters */
+  [data-transition-position="absolute"] .TransitionItem:not([data-exiting]) + &[data-entering] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  &[data-entering] {
+    filter: var(--tg-initial-filter);
+    opacity: var(--tg-initial-opacity);
+    transform: var(--tg-initial-transform);
+  }
+
+  &[data-exiting] {
+    filter: var(--tg-enter-filter);
+    opacity: var(--tg-enter-opacity);
+    transform: var(--tg-enter-transform);
+  }
+
+  &[data-entering-active],
+  &[data-entering][data-interrupted] {
+    filter: var(--tg-enter-filter);
+    opacity: var(--tg-enter-opacity);
+    transform: var(--tg-enter-transform);
+    transition:
+      opacity var(--tg-enter-duration) var(--tg-enter-timing-function) var(--tg-enter-delay),
+      transform var(--tg-enter-duration) var(--tg-enter-timing-function) var(--tg-enter-delay),
+      filter var(--tg-enter-duration) var(--tg-enter-timing-function) var(--tg-enter-delay);
+  }
+
+  &[data-exiting-active],
+  &[data-exiting][data-interrupted] {
+    filter: var(--tg-exit-filter, none);
+    opacity: var(--tg-exit-opacity, 0);
+    transform: var(--tg-exit-transform, none);
+    transition:
+      opacity var(--tg-exit-duration) var(--tg-exit-timing-function) var(--tg-exit-delay),
+      transform var(--tg-exit-duration) var(--tg-exit-timing-function) var(--tg-exit-delay),
+      filter var(--tg-exit-duration) var(--tg-exit-timing-function) var(--tg-exit-delay);
+  }
+
+  /* Interruptions should not experience delay */
+  &[data-entering][data-interrupted],
+  &[data-exiting][data-interrupted] {
+    transition-delay: 0ms;
+  }
+}

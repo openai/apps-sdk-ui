@@ -1,0 +1,114 @@
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import * as InputStories from './Input.stories';
+ 
+<Meta of={InputStories} />
+ 
+<Title>Input</Title>
+<Subtitle>Semantic input text collection</Subtitle>
+
+## Usage
+```jsx
+import { Input } from "@openai/apps-sdk-ui/components/Input";
+```
+
+<Canvas of={InputStories.Base} />
+
+## Reference
+
+<ArgTypes of={InputStories.Base} exclude={['ref']} />
+
+
+## Examples
+
+### Variants
+Use `variant` to stylize the input.
+
+<Canvas of={InputStories.Variants} sourceState="none" />
+
+### Sizing & roundness
+
+Sizing of the input is controlled with `size` and `gutterSize` props. `size` sets the input to a specific control `height`, and `gutterSize` sets the horizontal padding.
+
+Each `size` provides default values for `gutterSize`, as well as `font-size`. Each of these values can be overridden independently.
+
+<Canvas of={InputStories.Sizing} sourceState='hidden' />
+<div className="canvas-controls-only">
+<Controls of={InputStories.Sizing}/>
+</div>
+
+
+### Start adornment
+
+You can add arbitrary content to the beginning of an input with `startAdornment` &ndash; like a search icon.
+
+Ideally, the spacing will look pretty good by default. If you need to customize the spacing:
+- `gutterSize` determines the amount of spacing on the edges of the container, which you can fine-tune as needed.
+  - If you need precise spacing not supported by `gutterSize`, use negative left margin on your adornment directly (e.g., `-ml-2`).
+- The spacing between the adornment and the input is controlled with `gap` on the container, which you can customize as needed with Tailwind classes.
+
+<Canvas of={InputStories.StartAdornment} />
+
+### End adornment
+
+You can add arbitrary content to the end of an input with `endAdornment` &ndash; like a clear button.
+
+The same spacing guidance from `startAdornment` applies here.
+
+End adornments are most commonly actions that are tucked tightly into the container frame. In these cases, you'll likely reach for negative right margin (e.g., `-mr-2.5`) to achieve that aesthetic.
+
+<Canvas of={InputStories.EndAdornment} />
+
+### Disabled
+
+Use the `disabled` prop to disable the input, greying it out and preventing user interactions.
+
+<Canvas of={InputStories.Disabled} />
+<div className="canvas-controls-only">
+<Controls of={InputStories.Disabled}/>
+</div>
+
+### Invalid
+
+Use the `invalid` prop to mark the input as invalid. You decide how this state is removed, whether that's through `onFocus`, `onChange`, an `onSubmit` handler, etc.
+
+Default visual styles will be applied, based on the `variant`. Additionally, `[data-invalid]` is applied to the container for custom styling.
+
+<Canvas of={InputStories.Invalid} />
+<div className="canvas-controls-only">
+<Controls of={InputStories.Invalid}/>
+</div>
+
+### Auto select text
+
+Pass `autoSelect` to select all text in the input &ndash; useful when pairing with other copy actions. This prop behaves like an imperative action when toggled and allows selection to change.
+
+<Canvas of={InputStories.AutoSelect} />
+<div className="canvas-controls-only">
+<Controls of={InputStories.AutoSelect}/>
+</div>
+
+### Autofill extensions
+
+By default, autofill extensions are prevented by `Input`. For the occasions where you want browser extensions to be present, pass `allowAutofillExtensions` to remove the disabling.
+
+When `name` is passed, or `type` is set to `"password"`, this value will default to `true`.
+
+<Canvas of={InputStories.AutofillExtensions} />
+<div className="canvas-controls-only">
+<Controls of={InputStories.AutofillExtensions}/>
+</div>
+
+### With button
+
+You can pair `Input` and `Button` components together by using the same `size` value.
+
+<Canvas of={InputStories.WithButton} />
+<div className="canvas-controls-only">
+<Controls of={InputStories.WithButton}/>
+</div>
+
+### Optical alignment
+
+Use `opticallyAlign` with either `"start"` or `"end"` to offset the gutter of the input.
+
+<Canvas of={InputStories.OpticalAlignment} sourceState="none" />

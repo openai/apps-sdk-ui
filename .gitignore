@@ -1,0 +1,16 @@
+*.egg-info
+*.tgz
+*.tsbuildinfo
+.DS_STORE
+
+__pycache__
+.egg-info
+.git
+.mypy_cache
+.next
+.pytest_cache
+.rollup.cache
+.ruff_cache
+
+dist
+node_modules

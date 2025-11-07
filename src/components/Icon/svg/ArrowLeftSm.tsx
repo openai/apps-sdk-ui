@@ -1,0 +1,10 @@
+import type { SVGProps } from "react"
+const ArrowLeftSm = (props: SVGProps<SVGSVGElement>) => (
+  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path
+      d="M5.29289 12.7071C4.90237 12.3166 4.90237 11.6834 5.29289 11.2929L10.2929 6.29289C10.6834 5.90237 11.3166 5.90237 11.7071 6.29289C12.0976 6.68342 12.0976 7.31658 11.7071 7.70711L8.41421 11H18C18.5523 11 19 11.4477 19 12C19 12.5523 18.5523 13 18 13H8.41421L11.7071 16.2929C12.0976 16.6834 12.0976 17.3166 11.7071 17.7071C11.3166 18.0976 10.6834 18.0976 10.2929 17.7071L5.29289 12.7071Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+export default ArrowLeftSm

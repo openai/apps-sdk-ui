@@ -1,0 +1,294 @@
+.CalendarContainer {
+  position: relative;
+  width: 210px;
+  /*  Default size of the calendar is assumed to be 224px */
+  /*  and then is dynamically set via JS measuring */
+  height: 224px;
+
+  @mixin breakpoint sm {
+    width: 452px;
+  }
+}
+
+.Previous {
+  position: absolute;
+  top: 0;
+  left: -2px;
+  z-index: 2;
+  background-color: var(--color-surface-elevated);
+
+  /*  Prevent titles from bleeding beyond the button */
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -10px;
+    display: block;
+    width: 12px;
+    background-color: var(--color-surface-elevated);
+    content: "";
+  }
+
+  /*  Slide fade as titles collide with the button */
+  &::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    display: block;
+    width: 14px;
+    background-color: var(--color-surface-elevated);
+    content: "";
+    mask-image: linear-gradient(-90deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 100%));
+  }
+}
+
+.Next {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  z-index: 2;
+  background-color: var(--color-surface-elevated);
+
+  /*  Prevent titles from bleeding beyond the button */
+  &::before {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    bottom: 0;
+    display: block;
+    width: 12px;
+    background-color: var(--color-surface-elevated);
+    content: "";
+  }
+
+  /*  Slide fade as titles collide with the button */
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    display: block;
+    width: 14px;
+    background-color: var(--color-surface-elevated);
+    content: "";
+    mask-image: linear-gradient(90deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 100%));
+  }
+}
+
+/*  Lift the inner button above the pseudo elements to avoid clipping in the focus ring box shadow. */
+.Next button[type="button"],
+.Previous button[type="button"] {
+  z-index: 2;
+}
+
+.CalendarWrapper {
+  overflow: hidden;
+  padding: 10px 12px 12px;
+}
+
+.CalendarRange {
+  transition: transform 0.25s var(--cubic-move);
+}
+
+.ButtonText {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: var(--font-weight-normal);
+  text-align: left;
+
+  [data-active] & {
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.Calendar {
+  --cell-size: 30px;
+  --cell-vertical-gutter: 2px;
+
+  position: absolute;
+  top: 0;
+  width: 210px;
+  font-size: 14px;
+}
+
+.Week {
+  display: flex;
+  margin-bottom: var(--cell-vertical-gutter);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.DayLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  letter-spacing: var(--tracking-none);
+  text-align: center;
+}
+
+.MonthLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0;
+  margin: 0 0 6px;
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.Day {
+  position: relative;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  text-align: center;
+  transition: background-color 0.15s var(--cubic-enter);
+
+  &:first-child {
+    border-radius: var(--radius-xs) 0 0 var(--radius-xs);
+  }
+
+  &:last-child {
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  }
+
+  &[data-is-start],
+  &[data-is-end],
+  &[data-is-in-range] {
+    background-color: light-dark(var(--alpha-06), var(--alpha-08));
+  }
+
+  &[data-is-start][data-is-end] {
+    background: none;
+  }
+
+  &[data-is-first-range-trail] {
+    border-radius: 0;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 100%;
+      bottom: 0;
+      width: 15px;
+      background-color: light-dark(var(--alpha-06), var(--alpha-08));
+      content: "";
+      mask-image: linear-gradient(90deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 100%));
+      transition: opacity 0.15s var(--cubic-enter);
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+
+  &[data-is-last-range-trail] {
+    border-radius: 0;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 100%;
+      width: 15px;
+      background-color: light-dark(var(--alpha-06), var(--alpha-08));
+      content: "";
+      mask-image: linear-gradient(-90deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 100%));
+      transition: opacity 0.15s var(--cubic-enter);
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+
+  &[data-is-start] {
+    border-bottom-left-radius: var(--radius-full);
+    border-top-left-radius: var(--radius-full);
+  }
+
+  &[data-is-end] {
+    border-bottom-right-radius: var(--radius-full);
+    border-top-right-radius: var(--radius-full);
+  }
+}
+
+.InteractiveDay {
+  position: relative;
+  display: block;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 0;
+  border-radius: var(--radius-full);
+  appearance: auto;
+  background: none;
+  cursor: pointer;
+  font-size: var(--font-text-sm-size);
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border: 1px solid var(--color-text);
+    border-radius: var(--radius-full);
+    content: "";
+    opacity: 0;
+    transition:
+      color,
+      0.15s var(--cubic-enter),
+      opacity 0.15s var(--cubic-enter);
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.4;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  [data-is-start] &,
+  [data-is-end] & {
+    background: var(--color-text);
+    color: var(--color-text-inverse);
+  }
+}
+
+.TodayDot {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  border-radius: 100%;
+  margin-left: -1px;
+  background-color: var(--color-text);
+  transition: background-color 0.15s var(--cubic-enter);
+
+  [data-is-start] &,
+  [data-is-end] & {
+    background-color: var(--gray-0);
+  }
+}
+
+.Shortcuts {
+  flex: 1;
+  width: 150px;
+  padding: spacing(2);
+  border-right: 1px solid var(--color-border);
+}

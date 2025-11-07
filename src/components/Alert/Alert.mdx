@@ -1,0 +1,77 @@
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks'
+import { linkTo } from '@storybook/addon-links';
+import * as AlertStories from './Alert.stories'
+ 
+<Meta of={AlertStories} />
+ 
+<Title>Alert</Title>
+<Subtitle>Call attention to a specific message or warning</Subtitle>
+
+## Usage
+```jsx
+import { Alert } from "@openai/apps-sdk-ui/components/Alert";
+```
+<Canvas of={AlertStories.Base}  additionalActions={[
+  { title: 'View story', onClick: linkTo(AlertStories.title, 'Base')}
+]} />
+
+## Reference
+
+<ArgTypes of={AlertStories.Base} />
+
+## Examples
+
+### Colors & variants
+
+You can stylize the display of the alert using the `color` and `variant` props.
+
+<Canvas of={AlertStories.Colors} sourceState="none" />
+<div className="canvas-controls-only">
+<Controls of={AlertStories.Colors}/>
+</div>
+
+### Title
+
+You can optionally include a title for your alert with the `title` prop.
+
+<Canvas of={AlertStories.TitleOnly} />
+
+### Description
+
+You can optionally include description text for your alert with the `description` prop.
+
+<Canvas of={AlertStories.DescriptionOnly} />
+
+### Actions
+
+You can add actions to the alert with the `actions` prop, which accepts `ReactNode`.
+
+<Canvas of={AlertStories.Actions} />
+
+### Action placement
+
+Actions are automatically, intelligently positioned in the alert by default.
+
+You can force a specific position with the `actionsPlacement` prop, by passing either `'end'` or `'bottom'`. This would be ideal for long alert messages with multiple actions.
+
+<Canvas of={AlertStories.ActionsPlacement} />
+
+### Indicator
+
+Alert provides an indicator icon by default, which changes based on the `color` passed to the component (e.g., success, warning, error).
+
+You can override the default indicator by passing a custom icon to `indicator`.
+
+<Canvas of={AlertStories.Indicator} />
+
+To hide the indicator entirely, pass `indicator={false}`.
+
+<Canvas of={AlertStories.NoIndicator} />
+
+### Dismissible
+
+The suggested approach for dismissible notices is to use labeled buttons via `actions`.
+
+<Canvas of={AlertStories.DismissibleActions} />
+
+

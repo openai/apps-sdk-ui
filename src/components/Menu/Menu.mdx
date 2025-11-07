@@ -1,0 +1,169 @@
+import { ArrowUp, Link } from "../Icon";
+import { Menu } from "../Menu";
+import { linkTo } from '@storybook/addon-links';
+import { ArgTypes, Controls, Canvas, Meta, Subtitle, Title } from '@storybook/blocks';
+import { Hero } from '@storybookComponents/Hero';
+import * as MenuStories from './Menu.stories';
+ 
+<Meta of={MenuStories} />
+ 
+<Title>Menu</Title>
+<Subtitle>Structured actions in a dropdown list</Subtitle>
+
+<Hero>
+  <div style={{ width: 180, height: 118 }}>
+    <Menu forceOpen>
+      <Menu.Trigger>
+        <div />
+      </Menu.Trigger>
+      <Menu.Content align="start" minWidth="auto">
+        <Menu.Item onSelect={() => {}}><ArrowUp height={20} width={20} /> Upload image</Menu.Item>
+        <Menu.Item onSelect={() => {}}><Link height={20} width={20} /> Link to image</Menu.Item>
+        <Menu.Separator />
+        <Menu.Item className="text-tertiary text-xs py-1">
+            Supported formats: .jpeg .jpg .gif .png
+        </Menu.Item>
+      </Menu.Content>
+    </Menu>
+  </div>
+</Hero>
+
+## Usage
+
+```jsx
+import { Menu } from "@openai/apps-sdk-ui/components/Menu"
+```
+
+<Canvas of={MenuStories.Base} />
+
+> **Note:** Menu prevents `Tab` presses from advancing focus. Because of this, `Menu` isn't suitable for generic popover use-cases &ndash; use <span className="link" onClick={linkTo('components-popover')}>Popover</span> instead.
+
+## Reference
+
+<h3 id="menu-root" data-heading-label="Root">`Menu`</h3>
+
+<ArgTypes of={Menu} />
+
+<h3 id="menu-trigger" data-heading-label="Trigger">`Menu.Trigger`</h3>
+
+Renders the element that toggles the menu open and closed. You can use any interactive element (e.g., a button or icon) as the trigger. The trigger should be the user's point of interaction for revealing the menu options.
+
+<h3 id="menu-content" data-heading-label="Content">`Menu.Content`</h3>
+
+Renders the dynamic content for the menu. `Menu.Content` is mounted only while the menu is open.
+
+<ArgTypes of={Menu.Content} />
+
+<h3 id="menu-item" data-heading-label="Item">`Menu.Item`</h3>
+
+Most common component for rendering menu list items. When `onSelect` is omitted, the item is rendered as non-interactive.
+
+<ArgTypes of={Menu.Item} />
+
+<h3 id="menu-link" data-heading-label="Link">`Menu.Link`</h3>
+
+Renders a menu item as a navigational link. Use `Menu.Link` to create items that navigate to another page or route when selected. Accepts all props supported by the application's router link component, such as `to` or `href`, and ensures proper accessibility roles and keyboard behavior within the menu.
+
+<h3 id="menu-separator" data-heading-label="Separator">`Menu.Separator`</h3>
+
+Renders a divider between menu items
+
+<ArgTypes of={Menu.Separator} />
+
+<h3 id="menu-sub" data-heading-label="Sub">`Menu.Sub`</h3>
+
+Renders a wrapper for nested submenus within a menu. Use `Menu.Sub` to group a `Menu.SubTrigger` and a `Menu.SubContent`.
+
+<ArgTypes of={Menu.Sub} />
+
+<h3 id="menu-sub-trigger" data-heading-label="SubTrigger">`Menu.SubTrigger`</h3>
+
+Renders a menu item that toggles its associated submenu. Must be used inside a `Menu.Sub`.
+
+<ArgTypes of={Menu.SubTrigger} />
+
+<h3 id="menu-sub-content" data-heading-label="SubContent">`Menu.SubContent`</h3>
+
+Renders the content panel for a submenu. Must follow a `Menu.SubTrigger` within a `Menu.Sub`.
+
+<ArgTypes of={Menu.SubContent} />
+
+<h3 id="menu-checkboxitem" data-heading-label="CheckboxItem">`Menu.CheckboxItem`</h3>
+
+Renders a menu item with a checkbox indicator.
+
+<ArgTypes of={Menu.CheckboxItem} />
+
+<h3 id="menu-radiogroup" data-heading-label="RadioGroup">`Menu.RadioGroup`</h3>
+
+Renders a group of radio items in a menu.
+
+<ArgTypes of={Menu.RadioGroup} />
+
+<h3 id="menu-radioitem" data-heading-label="RadioItem">`Menu.RadioItem`</h3>
+
+Renders a menu item with a radio indicator &ndash; used inside `Menu.RadioGroup`.
+
+<ArgTypes of={Menu.RadioItem} />
+
+<h3 id="menu-itemactions" data-heading-label="ItemActions">`Menu.ItemActions`</h3>
+
+Renders a container for additional actions that appear on the menu item. `Menu.ItemActions` automatically handles visibility of the actions based on hover, and will not trigger the item's `onSelect` behavior.
+
+<ArgTypes of={Menu.ItemActions} />
+
+<h3 id="menu-itemaction" data-heading-label="ItemAction">`Menu.ItemAction`</h3>
+
+Renders an action for use in the hover `Menu.ItemActions` container. Child is most likely to be a simple icon, which is passed to a `Button` component.
+
+<ArgTypes of={Menu.ItemAction} />
+
+## Examples
+
+### Sizing the menu
+
+- **Natural sizing** &ndash; use `minWidth="auto"` to have the menu fit naturally to the size of the content.
+- **Fixed size** &ndash; use `width` and `minWidth` to set the menu to a fixed size, regardless of content size.
+- **Flexible sizing** &ndash; `minWidth` can be used by itself to describe a menu that must be a given size, but can grow larger depending on its content.
+- **Max sizing** &ndash; apply `max-width` to the `children` of `Menu.Content`. `maxWidth` isn't exposed to props because it's reserved for Radix variables to limit width in collision detection.
+
+<Canvas of={MenuStories.NaturalSizing} />
+
+### Submenus
+
+Use `Menu.Sub`, `Menu.SubTrigger`, and `Menu.SubContent` to create nested menu items.
+
+<Canvas of={MenuStories.WithSubmenu} />
+
+### Checkbox items
+
+You can render selectable menu items with `Menu.CheckboxItem`.
+
+- Use `indicatorPosition` to control whether the indicator appears before or after the content of the item.
+- Use `indicatorVariant` to switch between a solid and ghost checkmark indicator.
+- Pass `onSelect={(evt) => evt.preventDefault()}` to prevent the menu from closing when selecting.
+
+<Canvas of={MenuStories.WithCheckboxes} />
+<div className="canvas-controls-only">
+<Controls of={MenuStories.WithCheckboxes}/>
+</div>
+
+### Radio items
+
+You can render radio options within a menu with `Menu.RadioGroup` and `Menu.RadioItem`.
+
+- Use `indicatorPosition` to control whether the indicator appears before or after the content of the item.
+- Pass `onSelect={(evt) => evt.preventDefault()}` to prevent the menu from closing when selecting.
+
+<Canvas of={MenuStories.WithRadioItems} />
+<div className="canvas-controls-only">
+<Controls of={MenuStories.WithRadioItems}/>
+</div>
+
+### Item actions
+
+You can render additional actions on `Menu.Item` by using the `Menu.ItemActions` and `Menu.ItemAction` components. This will render a special set of actions that display when a given item is highlighted.
+
+> **Accessibility note:** These actions are not keyboard accessible due to how Radix `Menu` works, so these should not be critical actions with no other parity.
+
+<Canvas of={MenuStories.ItemActions} />

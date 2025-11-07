@@ -1,0 +1,180 @@
+.Badge {
+  --indicator-size: var(--badge-indicator-size);
+
+  display: inline-flex;
+  align-items: center;
+  gap: spacing(1);
+  height: var(--badge-size);
+  padding: 0 var(--badge-gutter);
+  border-radius: var(--badge-radius);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
+  letter-spacing: var(--badge-tracking);
+  white-space: nowrap;
+
+  svg {
+    font-size: var(--badge-icon-font-size);
+
+    :where(&:first-child:not(:only-child)) {
+      margin-left: var(--badge-icon-offset, -1px);
+    }
+
+    :where(&:last-child:not(:only-child)) {
+      margin-right: var(--badge-icon-offset, -1px);
+    }
+  }
+
+  /* =============================================
+    Variants
+  ============================================= */
+  &[data-variant="soft"] {
+    background-color: var(--badge-background-color);
+    color: var(--badge-text-color);
+
+    &:where([data-color="secondary"]) {
+      --badge-background-color: var(--color-background-secondary-soft-alpha);
+      --badge-text-color: var(--color-text-secondary-soft);
+    }
+
+    &:where([data-color="success"]) {
+      --badge-background-color: var(--color-background-success-soft-alpha);
+      --badge-text-color: var(--color-text-success-soft);
+    }
+
+    &:where([data-color="warning"]) {
+      --badge-background-color: var(--color-background-warning-soft-alpha);
+      --badge-text-color: var(--color-text-warning-soft);
+    }
+
+    &:where([data-color="danger"]) {
+      --badge-background-color: var(--color-background-danger-soft-alpha);
+      --badge-text-color: var(--color-text-danger-soft);
+    }
+
+    &:where([data-color="info"]) {
+      --badge-background-color: var(--color-background-info-soft-alpha);
+      --badge-text-color: var(--color-text-info-soft);
+    }
+
+    &:where([data-color="discovery"]) {
+      --badge-background-color: var(--color-background-discovery-soft-alpha);
+      --badge-text-color: var(--color-text-discovery-soft);
+    }
+  }
+
+  &[data-variant="solid"] {
+    background-color: var(--badge-background-color);
+    color: var(--badge-text-color);
+
+    &:where([data-color="secondary"]) {
+      --badge-background-color: var(--color-background-secondary-solid);
+      --badge-text-color: var(--color-text-secondary-solid);
+    }
+
+    &:where([data-color="success"]) {
+      --badge-background-color: var(--color-background-success-solid);
+      --badge-text-color: var(--color-text-success-solid);
+    }
+
+    &:where([data-color="warning"]) {
+      --badge-background-color: var(--color-background-warning-solid);
+      --badge-text-color: var(--color-text-warning-solid);
+    }
+
+    &:where([data-color="danger"]) {
+      --badge-background-color: var(--color-background-danger-solid);
+      --badge-text-color: var(--color-text-danger-solid);
+    }
+
+    &:where([data-color="info"]) {
+      --badge-background-color: var(--color-background-info-solid);
+      --badge-text-color: var(--color-text-info-solid);
+    }
+
+    &:where([data-color="discovery"]) {
+      --badge-background-color: var(--color-background-discovery-solid);
+      --badge-text-color: var(--color-text-discovery-solid);
+    }
+  }
+
+  &[data-variant="outline"] {
+    /* Avoids additive `width` compared to other variants */
+    box-shadow: 0 0 0 1px var(--badge-border-color) inset;
+    color: var(--badge-text-color);
+
+    &:where([data-color="secondary"]) {
+      --badge-border-color: var(--color-border-secondary-outline);
+      --badge-text-color: var(--color-text-secondary-outline);
+    }
+
+    &:where([data-color="success"]) {
+      --badge-border-color: var(--color-border-success-outline);
+      --badge-text-color: var(--color-text-success-outline);
+    }
+
+    &:where([data-color="warning"]) {
+      --badge-border-color: var(--color-border-warning-outline);
+      --badge-text-color: var(--color-text-warning-outline);
+    }
+
+    &:where([data-color="danger"]) {
+      --badge-border-color: var(--color-border-danger-outline);
+      --badge-text-color: var(--color-text-danger-outline);
+    }
+
+    &:where([data-color="info"]) {
+      --badge-border-color: var(--color-border-info-outline);
+      --badge-text-color: var(--color-text-info-outline);
+    }
+
+    &:where([data-color="discovery"]) {
+      --badge-border-color: var(--color-border-discovery-outline);
+      --badge-text-color: var(--color-text-discovery-outline);
+    }
+  }
+
+  /* =============================================
+    Sizes
+  ============================================= */
+  &:where([data-size="sm"]) {
+    --badge-size: var(--badge-size-sm);
+    --badge-gutter: var(--badge-gutter-sm);
+    --badge-font-size: var(--badge-font-size-sm);
+    --badge-font-weight: var(--badge-font-weight-sm);
+    --badge-tracking: var(--badge-tracking-sm);
+    --badge-radius: var(--badge-radius-sm);
+    --badge-icon-font-size: var(--badge-icon-font-size-sm);
+    --badge-indicator-size: var(--badge-indicator-size-sm);
+  }
+
+  &:where([data-size="md"]) {
+    --badge-size: var(--badge-size-md);
+    --badge-gutter: var(--badge-gutter-md);
+    --badge-font-size: var(--badge-font-size-md);
+    --badge-font-weight: var(--badge-font-weight-md);
+    --badge-tracking: var(--badge-tracking-md);
+    --badge-radius: var(--badge-radius-md);
+    --badge-icon-font-size: var(--badge-icon-font-size-md);
+    --badge-indicator-size: var(--badge-indicator-size-md);
+  }
+
+  &:where([data-size="lg"]) {
+    --badge-size: var(--badge-size-lg);
+    --badge-gutter: var(--badge-gutter-lg);
+    --badge-font-size: var(--badge-font-size-lg);
+    --badge-font-weight: var(--badge-font-weight-lg);
+    --badge-tracking: var(--badge-tracking-lg);
+    --badge-radius: var(--badge-radius-lg);
+    --badge-icon-font-size: var(--badge-icon-font-size-lg);
+    --badge-indicator-size: var(--badge-indicator-size-lg);
+  }
+
+  /* =============================================
+    Pill
+  ============================================= */
+  &:where([data-pill]) {
+    --badge-radius: var(--radius-full);
+
+    padding: 0 calc(var(--badge-gutter) * var(--control-gutter-pill-scaling));
+  }
+}

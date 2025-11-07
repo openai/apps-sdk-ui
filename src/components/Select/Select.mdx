@@ -1,0 +1,41 @@
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+ 
+import * as SelectStories from './Select.stories';
+ 
+<Meta of={SelectStories} />
+ 
+<Title>Select</Title>
+<Subtitle>Choose from a dropdown of options</Subtitle>
+
+## Usage
+```jsx
+import { Select } from "@openai/apps-sdk-ui/components/Select";
+```
+
+<Canvas of={SelectStories.Base} />
+
+## Reference
+
+<ArgTypes of={SelectStories.Base} sort='requiredFirst' />
+
+
+## Examples
+
+### Custom views
+You can fully customize the styling and rendering of select's trigger and options:
+- **Trigger** &ndash; `triggerClassName`, `TriggerStartIcon`, and `TriggerView`
+- **Options** &ndash; `optionClassName`, `OptionView`, as well as `description` and `tooltip` fields in `options`
+
+<Canvas of={SelectStories.CustomViews} />
+
+### Actions
+Custom, arbitrary actions can be displayed below the options list via the `actions` prop.
+<Canvas of={SelectStories.Actions} />
+
+### Grouped options
+Select supports option groups, similar to All selects are searchable by default, but will only present a searchbox when it makes sense. Currently, this means when there are 15 or more options.
+<Canvas of={SelectStories.GroupedOptions} />
+
+### Multiple selection
+Multiple selection is supported through the `multiple` property. This changes how `value`, `onChange`, and `TriggerView` are typed, accepting and returning arrays of values.
+<Canvas of={SelectStories.MultiSelect} />

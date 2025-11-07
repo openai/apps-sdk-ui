@@ -1,0 +1,10 @@
+import type { SVGProps } from "react"
+const ArrowDownSm = (props: SVGProps<SVGSVGElement>) => (
+  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path
+      d="M11.2929 18.7071C11.6834 19.0976 12.3166 19.0976 12.7071 18.7071L17.7071 13.7071C18.0976 13.3166 18.0976 12.6834 17.7071 12.2929C17.3166 11.9024 16.6834 11.9024 16.2929 12.2929L13 15.5858V6C13 5.44771 12.5523 5 12 5C11.4477 5 11 5.44771 11 6V15.5858L7.70711 12.2929C7.31658 11.9024 6.68342 11.9024 6.29289 12.2929C5.90237 12.6834 5.90237 13.3166 6.29289 13.7071L11.2929 18.7071Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+export default ArrowDownSm

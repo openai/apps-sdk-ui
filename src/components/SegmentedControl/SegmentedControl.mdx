@@ -1,0 +1,106 @@
+import { DarkMode, LightMode, SystemMode } from "../Icon";
+import { SegmentedControl } from "./";
+import { ArgTypes, Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+import { Hero } from '@storybookComponents/Hero';
+import { linkTo } from '@storybook/addon-links';
+import { useState } from 'react';
+import * as SegmentedControlStories from './SegmentedControl.stories';
+ 
+<Meta of={SegmentedControlStories} />
+ 
+<Title>SegmentedControl</Title>
+<Subtitle>Toggle through grouped options</Subtitle>
+
+export const Example = () => {
+    const [theme, setTheme] = useState("light");
+
+    return (
+        <SegmentedControl
+            value={theme}
+            onChange={(nextTheme) => setTheme(nextTheme)}
+            aria-label="Seleect theme mode"
+            gutterSize='sm'
+        >
+            <SegmentedControl.Option value="light" aria-label="Light mode">
+                <LightMode />
+            </SegmentedControl.Option>
+            <SegmentedControl.Option value="dark" aria-label="Dark mode">
+                <DarkMode />
+            </SegmentedControl.Option>
+            <SegmentedControl.Option value="system" aria-label="System mode">
+                <SystemMode />
+            </SegmentedControl.Option>
+        </SegmentedControl>
+    );
+};
+
+
+<Hero className="flex gap-4">
+  <Example />
+</Hero>
+
+## Usage
+```jsx
+import { SegmentedControl } from "@openai/apps-sdk-ui/components/SegmentedControl";
+```
+<Canvas of={SegmentedControlStories.Base} additionalActions={[
+  { title: 'View story', onClick: linkTo(SegmentedControlStories.title, 'Base')}
+]} />
+
+## Reference
+
+<h3 id="segmentedcontrol-root" data-heading-label="Root">`SegmentedControl`</h3>
+
+<ArgTypes of={SegmentedControlStories.Base} />
+
+<h3 id="segmentedcontrol-option" data-heading-label="Option">`SegmentedControl.Option`</h3>
+
+<ArgTypes of={SegmentedControl.Option} />
+
+## Examples
+
+### Sizing & roundness
+Sizing of the control is controlled with `size` and `gutterSize` props. `size` sets the control to a specific `height`, and `gutterSize` sets the horizontal padding of the inner options.
+
+Each `size` provides default values for `gutterSize`, as well as `font-size` and `border-radius`. Each of these values can be overridden independently.
+
+Create a fully rounded control with the `pill` prop. When `pill` is set, extra horizontal gutter is dynamically applied to the inner options.
+
+<Canvas of={SegmentedControlStories.Sizing} sourceState='hidden' />
+<div className="canvas-controls-only">
+<Controls of={SegmentedControlStories.Sizing}/>
+</div>
+
+### Block
+
+Create full-width controls with the `block` prop. 
+
+<Canvas of={SegmentedControlStories.Block} />
+<div className="canvas-controls-only">
+<Controls of={SegmentedControlStories.Block}/>
+</div>
+
+### Disabled group
+
+Use `disabled` on the `SegmentedControl` root to disable all options.
+
+<Canvas of={SegmentedControlStories.Disabled} />
+<div className="canvas-controls-only">
+<Controls of={SegmentedControlStories.Disabled}/>
+</div>
+
+### Disabled option
+
+Use `disabled` on a given `SegmentedControl.Option` to disable only that option.
+
+<Canvas of={SegmentedControlStories.DisabledOption} />
+<div className="canvas-controls-only">
+<Controls of={SegmentedControlStories.DisabledOption}/>
+</div>
+
+### Scrollable
+`SegmentedControl` can support scrolling, but is not enabled by default.
+
+To create a scrollable segmented control, wrap the component in a simple `flex` wrapper, which will then cause the control to create inner scrolling when applicable. When scrollable, the selected option will automatically be scrolled into view.
+
+<Canvas of={SegmentedControlStories.Scrollable} />

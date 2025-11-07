@@ -1,0 +1,241 @@
+.Container {
+  position: relative;
+  overflow: hidden;
+
+  /* The height is the sum of all rows plus spacing, which is N+1 to account for the top spacing for the first row */
+
+  /* prettier-ignore */
+  min-height: calc(
+        (var(--min-rows) * var(--tag-input-height)) + ((var(--min-rows) + 1) * var(--tag-input-tag-spacing))
+    );
+  padding: var(--tag-input-tag-spacing);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 1px var(--input-outline-border-color) inset;
+  cursor: text;
+  outline: 0;
+  transition: box-shadow 0.15s ease;
+
+  &[data-disabled] {
+    pointer-events: none;
+  }
+
+  &:not([data-disabled]) {
+    @mixin hover {
+      box-shadow: 0 0 0 1px light-dark(var(--gray-300), var(--gray-500)) inset;
+    }
+
+    &[data-focused] {
+      box-shadow: 0 0 0 1px var(--input-outline-border-color-focus) inset;
+    }
+  }
+
+  &[data-empty] {
+    padding: var(--tag-input-tag-spacing) 12px;
+  }
+
+  /* =============================================
+    Sizes
+    ============================================= */
+
+  /* 20 + 6 + 6 = 32 */
+  &:where([data-size="md"]) {
+    --tag-input-font-size: var(--control-font-size-md);
+    --tag-input-height: 20px;
+    --tag-input-tag-spacing: 6px;
+  }
+
+  /* 24 + 6 + 6 = 36 */
+  &:where([data-size="lg"]) {
+    --tag-input-font-size: var(--control-font-size-md);
+    --tag-input-height: 24px;
+    --tag-input-tag-spacing: 6px;
+  }
+
+  /* 24 + 8 + 8 = 40 */
+  &:where([data-size="xl"]) {
+    --tag-input-font-size: var(--control-font-size-lg);
+    --tag-input-height: 24px;
+    --tag-input-tag-spacing: 8px;
+  }
+
+  /* 28 + 8 + 8 = 44 */
+  &:where([data-size="2xl"]) {
+    --tag-input-font-size: var(--control-font-size-lg);
+    --tag-input-height: 28px;
+    --tag-input-tag-spacing: 8px;
+  }
+
+  /* 32 + 8 + 8 = 48 */
+  &:where([data-size="3xl"]) {
+    --tag-input-font-size: var(--control-font-size-lg);
+    --tag-input-height: 32px;
+    --tag-input-tag-spacing: 8px;
+  }
+}
+
+.TagInput {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tag-input-tag-spacing);
+}
+
+.Tag {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: var(--tag-input-height);
+  padding: 4px 4px 4px 8px;
+  border-radius: var(--radius-md);
+  background-color: light-dark(
+    var(--color-background-secondary-soft),
+    var(--color-background-secondary-solid)
+  );
+  color: light-dark(var(--color-text-secondary-soft), var(--color-text-secondary-solid));
+  cursor: pointer;
+  line-height: 1.4;
+  outline: none;
+  transition: background-color 0.15s ease;
+
+  @mixin hover {
+    background-color: light-dark(
+      var(--color-background-secondary-soft-hover),
+      var(--color-background-secondary-solid-hover)
+    );
+  }
+
+  &:focus {
+    background-color: light-dark(
+      var(--color-background-secondary-soft-hover),
+      var(--color-background-secondary-solid-hover)
+    );
+  }
+
+  .Container[data-disabled] & {
+    color: var(--color-text-tertiary);
+  }
+
+  &[data-invalid] {
+    background-color: var(--color-background-danger-soft);
+    color: var(--color-text-danger-soft);
+
+    @mixin hover {
+      background-color: var(--color-background-danger-soft-hover);
+    }
+
+    &:focus {
+      background-color: var(--color-background-danger-soft-hover);
+    }
+  }
+
+  &[data-duplicate] {
+    animation: shake 0.5s ease;
+  }
+
+  .TagRemove {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+
+    @mixin hover {
+      opacity: 1;
+    }
+  }
+}
+
+.TagValue {
+  font-size: var(--tag-input-font-size);
+  white-space: nowrap;
+}
+
+.InputContainer {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.InputWrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.InputMeasure {
+  position: absolute;
+  font-size: var(--tag-input-font-size);
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+.Input {
+  display: block;
+  min-width: 20px;
+  height: var(--tag-input-height);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--color-text);
+  font-size: var(--tag-input-font-size);
+  line-height: 1.4;
+  white-space: nowrap;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  &:disabled {
+    color: var(--color-text-tertiary);
+  }
+
+  /* Prevent auto-fill coloring */
+  @mixin autofill {
+    /*
+     * Prevent all color changes by delaying their effect for a very long time
+     * We cannot beat the specificity of user-agent stylesheet declarations, so we must delay them.
+     */
+    color: var(--color-text) !important;
+    -webkit-text-fill-color: var(--color-text) !important;
+    transition:
+      background-color 0s 50000s,
+      box-shadow 0s 50000s,
+      filter 0s 50000s !important;
+  }
+}
+
+.Limit {
+  width: 100%;
+  margin-top: 2px;
+  color: var(--color-text);
+  font-size: var(--font-text-xs-size);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

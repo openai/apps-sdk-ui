@@ -1,0 +1,160 @@
+{
+  "name": "@openai/apps-sdk-ui",
+  "version": "0.1.0",
+  "description": "Design system for building apps for ChatGPT with Apps SDK",
+  "license": "MIT",
+  "homepage": "https://github.com/openai/apps-sdk-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openai/apps-sdk-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openai/apps-sdk-ui/issues"
+  },
+  "private": false,
+  "files": [
+    "dist/es/**",
+    "dist/types/**"
+  ],
+  "exports": {
+    "./css": "./dist/es/styles/index.css",
+    "./components/*": {
+      "types": "./dist/types/components/*/index.d.ts",
+      "default": "./dist/es/components/*/index.js"
+    },
+    "./hooks/*": {
+      "types": "./dist/types/hooks/*.d.ts",
+      "default": "./dist/es/hooks/*.js"
+    },
+    "./theme": {
+      "types": "./dist/types/lib/theme.d.ts",
+      "default": "./dist/es/lib/theme.js"
+    },
+    "./helpers": {
+      "types": "./dist/types/lib/helpers.d.ts",
+      "default": "./dist/es/lib/helpers.js"
+    },
+    "./userAgent": {
+      "types": "./dist/types/lib/userAgent.d.ts",
+      "default": "./dist/es/lib/userAgent.js"
+    },
+    "./dateUtils": {
+      "types": "./dist/types/lib/dateUtils.d.ts",
+      "default": "./dist/es/lib/dateUtils.js"
+    }
+  },
+  "scripts": {
+    "format": "prettier --check --cache --ignore-path .gitignore --ignore-path .prettierignore '**/*.{js,jsx,ts,tsx,json,css,md}'",
+    "format:fix": "prettier --write --cache --ignore-path .gitignore --ignore-path .prettierignore '**/*.{js,jsx,ts,tsx,json,css,md}'",
+    "lint": "npm run lint:ts && npm run lint:css",
+    "lint:ts": "eslint . --ignore-pattern dist --ignore-pattern node_modules",
+    "lint:css": "stylelint \"src/**/*.css\" --ignore-path .stylelintignore",
+    "test": "vitest run",
+    "types": "tsc",
+    "build:clean": "rm -rf dist",
+    "build:js": "tsc -p tsconfig.build.json",
+    "build:css": "node ./scripts/build-css.mjs",
+    "build:assets": "rsync -a --include='*/' --include='*.d.ts' --exclude='*' src/ dist/types/",
+    "build": "npm run build:clean && npm run build:js && npm run build:css && npm run build:assets",
+    "prepublishOnly": "npm run format:fix && npm run lint && npm run types && npm run test && npm run build",
+    "storybook": "storybook dev -p 6006 --config-dir .storybook-base",
+    "build-storybook": "storybook build --disable-telemetry --config-dir .storybook-base"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "tailwindcss": "^4.0.10"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "4.0.17",
+    "@types/mdast": "^4.0.4",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "autoprefixer": "10.4.20",
+    "clsx": "^2.1.1",
+    "core-js": "3.46.0",
+    "lodash": "4.17.21",
+    "luxon": "3.7.1",
+    "postcss": "^8",
+    "postcss-functions": "^4.0.2",
+    "postcss-mixins": "^11.0.3",
+    "postcss-nested": "^7.0.2",
+    "postcss-selector-parser": "7.1.0",
+    "postcss-value-parser": "4.2.0",
+    "radix-ui": "^1.1.3",
+    "react-markdown": "^9.0.3",
+    "react-merge-refs": "^2.1.1",
+    "react-syntax-highlighter": "^16.1.0",
+    "recharts": "3.2.1",
+    "rehype-katex": "7.0.1",
+    "remark-breaks": "^4.0.0",
+    "remark-directive": "^3.0.1",
+    "remark-gfm": "^4.0.0",
+    "remark-math": "6.0.0",
+    "unist-util-visit": "^5.0.0",
+    "usehooks-ts": "^3.1.1",
+    "zustand": "5.0.6"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.4",
+    "@eslint/js": "^9.19.0",
+    "@happy-dom/global-registrator": "20.0.10",
+    "@mdx-js/react": "^3.1.0",
+    "@mdx-js/rollup": "^3.1.0",
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-interactions": "^8.6.12",
+    "@storybook/addon-links": "^8.6.12",
+    "@storybook/addon-storysource": "^8.6.12",
+    "@storybook/addon-toolbars": "^8.6.12",
+    "@storybook/blocks": "^8.6.12",
+    "@storybook/components": "^8.6.12",
+    "@storybook/manager-api": "^8.6.12",
+    "@storybook/react": "^8.6.12",
+    "@storybook/react-vite": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "@storybook/theming": "^8.6.12",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "16.3.0",
+    "@types/jsdom": "21.1.7",
+    "@types/lodash": "4.17.16",
+    "@types/luxon": "3.6.2",
+    "@types/mdx": "^2.0.13",
+    "@types/postcss-functions": "4.0.4",
+    "@types/postcss-mixins": "9.0.6",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-mdx": "^3.1.5",
+    "eslint-plugin-path": "1.4.0-beta.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-compiler": "19.0.0-beta-27714ef-20250124",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
+    "eslint-plugin-storybook": "^0.11.3",
+    "globals": "^15.14.0",
+    "happy-dom": "20.0.10",
+    "jsdom": "24.1.3",
+    "openai": "4.87.3",
+    "prettier": "3.2.5",
+    "prettier-plugin-organize-imports": "4.1.0",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-router": "^7.1.5",
+    "rollup": "4.35.0",
+    "rollup-plugin-dts": "6.2.3",
+    "storybook": "^8.6.12",
+    "stylelint": "16.18.0",
+    "stylelint-config-standard": "^37.0.0",
+    "stylelint-order": "^6.0.4",
+    "stylelint-prettier": "^5.0.3",
+    "stylelint-scss": "6.12.1",
+    "tailwindcss": "4.0.10",
+    "typescript": "5.7.3",
+    "typescript-eslint": "^8.22.0",
+    "vite": "6.2.4",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "^2.1.5"
+  }
+}

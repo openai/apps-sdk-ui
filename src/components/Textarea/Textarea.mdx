@@ -1,0 +1,85 @@
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import * as TextareaStories from './Textarea.stories';
+
+<Meta of={TextareaStories} />
+
+<Title>Textarea</Title>
+<Subtitle>Semantic multi-line text input collection</Subtitle>
+
+## Usage
+```jsx
+import { Textarea } from "@openai/apps-sdk-ui/components/Textarea";
+```
+
+<Canvas of={TextareaStories.Base} />
+
+## Reference
+
+<ArgTypes of={TextareaStories.Base} exclude={["ref"]} />
+
+## Examples
+
+### Variants
+Use `variant` to stylize the textarea.
+
+<Canvas of={TextareaStories.Variants} sourceState="none" />
+
+### Auto resize
+
+Enable `autoResize` to automatically grow/shrink the textarea as the user types. Control the bounds with `rows` (initial height) and `maxRows`.
+
+<Canvas of={TextareaStories.AutoResize} />
+<div className="canvas-controls-only">
+  <Controls of={TextareaStories.AutoResize} />
+</div>
+
+### Sizing
+
+Sizing of the textarea is controlled with `size` and `gutterSize` props. `size` sets the textarea to a specific control `height` for single-line equivalent, and `gutterSize` sets the horizontal padding.
+
+Each `size` provides default values for `gutterSize`, as well as `font-size` and `border-radius`. Each of these values can be overridden independently.
+
+<Canvas of={TextareaStories.Sizing} sourceState='hidden' />
+<div className="canvas-controls-only">
+<Controls of={TextareaStories.Sizing}/>
+</div>
+
+### Disabled
+
+Use the `disabled` prop to disable the textarea, greying it out and preventing user interactions.
+
+<Canvas of={TextareaStories.Disabled} />
+<div className="canvas-controls-only">
+  <Controls of={TextareaStories.Disabled} />
+</div>
+
+### Invalid
+
+Use the `invalid` prop to mark the textarea as invalid. You decide how this state is removed, whether that's through `onFocus`, `onChange`, an `onSubmit` handler, etc.
+
+Default visual styles will be applied, based on the `variant`. Additionally, `[data-invalid]` is applied to the container for custom styling.
+
+<Canvas of={TextareaStories.Invalid} />
+<div className="canvas-controls-only">
+  <Controls of={TextareaStories.Invalid} />
+</div>
+
+### Auto select text
+
+Pass `autoSelect` to select all text in the textarea &ndash; useful when pairing with other copy actions. This prop behaves like an imperative action when toggled and allows selection to change.
+
+<Canvas of={TextareaStories.AutoSelect} />
+<div className="canvas-controls-only">
+  <Controls of={TextareaStories.AutoSelect} />
+</div>
+
+### Autofill extensions
+
+By default, autofill extensions are prevented by `Textarea`. For the occasions where you want browser extensions to be present, pass `allowAutofillExtensions` to remove the disabling.
+
+When `name` is passed this value will default to `true`.
+
+<Canvas of={TextareaStories.AutofillExtensions} />
+<div className="canvas-controls-only">
+  <Controls of={TextareaStories.AutofillExtensions} />
+</div>

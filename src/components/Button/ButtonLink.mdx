@@ -1,0 +1,125 @@
+import { ArrowRight } from "../Icon";
+import { ButtonLink } from "./";
+import { Canvas, ArgTypes, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+import { Hero } from '@storybookComponents/Hero';
+import { linkTo } from '@storybook/addon-links';
+ 
+import * as ButtonLinkStories from './ButtonLink.stories';
+ 
+<Meta of={ButtonLinkStories} />
+ 
+<Title>ButtonLink</Title>
+<Subtitle>`<Button>` as a semantic anchor element</Subtitle>
+
+## Usage
+```jsx
+import { ButtonLink } from "@openai/apps-sdk-ui/components/ButtonLink";
+```
+<Canvas of={ButtonLinkStories.Base} additionalActions={[
+  { title: 'View story', onClick: linkTo(ButtonLinkStories.title, 'Base')}
+]}  />
+
+## Reference
+<ArgTypes of={ButtonLinkStories.Base} />
+
+## Examples
+
+### Internal link
+
+When a relative `href` or `to` is provided, `ButtonLink` automatically uses the configured `LinkComponent` from `AppsSDKUIProvider` so your router handles navigation and prefetching.
+
+<Canvas of={ButtonLinkStories.Internal} />
+
+### External link
+
+When linking to an external URL (or when `external` is set), `<a>` is used with `target="_blank"` and `rel="noopener noreferrer"` added automatically.
+
+If your link is not being automatically identified, you can force external link behavior with the `external` prop.
+
+<Canvas of={ButtonLinkStories.External} />
+
+### Colors & variants
+You can stylize the display of the link using the `color` and `variant` props.
+
+<Canvas of={ButtonLinkStories.Colors} sourceState="none" />
+
+### Sizing & roundness
+Sizing of the link is controlled with `size` and `gutterSize` props. `size` sets the control `height`, and `gutterSize` sets the horizontal padding.
+
+Create fully rounded links with the `pill` prop. When `pill` is set, extra horizontal gutter is dynamically applied to the link.
+
+<Canvas of={ButtonLinkStories.Sizing} sourceState='hidden' />
+<div className="canvas-controls-only">
+  <Controls of={ButtonLinkStories.Sizing}/>
+</div>
+
+### Icons
+
+Icon sizing is controlled by the `iconSize` prop, which makes it easy to add icons as children without additional props.
+
+`size` will provide a default value for `iconSize`, but setting the prop will force the specified size.
+
+<Canvas of={ButtonLinkStories.Icon} />
+<div className="canvas-controls-only">
+  <Controls of={ButtonLinkStories.Icon}/>
+</div>
+
+### Block
+
+Create full-width links with the `block` prop.
+
+<Canvas of={ButtonLinkStories.Block} />
+<div className="canvas-controls-only">
+  <Controls of={ButtonLinkStories.Block}/>
+</div>
+
+### Disabled
+
+Use `disabled` to both visually and accessibly disable a link. The component renders as a `span[role="link"]`, and `onClick` handles are not bound.
+
+<Canvas of={ButtonLinkStories.Disabled} />
+<div className="canvas-controls-only">
+  <Controls of={ButtonLinkStories.Disabled}/>
+</div>
+
+## Configure your Router
+
+### Provider
+
+```tsx
+// In the root of your App
+import {AppsSDKUIProvider} from "@openai/apps-sdk-ui/components/AppsSDKUIProvider"
+import {Link} from "react-router"
+
+// Set up types 
+declare global {
+  interface AppsSDKUIConfig {
+    LinkComponent: typeof Link
+  }
+}
+
+// Wrap your app in AppsSDKUIProvider and pass in your router's Link component.
+export function App() {
+  return (
+    <AppsSDKUIProvider linkComponent={Link}>
+      {/* other providers... */}
+    </AppsSDKUIProvider>
+  )
+}
+
+// elsewhere - everything just works!
+<ButtonLink to={{ pathname: "/help" }} prefetch="intent">
+  Get Help
+</ButtonLink>
+```
+
+### Component-level
+For testing, and rare escape-hatch use-cases, you can also pass your Link component to the `as` prop.
+
+```tsx
+import {Link} from "next/link"
+
+<ButtonLink as={Link} href="/dashboard">
+  View Dashboard
+</ButtonLink>
+```

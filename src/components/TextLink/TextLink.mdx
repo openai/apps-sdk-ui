@@ -1,0 +1,114 @@
+import { ArrowUpRight } from "../Icon";
+import { TextLink } from "./TextLink";
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import { Hero } from '@storybookComponents/Hero';
+ 
+import * as TextLinkStories from './TextLink.stories';
+ 
+<Meta of={TextLinkStories} />
+ 
+<Title>TextLink</Title>
+<Subtitle>Semantic link used for both internal and external links</Subtitle>
+
+<Hero className="flex gap-4">
+<TextLink>Read more</TextLink>
+  <TextLink primary>External link <ArrowUpRight /></TextLink>
+</Hero>
+
+## Usage
+
+```jsx
+import { TextLink } from "@openai/apps-sdk-ui/components/TextLink"
+```
+
+<Canvas of={TextLinkStories.Base} />
+
+## Reference
+<ArgTypes of={TextLinkStories.Base} />
+
+## Examples
+
+### Default inheritance
+By default, `TextLink` uses `currentcolor` inheritance and `text-decoration: underline` to create subtle visual differentiation from surrounding text. The hover effect is a dynamic deemphasis of the `currentcolor`, with some special cases for `text-secondary` and `text-tertiary` contexts.
+
+You can see this behavior by changing the text color context of the paragraph the links are in below:
+
+<Canvas of={TextLinkStories.Colors} />
+<div className="canvas-controls-only">
+<Controls of={TextLinkStories.Colors}/>
+</div>
+
+### Primary color
+You can create a colorful link style with the `primary` prop, which uses color for visual differentiation.
+
+Primary links also remove the default `underline` treatment - pass `underline` re-apply that style.
+
+<Canvas of={TextLinkStories.Primary} />
+<div className="canvas-controls-only">
+<Controls of={TextLinkStories.Primary}/>
+</div>
+
+
+
+### Underline
+Links have an underlined aesthetic by default.
+
+Pass `underline={false}` to remove the underline from the link.
+
+<Canvas of={TextLinkStories.Underline} />
+<div className="canvas-controls-only">
+<Controls of={TextLinkStories.Underline}/>
+</div>
+
+
+### External links
+When external paths are provided, `<a>` will be used with `target="_blank"` and `rel="noopener noreferrer"` included by default. You can also compose icons along with the text to add visual indication.
+
+<Canvas of={TextLinkStories.External} />
+
+### Font weight
+To customize the font weight, pass a Tailwind class to the `className` prop.
+
+<Canvas of={TextLinkStories.Weight} />
+
+## Configure your Router
+
+### Provider
+
+```tsx
+// In the root of your App
+import {AppsSDKUIProvider} from "@openai/apps-sdk-ui/components/AppsSDKUIProvider"
+import {Link} from "react-router"
+
+// Set up types 
+declare global {
+  interface AppsSDKUIConfig {
+    LinkComponent: typeof Link
+  }
+}
+
+// Wrap your app in AppsSDKUIProvider and pass in your router's Link component.
+export function App() {
+  return (
+    <AppsSDKUIProvider linkComponent={Link}>
+      {/* other providers... */}
+    </AppsSDKUIProvider>
+  )
+}
+
+// elsewhere - everything just works!
+<TextLink to={{ pathname: "/help" }} prefetch="intent">
+  Get Help
+</TextLink>
+```
+
+### Component-level
+For testing, and rare escape-hatch use-cases, you can also pass your Link component to the `as` prop.
+
+```tsx
+import {Link} from "next/link"
+
+<TextLink as={Link} href="/dashboard">
+  View Dashboard
+</TextLink>
+```

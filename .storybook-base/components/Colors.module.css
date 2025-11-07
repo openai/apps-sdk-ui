@@ -1,0 +1,105 @@
+.Color {
+  --shadow-hover-color: light-dark(rgb(0 0 0 / 100%), rgb(255 255 255 / 100%));
+  --shadow-hover-offset: 2px;
+
+  position: relative;
+  flex: 1;
+  height: 80px;
+  color: inherit;
+  cursor: pointer;
+
+  &::before {
+    position: absolute;
+    inset: var(--shadow-hover-offset);
+    display: block;
+    box-shadow: inset 0 0 0 2px var(--shadow-hover-color);
+    content: "";
+    opacity: 0;
+    transition: opacity 0.15s var(--cubic-enter);
+  }
+
+  &[data-state*="open"],
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.InvertLight {
+  @mixin light {
+    --shadow-hover-color: rgb(255 255 255 / 100%);
+
+    color: var(--white);
+  }
+}
+
+.InvertDark {
+  @mixin dark {
+    --shadow-hover-color: rgb(0 0 0 / 100%);
+
+    color: var(--black);
+  }
+}
+
+.InvertDarkHover {
+  --shadow-hover-color: rgb(255 255 255 / 50%);
+}
+
+.LightColorBorder {
+  @mixin light {
+    box-shadow: inset 0 0 0 1px var(--gray-50);
+  }
+}
+
+.Label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.Alpha {
+  --dot-size: 2px;
+  --gap-size: 8px;
+  --dot-light: var(--color-surface);
+  --dot-dark: light-dark(var(--gray-100), var(--gray-50));
+
+  flex: 1;
+  height: 80px;
+  background-image: radial-gradient(
+      circle,
+      var(--dot-light) 0 calc(var(--dot-size) / 2),
+      transparent calc(var(--dot-size) / 2 + 0.1px)
+    ),
+    radial-gradient(
+      circle,
+      var(--dot-dark) 0 calc(var(--dot-size) / 2),
+      transparent calc(var(--dot-size) / 2 + 0.1px)
+    );
+  background-position:
+    0 0,
+    calc(var(--gap-size) / 2) calc(var(--gap-size) / 2);
+  background-size: var(--gap-size) var(--gap-size);
+}
+
+.CopyButton {
+  flex-direction: row-reverse;
+  gap: 6px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-medium);
+
+  svg {
+    opacity: 0.75;
+  }
+}
+
+.TooltipValue {
+  display: none;
+
+  @mixin breakpoint md {
+    display: block;
+  }
+}

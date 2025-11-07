@@ -1,0 +1,209 @@
+import { CodeBlock } from "./CodeBlock";
+import { linkTo } from '@storybook/addon-links';
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import { Hero } from '@storybookComponents/Hero';
+import * as CodeBlockStories from './CodeBlock.stories';
+
+<Meta of={CodeBlockStories} />
+
+<Title>CodeBlock</Title>
+<Subtitle>Display syntax-highlighted code snippets</Subtitle>
+
+### Usage
+
+```jsx
+import { CodeBlock } from "@openai/apps-sdk-ui/components/CodeBlock";
+```
+
+<Canvas of={CodeBlockStories.Base} source={{code: `
+const codeSnippet = '...'
+
+return (
+  <CodeBlock language="javascript">{codeSnippet}</CodeBlock>
+)
+`}} />
+
+## Reference
+<ArgTypes of={CodeBlockStories.Base} />
+
+
+## Examples
+
+### Custom composition
+
+Custom code blocks can be created by using `<CodeBlockBase>` component composition. `<CodeBlockBase.Code>` can be used to render code within the base container, with custom markup around it.
+
+`<CodeBlockBase.CopyButton>` is also exposed, however it won't always make sense to re-use.
+
+In this example, a header is being added above the code block with a bespoke `<CopyButton>`.
+
+<Canvas of={CodeBlockStories.CustomBlock} source={{code: `
+const codeSnippet = '...'
+
+return (
+  <CodeBlockBase>
+    <div className="flex items-center justify-between bg-(--alpha-02) border-b border-b-(--alpha-06) px-4 py-1">
+      <span className="text-sm font-semibold text-secondary">typescript</span>
+      <CopyButton
+        variant="ghost"
+        color="secondary"
+        size="md"
+        uniform
+        copyValue={codeSnippet}
+        className="-mr-2"
+      />
+    </div>
+    <CodeBlockBase.Code language="typescript">
+      {codeSnippet}
+    </CodeBlockBase.Code>
+  </CodeBlockBase>
+)
+`}} />
+
+### Supported languages
+
+A pragmatic set of Prism grammars are pre-registered out of the box: `javascript`, `jsx`, `typescript`, `tsx`, `python`, `json`, `jsonc`, `bash`, `markup`, `css`, `scss`, `sql`, `markdown`, `yaml`, `java`, `go`, `c`, `clike`, `php`, `ruby`, `docker`, `diff`, `toml`, `kotlin`
+
+#### JavaScript
+
+Use the `javascript` language to highlight JavaScript code.
+
+<Canvas of={CodeBlockStories.JavaScript} sourceState="none" />
+
+#### JSX
+
+Use the `jsx` language for React components.
+
+<Canvas of={CodeBlockStories.JSX} sourceState="none" />
+
+#### TypeScript
+
+Use the `typescript` language for typed JavaScript code.
+
+<Canvas of={CodeBlockStories.TypeScript} sourceState="none" />
+
+#### TSX
+
+Use the `tsx` language for typed React components.
+
+<Canvas of={CodeBlockStories.TSX} sourceState="none" />
+
+#### Python
+
+Highlight Python code snippets with the `python` language.
+
+<Canvas of={CodeBlockStories.Python} sourceState="none" />
+
+#### JSON
+
+Highlight JSON data structures with the `json` language.
+
+<Canvas of={CodeBlockStories.JSON} sourceState="none" />
+
+#### JSONC
+
+Highlight JSON with comments using the `jsonc` language.
+
+<Canvas of={CodeBlockStories.JSONC} sourceState="none" />
+
+#### Bash
+
+Use the `bash` language for shell scripts.
+
+<Canvas of={CodeBlockStories.Bash} sourceState="none" />
+
+#### Markup
+
+Use the `markup` language to highlight HTML and XML.
+
+<Canvas of={CodeBlockStories.Markup} sourceState="none" />
+
+#### CSS
+
+Use the `css` language to highlight CSS styles.
+
+<Canvas of={CodeBlockStories.CSS} sourceState="none" />
+
+#### SCSS
+
+Use the `scss` language to highlight SCSS styles.
+
+<Canvas of={CodeBlockStories.Scss} sourceState="none" />
+
+#### SQL
+
+Highlight SQL queries with the `sql` language.
+
+<Canvas of={CodeBlockStories.SQL} sourceState="none" />
+
+#### Markdown
+
+Use the `markdown` language to highlight Markdown.
+
+<Canvas of={CodeBlockStories.Markdown} sourceState="none" />
+
+#### YAML
+
+Use the `yaml` language to highlight YAML files.
+
+<Canvas of={CodeBlockStories.Yaml} sourceState="none" />
+
+#### Java
+
+Use the `java` language to highlight Java code.
+
+<Canvas of={CodeBlockStories.Java} sourceState="none" />
+
+#### Go
+
+Use the `go` language to highlight Go code.
+
+<Canvas of={CodeBlockStories.Go} sourceState="none" />
+
+#### C
+
+Use the `c` language to highlight C code.
+
+<Canvas of={CodeBlockStories.C} sourceState="none" />
+
+#### C-like
+
+Use the `clike` language to highlight C-like syntax (C, C++, Java).
+
+<Canvas of={CodeBlockStories.Clike} sourceState="none" />
+
+#### PHP
+
+Use the `php` language to highlight PHP code.
+
+<Canvas of={CodeBlockStories.Php} sourceState="none" />
+
+#### Ruby
+
+Use the `ruby` language to highlight Ruby code.
+
+<Canvas of={CodeBlockStories.Ruby} sourceState="none" />
+
+#### Docker
+
+Use the `docker` language for Dockerfiles.
+
+<Canvas of={CodeBlockStories.Docker} sourceState="none" />
+
+#### Diff
+
+Use the `diff` language for diff outputs.
+
+<Canvas of={CodeBlockStories.Diff} sourceState="none" />
+
+#### TOML
+
+Use the `toml` language to highlight TOML files.
+
+<Canvas of={CodeBlockStories.Toml} sourceState="none" />
+
+#### Kotlin
+
+Use the `kotlin` language to highlight Kotlin code.
+
+<Canvas of={CodeBlockStories.Kotlin} sourceState="none" />

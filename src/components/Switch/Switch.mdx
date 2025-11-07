@@ -1,0 +1,42 @@
+import { Canvas, Controls, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import { Switch } from './Switch';
+import * as SwitchStories from './Switch.stories';
+
+<Meta of={SwitchStories} />
+
+<Title>Switch</Title>
+<Subtitle>Toggle control for on and off states</Subtitle>
+
+## Usage
+```jsx
+import { Switch } from "@openai/apps-sdk-ui/components/Switch";
+```
+
+<Canvas of={SwitchStories.Base} />
+
+## Reference
+
+<ArgTypes of={SwitchStories.Base} />
+
+
+## Examples
+
+### With label
+You can add a label to the component by using the `label` prop. The label will automatically connect to the switch with `id`.
+<Canvas of={SwitchStories.WithLabel} />
+
+### Label position
+Set `labelPosition="start"` to place the label on the left side of the switch control.
+<Canvas of={SwitchStories.LabelPositionStart} />
+
+### Default checked
+Initialize the switch with `defaultChecked` when you don't need to control its state. You can then use the `name` prop to read the value later on.
+<Canvas of={SwitchStories.DefaultChecked} />
+
+### Controlled
+Pass `checked` and `onCheckedChange` to manage the state in a controlled manner.
+<Canvas of={SwitchStories.Controlled} />
+
+### Disabled
+Use `disabled` to prevent the user from toggling the control.
+<Canvas of={SwitchStories.Disabled} />

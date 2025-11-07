@@ -1,0 +1,321 @@
+.Container {
+  display: flex;
+  align-items: center;
+  gap: var(--input-gap);
+  width: 100%;
+  border-radius: var(--input-radius);
+  color: var(--input-text-color);
+  cursor: text;
+  /* NOTE: Whenever this is not 16px on mobile, zooming occurs. */
+  font-size: var(--input-font-size);
+  font-weight: var(--font-weight-normal);
+  transition-duration: var(--transition-duration-basic);
+  transition-property: color, box-shadow, background-color;
+  transition-timing-function: var(--transition-ease-basic);
+
+  &:where([data-optically-align="start"]) {
+    margin-inline-start: calc(var(--input-gutter) * -1);
+  }
+
+  &:where([data-optically-align="end"]) {
+    margin-inline-end: calc(var(--input-gutter) * -1);
+  }
+
+  /* =============================================
+    Outline variant
+  ============================================= */
+  &:where([data-variant="outline"]) {
+    /* NOTE: Don't add box-model size here, as the <input> defines all height sizing */
+    box-shadow: 0 0 0 1px var(--input-outline-border-color) inset;
+
+    &:not([data-disabled]) {
+      @mixin hover {
+        box-shadow: 0 0 0 1px var(--input-outline-border-color-hover) inset;
+      }
+
+      &[data-focused="true"] {
+        box-shadow: 0 0 0 1px var(--input-outline-border-color-focus) inset;
+      }
+
+      &[data-invalid] {
+        box-shadow: 0 0 0 1px var(--input-border-color-invalid) inset;
+      }
+    }
+  }
+
+  /* =============================================
+    Soft variant
+  ============================================= */
+  &:where([data-variant="soft"]) {
+    background-color: var(--input-soft-background-color);
+
+    &:not([data-disabled]) {
+      &[data-focused="true"] {
+        box-shadow: 0 0 0 1px var(--input-soft-border-color-focus) inset;
+      }
+
+      &[data-invalid] {
+        box-shadow: 0 0 0 1px var(--input-border-color-invalid) inset;
+      }
+    }
+  }
+
+  /* =============================================
+    Invalid
+  ============================================= */
+  &[data-invalid] {
+    ::selection {
+      background-color: var(--red-a50);
+    }
+  }
+
+  /* =============================================
+    Sizes
+  ============================================= */
+  &:where([data-size="3xs"]) {
+    --input-size: var(--control-size-3xs);
+    --input-font-size: var(--control-font-size-sm);
+    --input-radius: var(--control-radius-sm);
+    --input-gutter: var(--control-gutter-xs);
+    --input-gap: var(--input-gap-xs);
+    --input-adornment-offset: -1px;
+  }
+
+  &:where([data-size="2xs"]) {
+    --input-size: var(--control-size-2xs);
+    --input-font-size: var(--control-font-size-sm);
+    --input-radius: var(--control-radius-sm);
+    --input-gutter: var(--control-gutter-xs);
+    --input-gap: var(--input-gap-xs);
+    --input-adornment-offset: -1px;
+  }
+
+  &:where([data-size="xs"]) {
+    --input-size: var(--control-size-xs);
+    --input-font-size: var(--control-font-size-md);
+    --input-radius: var(--control-radius-sm);
+    --input-gutter: var(--control-gutter-xs);
+    --input-gap: var(--input-gap-sm);
+    --input-adornment-offset: -1px;
+  }
+
+  &:where([data-size="sm"]) {
+    --input-size: var(--control-size-sm);
+    --input-font-size: var(--control-font-size-md);
+    --input-radius: var(--control-radius-md);
+    --input-gutter: var(--control-gutter-sm);
+    --input-gap: var(--input-gap-md);
+    --input-adornment-offset: -1px;
+  }
+
+  &:where([data-size="md"]) {
+    --input-size: var(--control-size-md);
+    --input-font-size: var(--control-font-size-md);
+    --input-radius: var(--control-radius-md);
+    --input-gutter: var(--control-gutter-md);
+    --input-gap: var(--input-gap-md);
+  }
+
+  &:where([data-size="lg"]) {
+    --input-size: var(--control-size-lg);
+    --input-font-size: var(--control-font-size-md);
+    --input-radius: var(--control-radius-md);
+    --input-gutter: var(--control-gutter-md);
+    --input-gap: var(--input-gap-md);
+  }
+
+  &:where([data-size="xl"]) {
+    --input-size: var(--control-size-xl);
+    --input-font-size: var(--control-font-size-lg);
+    --input-radius: var(--control-radius-lg);
+    --input-gutter: var(--control-gutter-lg);
+    --input-gap: var(--input-gap-lg);
+  }
+
+  &:where([data-size="2xl"]) {
+    --input-size: var(--control-size-2xl);
+    --input-font-size: var(--control-font-size-lg);
+    --input-radius: var(--control-radius-xl);
+    --input-gutter: var(--control-gutter-xl);
+    --input-gap: var(--input-gap-lg);
+    --input-adornment-offset: -4px;
+  }
+
+  &:where([data-size="3xl"]) {
+    --input-size: var(--control-size-3xl);
+    --input-font-size: var(--control-font-size-lg);
+    --input-radius: var(--control-radius-xl);
+    --input-gutter: var(--control-gutter-xl);
+    --input-gap: var(--input-gap-lg);
+    --input-adornment-offset: -4px;
+  }
+
+  /* =============================================
+    Gutter sizes
+  ============================================= */
+  &:where([data-gutter-size="2xs"]) {
+    --input-gutter: var(--control-gutter-2xs);
+    --input-adornment-offset: -1px;
+  }
+
+  &:where([data-gutter-size="xs"]) {
+    --input-gutter: var(--control-gutter-xs);
+    --input-adornment-offset: -1px;
+  }
+
+  &:where([data-gutter-size="sm"]) {
+    --input-gutter: var(--control-gutter-sm);
+    --input-adornment-offset: -2px;
+  }
+
+  &:where([data-gutter-size="md"]) {
+    --input-gutter: var(--control-gutter-md);
+    --input-adornment-offset: -2px;
+  }
+
+  &:where([data-gutter-size="lg"]) {
+    --input-gutter: var(--control-gutter-lg);
+    --input-adornment-offset: -2px;
+  }
+
+  &:where([data-gutter-size="xl"]) {
+    --input-gutter: var(--control-gutter-xl);
+    --input-adornment-offset: -4px;
+  }
+
+  /* =============================================
+    Pill
+  ============================================= */
+  &:where([data-pill]) {
+    --input-radius: var(--radius-full);
+  }
+
+  /* =============================================
+    Disabled
+  ============================================= */
+  &[data-disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* =============================================
+    Gutter
+  ============================================= */
+  /*
+   * When adornments are present, gutter is applied to the container instead of the input.
+   */
+  &:where([data-has-start-adornment]) {
+    padding-left: var(--input-gutter);
+  }
+
+  &:where([data-has-start-adornment][data-pill]) {
+    padding-left: calc(var(--input-gutter) * var(--control-gutter-pill-scaling));
+  }
+
+  &:where([data-has-end-adornment]) {
+    padding-right: var(--input-gutter);
+  }
+
+  &:where([data-has-end-adornment][data-pill]) {
+    padding-right: calc(var(--input-gutter) * var(--control-gutter-pill-scaling));
+  }
+
+  /* =============================================
+    Adornments
+  ============================================= */
+  > :first-child:not(input) {
+    margin-left: var(--input-adornment-offset, -2px);
+  }
+
+  > :last-child:not(input) {
+    margin-right: var(--input-adornment-offset, -2px);
+  }
+}
+
+.Input {
+  display: block;
+  width: 100%;
+  height: var(--input-size);
+  /* `padding` is intrinsic to `.Input` when no adornments are present, for a few reasons. Autofill extensions are one such reason. */
+  padding: 0 var(--input-gutter);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: var(--input-placeholder-text-color);
+  }
+
+  /* Applying an animation on autofill allows us to listen for the event in JS */
+  &:-webkit-autofill {
+    animation: native-autofill-in 1ms;
+  }
+
+  @mixin autofill {
+    color: var(--color-text) !important;
+    -webkit-text-fill-color: var(--color-text) !important;
+    /*
+     * Prevent all color changes by delaying their effect for a very long time
+     * We cannot beat the specificity of user-agent stylesheet declarations, so we must delay them.
+     */
+    transition:
+      background-color 0s 50000s,
+      box-shadow 0s 50000s,
+      filter 0s 50000s !important;
+  }
+
+  /* Prevent strange autofill size adjustments */
+  &:-webkit-autofill::first-line {
+    font-size: inherit !important;
+    transition: font-size 0s 50000s !important;
+  }
+
+  /* Hide up/down arrows */
+  &[type="number"] {
+    /* Firefox */
+    appearance: textfield;
+
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      margin: 0;
+      appearance: none;
+    }
+  }
+
+  /* Dynamic pill spacing */
+  :where(.Container[data-pill]) & {
+    padding: 0 calc(var(--input-gutter) * var(--control-gutter-pill-scaling));
+  }
+
+  :where(.Container[data-has-start-adornment]) & {
+    padding-left: 0;
+  }
+
+  :where(.Container[data-has-end-adornment]) & {
+    padding-right: 0;
+  }
+}
+
+@keyframes native-autofill-in {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,38 @@
+.Shimmer {
+  --shimmer-highlight: light-dark(var(--gray-200), var(--gray-900));
+
+  display: inline-block;
+  animation-delay: 0.6s;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  background: currentcolor
+    linear-gradient(to left, currentcolor, var(--shimmer-highlight) 50%, currentcolor);
+  background-clip: text;
+  background-position: -100% top;
+  background-repeat: no-repeat;
+  background-size: 50% 200%;
+  -webkit-text-fill-color: transparent;
+
+  /* Preference: disable animations entirely, rather than leaving potentially *many* animations paused in the DOM. */
+  &[data-idle] {
+    animation: none;
+    background: none;
+    background-clip: unset;
+    -webkit-text-fill-color: unset;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% top;
+  }
+
+  70% {
+    background-position: 250% top;
+  }
+
+  100% {
+    background-position: 250% top;
+  }
+}

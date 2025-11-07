@@ -1,0 +1,40 @@
+import { ArgTypes, Canvas, Meta, Subtitle, Title } from "@storybook/blocks"
+import { EmptyMessage } from "../EmptyMessage"
+import * as EmptyMessageStories from "./EmptyMessage.stories.tsx"
+
+<Meta of={EmptyMessageStories} />
+
+<Title>EmptyMessage</Title>
+<Subtitle>Gracefully inform users when there's nothing to see</Subtitle>
+
+### Usage
+
+```jsx
+import { EmptyMessage } from "../EmptyMessage"
+```
+
+### Reference
+
+<Canvas of={EmptyMessageStories.Base} layout="padded" />
+
+#### `EmptyMessage`
+
+<ArgTypes of={EmptyMessage} />
+
+#### `EmptyMessage.Icon`
+
+<ArgTypes of={EmptyMessage.Icon} />
+
+## Examples
+
+### Error message
+
+The `color` property enables you to display clearer intent with the message, such as showing an error state.
+
+<Canvas of={EmptyMessageStories.Error} layout="padded" />
+
+### No results
+
+The components of `EmptyMessage` are both composable and optional. This example omits the `EmptyMessage.Title` component, using only an icon and description for a simpler message style.
+
+<Canvas of={EmptyMessageStories.Empty} layout="padded" />

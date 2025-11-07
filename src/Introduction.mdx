@@ -1,0 +1,52 @@
+import { linkTo } from "@storybook/addon-links"
+import { Subtitle, Title, Meta, Unstyled } from "@storybook/blocks"
+import { Card } from "@storybookComponents/Card"
+import { HideTableOfContents } from "@storybookComponents/HideTableOfContents"
+import { Terminal, Cube, Documentation, GridAlt } from "./components/Icon"
+
+<HideTableOfContents />
+
+<Meta title="Overview/Introduction" />
+
+<Title>Apps SDK UI</Title>
+<Subtitle>Design system for building high quality apps in ChatGPT</Subtitle>
+
+Apps SDK UI is a design system tailored for ChatGPT, providing styling foundations with Tailwind, CSS variable design tokens, and a library of well-crafted, accessible components. Apps SDK UI includes:
+
+- **Design tokens** &ndash; for colors, typography, spacing, sizing, shadows, surfaces, and more.
+- **Tailwind 4** &ndash; pre-configured with Apps SDK UI's design tokens.
+- **Component library** &ndash; high-quality components built on top of Radix for consistent accessibility patterns.
+- **Utilities** &ndash; for dark mode, responsiveness layouts, and more.
+
+## Get started
+
+<Unstyled>
+  <div className="flex gap-6">
+    <Card
+      icon={<Terminal />}
+      title="Installation"
+      subtitle="Start using Apps SDK UI in your app"
+      onClick={linkTo("overview-installation")}
+    />
+    <Card
+      icon={<Documentation />}
+      title="Concepts"
+      subtitle="Read about core concepts in Apps SDK UI"
+      onClick={linkTo("concepts-dark-mode", "docs")}
+    />
+  </div>
+  <div className="mt-6 flex gap-6">
+    <Card
+      icon={<Cube />}
+      title="Components"
+      subtitle="Explore our library of composable components"
+      onClick={linkTo("components-avatar")}
+    />
+    <Card
+      icon={<GridAlt />}
+      title="Design tokens"
+      subtitle="See all available design tokens"
+      onClick={linkTo("foundations-design-tokens", "docs")}
+    />
+  </div>
+</Unstyled>
