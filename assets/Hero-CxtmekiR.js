@@ -1,0 +1,1 @@
+import{j as n}from"./jsx-runtime-D_zvdyIk.js";import{U as o}from"./index-BNUg4Y7r.js";const t="_Container_1emz1_1",e={Container:t},m=({className:r,children:s})=>n.jsx(o,{children:n.jsx("div",{className:e.Container,children:n.jsx("div",{className:r,children:s})})});export{m as H};

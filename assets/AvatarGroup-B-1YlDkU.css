@@ -1,0 +1,1 @@
+@layer components{._Group_eavzr_1{display:flex}._Group_eavzr_1>*~*{box-shadow:0 0 0 var(--avatar-group-cutout-width) var(--avatar-group-cutout-color)}._Group_eavzr_1[data-stack=start]{flex-direction:row-reverse}._Group_eavzr_1[data-stack=start]>*~*{margin-inline-end:var(--avatar-group-spacing)}._Group_eavzr_1[data-stack=end]>*~*{margin-inline-start:var(--avatar-group-spacing)}}

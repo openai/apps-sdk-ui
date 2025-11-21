@@ -1,0 +1,1 @@
+import{r as s}from"./index-CDlOlYQx.js";function t(e){const r=s.useRef(e);return r.current=e,r}try{t.displayName="useLatestValue",t.__docgenInfo={description:"",displayName:"useLatestValue",props:{}}}catch{}export{t as u};

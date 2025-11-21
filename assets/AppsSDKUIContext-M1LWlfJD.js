@@ -1,0 +1,1 @@
+import{r as e}from"./index-CDlOlYQx.js";const t=e.createContext(null);try{t.displayName="AppsSDKUIContext",t.__docgenInfo={description:"",displayName:"AppsSDKUIContext",props:{}}}catch{}export{t as A};

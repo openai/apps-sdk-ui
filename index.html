@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>@storybook/core - Storybook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    
+    <style>
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-regular.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-italic.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-bold.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: italic;
+        font-weight: 700;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-bold-italic.woff2') format('woff2');
+      }
+    </style>
+
+    <link href="./sb-manager/runtime.js" rel="modulepreload" />
+
+    
+    <link href="./sb-addons/storybook-core-core-server-presets-0/common-manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/links-1/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/toolbars-2/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-controls-3/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-docs-4/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/storysource-5/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/storybook-base-6/manager-bundle.js" rel="modulepreload" />
+      <link rel="icon" type="image/png" href="/favicon-storybook.png" />
+<link rel="icon" type="image/svg+xml" href="/favicon-storybook.svg" />
+<link rel="preconnect" href="https://cdn.openai.com" />
+
+<style>
+  :root {
+    --gray-0: light-dark(#ffffff, #0d0d0d);
+    --gray-25: light-dark(#fcfcfc, #101010);
+    --gray-50: light-dark(#f9f9f9, #131313);
+    --gray-75: light-dark(#f3f3f3, #161616);
+    --gray-100: light-dark(#ededed, #181818);
+    --gray-150: light-dark(#dfdfdf, #1c1c1c);
+    --gray-200: light-dark(#c4c4c4, #212121);
+    --gray-250: light-dark(#b9b9b9, #292929);
+    --gray-300: light-dark(#afafaf, #303030);
+    --gray-350: light-dark(#9f9f9f, #393939);
+    --gray-400: light-dark(#8f8f8f, #414141);
+    --gray-450: light-dark(#767676, #4f4f4f);
+    --gray-500: #5d5d5d;
+    --gray-550: light-dark(#4f4f4f, #767676);
+    --gray-600: light-dark(#414141, #8f8f8f);
+    --gray-650: light-dark(#393939, #9f9f9f);
+    --gray-700: light-dark(#303030, #afafaf);
+    --gray-750: light-dark(#292929, #b9b9b9);
+    --gray-800: light-dark(#212121, #c4c4c4);
+    --gray-850: light-dark(#1c1c1c, #dcdcdc);
+    --gray-900: light-dark(#181818, #ededed);
+    --gray-925: light-dark(#161616, #f3f3f3);
+    --gray-950: light-dark(#131313, #f3f3f3);
+    --gray-975: light-dark(#101010, #f9f9f9);
+    --gray-1000: light-dark(#0d0d0d, #ffffff);
+    --alpha-base: light-dark(#0d0d0d, #ffffff);
+    --alpha-0: color-mix(in srgb, var(--alpha-base) 0%, transparent);
+    --alpha-02: color-mix(in srgb, var(--alpha-base) 2%, transparent);
+    --alpha-04: color-mix(in srgb, var(--alpha-base) 4%, transparent);
+    --alpha-05: color-mix(in srgb, var(--alpha-base) 5%, transparent);
+    --alpha-06: color-mix(in srgb, var(--alpha-base) 6%, transparent);
+    --alpha-08: color-mix(in srgb, var(--alpha-base) 8%, transparent);
+    --alpha-10: color-mix(in srgb, var(--alpha-base) 10%, transparent);
+    --alpha-12: color-mix(in srgb, var(--alpha-base) 12%, transparent);
+    --alpha-15: color-mix(in srgb, var(--alpha-base) 15%, transparent);
+    --alpha-20: color-mix(in srgb, var(--alpha-base) 20%, transparent);
+    --alpha-25: color-mix(in srgb, var(--alpha-base) 25%, transparent);
+    --alpha-30: color-mix(in srgb, var(--alpha-base) 30%, transparent);
+    --alpha-35: color-mix(in srgb, var(--alpha-base) 35%, transparent);
+    --alpha-40: color-mix(in srgb, var(--alpha-base) 40%, transparent);
+    --alpha-50: color-mix(in srgb, var(--alpha-base) 50%, transparent);
+
+    --sb-input-border-color: light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.18));
+    --sb-input-border-hover-color: light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.25));
+    --sb-input-border-focus-color: light-dark(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.35));
+    --color-text: light-dark(var(--gray-750), var(--gray-850));
+    --color-text-secondary: light-dark(var(--gray-500), var(--gray-700));
+    --color-surface: light-dark(var(--gray-0), var(--gray-200));
+  }
+
+  /* When the document doesn't know its theme, keep it hidden */
+  html:not([data-theme]),
+  /* When the story iframe itself is still loading */
+  [data-is-loaded="false"] {
+    visibility: hidden;
+  }
+
+  * {
+    /* Aesthetic scrollbar defaults */
+    scrollbar-color: var(--alpha-30) transparent;
+    scrollbar-width: thin;
+  }
+
+  .sidebar-header {
+    margin-top: -6px !important;
+  }
+
+  .sidebar-header a {
+    pointer-events: none;
+  }
+
+  .sidebar-header a:focus {
+    outline: 0;
+  }
+
+  /* Hide the gear icon */
+  .sidebar-header > div:last-child {
+    display: none !important;
+  }
+
+  /* Hide the "Create new story" button */
+  .search-field + div {
+    display: none;
+  }
+
+  /* Hide resize handlebar */
+  div:has(+ .sidebar-container) {
+    display: none;
+  }
+
+  /* Search box */
+  .search-field {
+    position: relative;
+    margin-top: -6px !important;
+    height: 36px !important;
+    box-shadow: 0 0 0 1px var(--sb-input-border-color) !important;
+    transition: box-shadow 0.15s ease;
+  }
+
+  .search-field::before {
+    content: "";
+    -webkit-mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0), rgb(0, 0, 0));
+    mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0), #000);
+    height: 20px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    margin-top: 1px;
+    background: var(--color-surface);
+    pointer-events: none;
+  }
+
+  .search-field:hover {
+    box-shadow: 0 0 0 1px var(--sb-input-border-hover-color) !important;
+  }
+  .search-field:has(#storybook-explorer-searchfield:focus) {
+    box-shadow: 0 0 0 1px var(--sb-input-border-focus-color) !important;
+  }
+  #storybook-explorer-searchfield {
+    font-size: 14px !important;
+  }
+  /* Hide tags filter */
+  .search-field > div:last-child > div {
+    display: none !important;
+  }
+
+  .search-field > div:last-child > button {
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    margin-right: 4px;
+    border-radius: 100%;
+  }
+
+  .search-field > div:last-child > button:hover {
+    background: light-dark(var(--gray-100), var(--gray-400)) !important;
+    color: var(--gray-900) !important;
+  }
+
+  .search-result-recentlyOpened {
+    color: light-dark(var(--gray-400), var(--gray-650)) !important;
+    text-transform: none !important;
+    letter-spacing: 0em !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    margin-top: 0 !important;
+    margin-bottom: 4px !important;
+    padding-left: 10px !important;
+  }
+
+  /* Search results */
+  .search-result-item {
+    margin-bottom: 2px !important;
+    padding: 8px 10px !important;
+    background-color: transparent !important;
+    border-radius: 6px !important;
+  }
+
+  .search-result-item:hover {
+    background: light-dark(var(--gray-100), var(--gray-400)) !important;
+  }
+
+  .search-result-item > div:first-child {
+    display: none !important;
+  }
+
+  .search-result-item--label > div:first-child {
+    margin-bottom: 2px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--color-text) !important;
+  }
+
+  .search-result-item--label > div:first-child mark {
+    color: var(--color-text) !important;
+    background: var(--alpha-08) !important;
+  }
+
+  .search-result-item--label > div:last-child {
+    color: light-dark(var(--gray-500), var(--gray-650)) !important;
+    font-size: 12px !important;
+  }
+
+  .story-back-link {
+    position: absolute;
+    top: 5px;
+    left: 16px;
+  }
+
+  /* panel */
+  #root > div > div:nth-child(3):not(:has(.sidebar-container)) {
+    margin-right: 20px;
+    margin-left: 20px;
+    border: 1px solid var(--gray-150);
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+  }
+
+  #root > div > div:nth-child(3):not(:has(.sidebar-container)) div[orientation]::after,
+  #root > div > div:nth-child(3):not(:has(.sidebar-container)) .sb-bar {
+    background: none;
+  }
+
+  #root
+    > div
+    > div:nth-child(3):not(:has(.sidebar-container))
+    [title="Change addon orientation [⌥ D]"] {
+    display: none !important;
+  }
+
+  /* Sidebar container */
+  #root > div > div:nth-child(2),
+  #root > div > div:nth-child(3):has(.sidebar-container) {
+    border: 0 !important;
+  }
+
+  /* Sidebar custom nested scroll */
+  #storybook-explorer-menu {
+    position: absolute;
+    top: 99px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    margin: 0;
+    padding: 20px 12px 10px;
+  }
+
+  /* Sidebar "Roots" - remove expand/collapse and treat as normal headers */
+  [data-nodetype="root"] {
+    pointer-events: none !important;
+    color: light-dark(var(--gray-400), var(--gray-650)) !important;
+    text-transform: none !important;
+    letter-spacing: 0em !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    margin-top: 0px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .sidebar-item ~ [data-nodetype="root"] {
+    margin-top: 20px !important;
+  }
+
+  [data-nodetype="root"] button:first-child {
+    padding-left: 10px !important;
+  }
+
+  [data-nodetype="root"] button:first-child > div:first-child {
+    display: none;
+  }
+
+  [data-nodetype="root"] .sidebar-subheading-action {
+    display: none;
+  }
+
+  /* Sidebar spacing nudges */
+  .sidebar-item {
+    min-height: auto !important;
+    margin-bottom: 2px !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    transition: background-color 0.1s ease;
+  }
+  .sidebar-item:not([data-selected="true"]):hover {
+    background: light-dark(var(--gray-100), var(--gray-400)) !important;
+  }
+  .sidebar-item > button {
+    align-items: center !important;
+  }
+  .sidebar-item > button > div {
+    margin-top: 0 !important;
+  }
+  .sidebar-item > button:first-child {
+    padding-top: 4px !important;
+  }
+  .sidebar-item > a:first-child {
+    min-height: 36px !important;
+    align-items: center !important;
+    padding: 0 0 0 10px !important;
+    font-weight: inherit !important;
+    color: var(--color-text) !important;
+  }
+  .sidebar-item > a:first-child > div {
+    display: none !important;
+    margin-top: 1px;
+  }
+  .sidebar-item[data-selected="true"] {
+    background: light-dark(var(--gray-100), var(--gray-400)) !important;
+    color: var(--gray-900) !important;
+    font-weight: 600 !important;
+  }
+
+  /* Story args table */
+  .docblock-argstable-body td table {
+    /* Hide JSDoc tables which are meant for IDE's and not Storybook */
+    display: none !important;
+  }
+
+  /* Toolbar */
+  @media (min-width: 600px) {
+    [data-test-id="sb-preview-toolbar"] {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
+    }
+
+    [data-test-id="sb-preview-toolbar"] button {
+      pointer-events: all !important;
+    }
+
+    [data-view-mode="story"] [data-test-id="sb-preview-toolbar"] {
+      position: static !important;
+      pointer-events: all !important;
+    }
+  }
+
+  @media (max-width: 599px) {
+    #root > div > div:last-child {
+      position: absolute !important;
+      background: none !important;
+    }
+
+    #root > div > div:last-child > div > button {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      cursor: pointer;
+    }
+
+    #root > div > div:last-child > div > button svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    #root > div > div:last-child > div > button p {
+      display: none;
+    }
+
+    /* Hide addons drawer on mobile */
+    #root > div > div:nth-child(3) {
+      border: 0 !important;
+    }
+
+    #root > div > div:nth-child(3) button[title="Open addon panel"] {
+      display: none !important;
+    }
+
+    .story-back-link {
+      position: static !important;
+    }
+  }
+
+  [data-test-id="sb-preview-toolbar"] > div {
+    justify-content: flex-end !important;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 8px;
+  }
+
+  [data-test-id="sb-preview-toolbar"] > div > div:last-child {
+    display: none !important;
+  }
+
+  /* Toolbar hide orphan divider */
+  .sb-bar > div > div > span:first-child {
+    display: none !important;
+  }
+
+  #storybook-preview-iframe {
+    opacity: 0 !important;
+  }
+  #storybook-preview-iframe[data-is-loaded="true"] {
+    opacity: 1 !important;
+  }
+</style>
+ 
+
+    <style>
+      #storybook-root[hidden] {
+        display: none !important;
+      }
+    </style>
+
+    
+  </head>
+  <body>
+    <div id="root"></div>
+
+    
+    <script>
+      
+        
+          window['FEATURES'] = {
+  "argTypeTargetsV7": true,
+  "legacyDecoratorFileOrder": false,
+  "disallowImplicitActionsInRenderV8": true
+};
+        
+      
+        
+          window['REFS'] = {};
+        
+      
+        
+          window['LOGLEVEL'] = "info";
+        
+      
+        
+          window['DOCS_OPTIONS'] = {
+  "defaultName": "Docs",
+  "autodocs": "tag"
+};
+        
+      
+        
+          window['CONFIG_TYPE'] = "PRODUCTION";
+        
+      
+        
+      
+        
+      
+        
+          window['TAGS_OPTIONS'] = {
+  "dev-only": {
+    "excludeFromDocsStories": true
+  },
+  "docs-only": {
+    "excludeFromSidebar": true
+  },
+  "test-only": {
+    "excludeFromSidebar": true,
+    "excludeFromDocsStories": true
+  }
+};
+        
+      
+        
+          window['STORYBOOK_RENDERER'] = "react";
+        
+      
+        
+          window['STORYBOOK_BUILDER'] = "@storybook/builder-vite";
+        
+      
+        
+          window['STORYBOOK_FRAMEWORK'] = "@storybook/react-vite";
+        
+      
+    </script>
+    
+
+    <script type="module">
+      import './sb-manager/globals-runtime.js';
+      
+      
+        import './sb-addons/storybook-core-core-server-presets-0/common-manager-bundle.js';
+      
+        import './sb-addons/links-1/manager-bundle.js';
+      
+        import './sb-addons/toolbars-2/manager-bundle.js';
+      
+        import './sb-addons/essentials-controls-3/manager-bundle.js';
+      
+        import './sb-addons/essentials-docs-4/manager-bundle.js';
+      
+        import './sb-addons/storysource-5/manager-bundle.js';
+      
+        import './sb-addons/storybook-base-6/manager-bundle.js';
+      
+      
+      import './sb-manager/runtime.js';
+    </script>
+  </body>
+</html>
