@@ -1,3 +1,5 @@
+"use client"
+
 import { DropdownMenu } from "radix-ui"
 import React, {
   type ComponentProps,

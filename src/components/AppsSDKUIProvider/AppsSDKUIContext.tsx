@@ -1,3 +1,5 @@
+"use client"
+
 import { type ComponentType, createContext, type ForwardRefExoticComponent } from "react"
 
 type AppsSDKUIContextValue = {
