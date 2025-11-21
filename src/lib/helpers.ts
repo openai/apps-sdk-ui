@@ -1,8 +1,14 @@
 import { type CSSProperties } from "react"
+import { canUseDOM, hasDocument, hasWindow } from "./environment"
 import type { Pretty } from "./utilityTypes"
 
-export const prefersReducedMotion = () =>
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches
+export const prefersReducedMotion = () => {
+  if (!hasWindow || typeof window.matchMedia !== "function") {
+    return false
+  }
+
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+}
 
 export const handlePressableMouseEnter = (evt: React.MouseEvent) => {
   const target = evt.currentTarget
@@ -37,28 +43,36 @@ export const waitForAnimationFrame = (
   cb: () => void,
   options?: { frames: number },
 ): CancelAnimationFrame => {
-  // Browsers will sometimes decide to pause execution of animation frames
-  // when the window is hidden. In these cases, bypass requestAnimationFrame.
-  if (document.visibilityState === "hidden") {
-    // Run callback immediately, at the end of the next tick
+  const runAfterTick = () => {
     const id = setTimeout(cb)
     return () => {
       clearTimeout(id)
     }
   }
 
+  if (!canUseDOM || typeof window.requestAnimationFrame !== "function") {
+    return runAfterTick()
+  }
+
+  const visibilityHidden = hasDocument && document.visibilityState === "hidden"
+  if (visibilityHidden) {
+    return runAfterTick()
+  }
+
   let frames = options?.frames ?? 2
-  let animationFrame = requestAnimationFrame(function recurse() {
+  let animationFrame = window.requestAnimationFrame(function recurse() {
     frames -= 1
     if (frames === 0) {
       cb()
     } else {
-      animationFrame = requestAnimationFrame(recurse)
+      animationFrame = window.requestAnimationFrame(recurse)
     }
   })
 
   return () => {
-    cancelAnimationFrame(animationFrame)
+    if (typeof window.cancelAnimationFrame === "function") {
+      window.cancelAnimationFrame(animationFrame)
+    }
   }
 }
 
@@ -144,7 +158,7 @@ export const focusableElements = (element: HTMLElement) =>
   )
 
 export const sleep = (ms: number): Promise<void> =>
-  new Promise((resolve) => window.setTimeout(resolve, ms))
+  new Promise((resolve) => setTimeout(resolve, ms))
 
 /**
  * Group an array of objects by a property, preserving the *first-seen* order

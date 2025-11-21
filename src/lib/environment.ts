@@ -5,3 +5,6 @@ export const isJSDomLike =
   typeof (globalThis as unknown as Record<string, unknown>).happyDOM === "object"
 
 export const isTest = import.meta.env.MODE === "test" || isJSDomLike
+export const hasWindow = typeof window !== "undefined"
+export const hasDocument = typeof document !== "undefined"
+export const canUseDOM = hasWindow && hasDocument
