@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { Children, useMemo, type ComponentProps, type FC, type ReactNode } from "react"
 import ReactMarkdown from "react-markdown"

@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { type ComponentProps, type ComponentType, type ReactNode } from "react"
 import { useLinkComponent } from "../AppsSDKUIProvider/internal"

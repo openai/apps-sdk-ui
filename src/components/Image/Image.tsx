@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { type ComponentProps, useState } from "react"
 import s from "./Image.module.css"

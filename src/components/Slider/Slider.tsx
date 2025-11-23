@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import clamp from "lodash/clamp"
 import round from "lodash/round"

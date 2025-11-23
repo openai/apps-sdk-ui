@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { Switch as RadixSwitch } from "radix-ui"
 import { type FocusEventHandler, type ReactNode, useId } from "react"

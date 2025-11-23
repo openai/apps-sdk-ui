@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { TransitionGroup, type TransitionGroupProps } from "./TransitionGroup"
 
