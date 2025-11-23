@@ -55,9 +55,11 @@ createRoot(document.getElementById("root")!).render(
 )
 ```
 
-### 3. Add React provider
+### 3. Configure router (optional)
 
-`<AppsSDKUIProvider>` provides polyfills for ChatGPT’s browser environment and allows you to define a router link component - used in components like `<TextLink>` and `<ButtonLink>`.
+`<AppsSDKUIProvider>` helps define your default router link component, used in components like `<TextLink>` and `<ButtonLink>`.
+
+This provider is optional - router links can also be [passed directly to components](https://openai.github.io/apps-sdk-ui/?path=/docs/components-textlink--docs#component-level) via the `as` prop.
 
 ```tsx
 // Must be imported first to ensure Tailwind layers and style foundations are defined before component styles
@@ -82,14 +84,6 @@ createRoot(document.getElementById("root")!).render(
     </AppsSDKUIProvider>
   </StrictMode>,
 )
-```
-
-If your app doesn’t use a router:
-
-```tsx
-<AppsSDKUIProvider linkComponent={"a" as any}>
-  <App />
-</AppsSDKUIProvider>
 ```
 
 ### Start building
