@@ -1,6 +1,6 @@
 {
   "name": "@openai/apps-sdk-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Design system for building apps for ChatGPT with Apps SDK",
   "license": "MIT",
   "homepage": "https://github.com/openai/apps-sdk-ui#readme",
