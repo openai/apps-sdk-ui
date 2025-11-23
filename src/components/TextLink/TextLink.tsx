@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { type ComponentProps, type ComponentType, type ReactNode } from "react"
 import { useLinkComponent } from "../AppsSDKUIProvider/internal"
@@ -33,7 +35,7 @@ type TextLink = <
     TextLinkProps & {
       /**
        * Override the default component used for the link. This is useful for
-       * using a different routing library (e.g. React Router) or for testing
+       * using a routing library, or SSR rendering.
        * purposes.
        *
        * @default 'a'

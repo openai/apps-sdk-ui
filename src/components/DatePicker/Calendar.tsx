@@ -1,3 +1,5 @@
+"use client"
+
 import { DateTime, Interval } from "luxon"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { chunkIntoWeeks, getDaysOfMonth, isBefore, isSameDay, isToday } from "../../lib/dateUtils"

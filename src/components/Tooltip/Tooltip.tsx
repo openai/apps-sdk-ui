@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { Tooltip as RadixTooltip, Slot } from "radix-ui"
 import { useState, type MouseEventHandler, type PointerEventHandler } from "react"

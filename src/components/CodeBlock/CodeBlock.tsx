@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { type ComponentProps } from "react"
 import { createElement, PrismLight as SyntaxHighlighter } from "react-syntax-highlighter"

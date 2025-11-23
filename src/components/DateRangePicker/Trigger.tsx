@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import type { DateTime } from "luxon"
 import { useMemo, type ComponentProps } from "react"

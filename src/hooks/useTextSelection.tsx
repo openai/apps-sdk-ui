@@ -1,4 +1,5 @@
 import { type RefObject, useEffect, useId } from "react"
+import { canUseDOM } from "../lib/environment"
 import { useLatestValue } from "./useLatestValue"
 
 type Handler = {
@@ -10,6 +11,10 @@ let handlers: Handler[] = []
 let listenerBound = false
 
 const handleSelectionChange = () => {
+  if (!canUseDOM) {
+    return
+  }
+
   // Wait until the next tick
   setTimeout(() => {
     const selection = window.getSelection?.()
@@ -22,6 +27,10 @@ const handleSelectionChange = () => {
 }
 
 const managerListener = () => {
+  if (!canUseDOM) {
+    return
+  }
+
   if (handlers.length > 0 && !listenerBound) {
     document.addEventListener("mouseup", handleSelectionChange)
     listenerBound = true
@@ -61,6 +70,10 @@ export const useTextSelection = (
 }
 
 export const clearTextSelection = () => {
+  if (!canUseDOM) {
+    return
+  }
+
   const selection = window.getSelection?.()
 
   if (!selection || selection.type === "None") {

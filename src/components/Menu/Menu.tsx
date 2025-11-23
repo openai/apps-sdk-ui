@@ -1,3 +1,5 @@
+"use client"
+
 import { DropdownMenu } from "radix-ui"
 import React, {
   type ComponentProps,
@@ -184,7 +186,7 @@ type MenuLink = <
     MenuLinkProps & {
       /**
        * Override the default component used for the link. This is useful for
-       * using a different routing library (e.g. React Router) or for testing
+       * using a routing library, or SSR rendering.
        * purposes.
        *
        * @default 'a'

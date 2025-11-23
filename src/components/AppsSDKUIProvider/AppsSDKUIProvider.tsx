@@ -1,8 +1,7 @@
+"use client"
+
 import { type ComponentType, type ForwardRefExoticComponent, type ReactNode } from "react"
 import { AppsSDKUIContext } from "./AppsSDKUIContext"
-
-// Polyfills
-import "core-js/actual/array/to-sorted"
 
 /// <reference path="../../global.d.ts" />
 

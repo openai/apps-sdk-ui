@@ -8,7 +8,7 @@ import { useLatestValue } from "./useLatestValue"
  */
 export function useTrailingValue<T>(value: T, delay: number): T {
   const [trailing, setTrailing] = useState(value)
-  const timeouts = useRef<number[]>([])
+  const timeouts = useRef<ReturnType<typeof setTimeout>[]>([])
   const currentDelay = useLatestValue(delay)
 
   // clear up any unsettled timeouts on unmount
@@ -20,7 +20,7 @@ export function useTrailingValue<T>(value: T, delay: number): T {
   }, [])
 
   useEffect(() => {
-    const timer = window.setTimeout(() => {
+    const timer = setTimeout(() => {
       setTrailing(value)
       timeouts.current = timeouts.current.filter((t) => t !== timer)
     }, currentDelay.current)

@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import {
   type ButtonHTMLAttributes,
@@ -193,7 +195,7 @@ type ButtonLink = <
       external?: boolean
       /**
        * Override the default component used for the link. This is useful for
-       * using a different routing library (e.g. React Router) or for testing
+       * using a routing library, or SSR rendering.
        * purposes.
        *
        * @default 'a'
@@ -214,7 +216,7 @@ export const ButtonLink = ((
   const {
     color = "primary",
     variant = "solid",
-    pill = false,
+    pill = true,
     size = "md",
     gutterSize,
     iconSize,
