@@ -214,7 +214,7 @@ export const ButtonLink = ((
   const {
     color = "primary",
     variant = "solid",
-    pill = false,
+    pill = true,
     size = "md",
     gutterSize,
     iconSize,
