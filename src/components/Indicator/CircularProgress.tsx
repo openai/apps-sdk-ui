@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { useState, type ComponentProps } from "react"
 import { useSimulatedProgress } from "../../hooks/useSimulatedProgress"

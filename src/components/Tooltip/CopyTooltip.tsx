@@ -1,3 +1,5 @@
+"use client"
+
 import { Tooltip as RadixTooltip } from "radix-ui"
 import { useRef, useState } from "react"
 import { copyText } from "../../lib/copyToClipboard"

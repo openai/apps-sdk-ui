@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { Checkbox as RadixCheckbox } from "radix-ui"
 import { type FocusEventHandler, type ReactNode, useId } from "react"

@@ -1,3 +1,5 @@
+"use client"
+
 import { DateTime } from "luxon"
 import { createContext, use } from "react"
 import type { SelectControlProps } from "../SelectControl"

@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { useMemo, useState } from "react"
 import { toCssVariables } from "../../lib/helpers"

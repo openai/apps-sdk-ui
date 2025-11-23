@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { RadioGroup as RadixRadioGroup } from "radix-ui"
 import React, { createContext, use, useId, useMemo } from "react"

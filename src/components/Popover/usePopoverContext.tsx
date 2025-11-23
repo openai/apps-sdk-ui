@@ -1,3 +1,5 @@
+"use client"
+
 import { createContext, use, type RefObject } from "react"
 
 export type PopoverContextValue = {

@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useRef, useState, type MouseEvent } from "react"
 import { copyToClipboard, type ClipboardContent } from "../../lib/copyToClipboard"
 import { Check, Copy } from "../Icon"

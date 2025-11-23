@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { useEffect, useId, useRef, useState } from "react"
 import { mergeRefs } from "react-merge-refs"

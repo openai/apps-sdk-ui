@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { ToggleGroup } from "radix-ui"
 import { useCallback, useLayoutEffect, useRef } from "react"

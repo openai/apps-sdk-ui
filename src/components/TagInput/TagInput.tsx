@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { useOnClickOutside } from "usehooks-ts"
 import { useLatestValue } from "../../hooks/useLatestValue"

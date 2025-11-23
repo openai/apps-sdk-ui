@@ -1,3 +1,5 @@
+"use client"
+
 import { DateTime } from "luxon"
 import { useMemo } from "react"
 import { useLatestValue } from "../../hooks/useLatestValue"
@@ -126,7 +128,7 @@ export const DatePicker = (props: DatePickerProps) => {
     disabled = false,
     dropdownIconType,
     placeholder = "Select date...",
-    pill = false,
+    pill = true,
     block = false,
     triggerClassName,
     triggerShowIcon = true,

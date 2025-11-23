@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import { useRef, type ReactNode } from "react"
 import { mergeRefs } from "react-merge-refs"
