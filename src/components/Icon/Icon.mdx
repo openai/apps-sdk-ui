@@ -1,0 +1,53 @@
+import { Canvas, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import * as IconStories from './Icon.stories';
+
+<Meta of={IconStories} />
+
+<Title>Icon</Title>
+<Subtitle>Collection of SVG icons exported as React components</Subtitle>
+
+## Usage
+
+```jsx
+import { Search, Settings, Check } from "@openai/apps-sdk-ui/components/Icon";
+```
+
+<Canvas of={IconStories.Base} additionalActions={[
+  { title: 'View story', onClick: linkTo(IconStories.title, 'Base')}
+]} />
+
+## Reference
+
+<ArgTypes of={IconStories.Base} exclude={['ref']} />
+
+## Examples
+
+### Sizing
+
+Icons accept `width` and `height` props to control their size. By default, icons use `1em` which scales with the font size.
+
+<Canvas of={IconStories.Sizing} />
+
+### Colors
+
+Icons use `currentColor` for their fill, so they inherit the text color from their parent. You can style them using Tailwind color classes.
+
+<Canvas of={IconStories.Colors} />
+
+### Common icons
+
+A selection of commonly used icons from the collection.
+
+<Canvas of={IconStories.CommonIcons} />
+
+### With text
+
+Icons work well alongside text content, inheriting the text color and scaling appropriately.
+
+<Canvas of={IconStories.WithText} />
+
+## Icon gallery
+
+For a complete list of all available icons, see the [Icon Gallery](/foundations-icons).
+
