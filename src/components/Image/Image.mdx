@@ -1,0 +1,48 @@
+import { Canvas, ArgTypes, Meta, Subtitle, Title } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import * as ImageStories from './Image.stories';
+
+<Meta of={ImageStories} />
+
+<Title>Image</Title>
+<Subtitle>Load remote images with fade-in animation and error handling</Subtitle>
+
+## Usage
+```jsx
+import { Image } from "@openai/apps-sdk-ui/components/Image";
+```
+
+<Canvas of={ImageStories.Base} additionalActions={[
+  { title: 'View story', onClick: linkTo(ImageStories.title, 'Base')}
+]} />
+
+## Reference
+
+<ArgTypes of={ImageStories.Base} exclude={['ref']} />
+
+## Examples
+
+### Loading
+
+Images fade in smoothly once loaded. The component tracks loaded images to provide instant display on subsequent renders.
+
+<Canvas of={ImageStories.Loading} />
+
+### Error
+
+By default, if an image fails to load, the component returns `null` and nothing is rendered.
+
+<Canvas of={ImageStories.Error} />
+
+### Force render on error
+
+Use `forceRenderAfterLoadFail` to display the broken image icon when an image fails to load, rather than hiding it completely.
+
+<Canvas of={ImageStories.ForceRenderOnError} />
+
+### Draggable
+
+Control whether the image can be dragged by setting the `draggable` prop.
+
+<Canvas of={ImageStories.Draggable} />
+
