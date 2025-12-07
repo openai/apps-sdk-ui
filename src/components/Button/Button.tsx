@@ -32,7 +32,7 @@ type CommonProps = {
   variant?: Variants<"solid" | "soft" | "outline" | "ghost">
   /**
    * Determines if the button should be a fully rounded pill shape
-   * @default false
+   * @default true
    */
   pill?: boolean
   /**

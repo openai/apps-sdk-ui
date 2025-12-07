@@ -63,11 +63,12 @@ Icon.args = {
   color: "secondary",
   size: "lg",
   uniform: true,
+  pill: false,
   variant: "ghost",
 }
 
 Icon.parameters = {
-  controls: { include: ["size", "gutterSize", "iconSize", "uniform", "variant"] },
+  controls: { include: ["size", "gutterSize", "iconSize", "uniform", "pill", "variant"] },
 }
 
 Icon.argTypes = {
