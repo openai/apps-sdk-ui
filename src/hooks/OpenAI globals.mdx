@@ -1,0 +1,96 @@
+import { Meta, Subtitle, Title } from "@storybook/blocks"
+
+<Meta title="Hooks/OpenAI globals" />
+
+<Title>OpenAI globals hooks</Title>
+<Subtitle>Subscribe to ChatGPT host values like layout and widget state</Subtitle>
+
+## Overview
+ChatGPT injects a `window.openai` object that includes layout details, locale, safe area, tool IO, and widget state. The hooks below subscribe to `openai:set_globals` events so your UI stays in sync with host updates. Until the host provides data they return `null`, so add sensible fallbacks for local development. See the [ChatGPT UI guide](https://developers.openai.com/apps-sdk/build/chatgpt-ui#managing-state) for the full host API.
+
+## State placement
+- **Business data (authoritative)** – lives on your MCP server or backend; return fresh snapshots via tools.
+- **Widget UI state (ephemeral)** – lives in `window.openai.widgetState` and should be updated through `useWidgetState` after every meaningful UI change.
+- **Cross-session state (durable)** – store in your backend if it must survive across conversations or devices.
+
+## `useOpenAiGlobal`
+Base hook for reading any key from `window.openai` with live updates. Pass the key you want and receive a typed value.
+
+```tsx
+import { useOpenAiGlobal } from "@openai/apps-sdk-ui/hooks/useOpenaiGlobal"
+
+function SafeAreaAwarePanel() {
+  const safeArea = useOpenAiGlobal("safeArea")
+  const locale = useOpenAiGlobal("locale")
+
+  return (
+    <section style={{ paddingBottom: safeArea?.insets.bottom ?? 16 }}>
+      <p>Current locale: {locale ?? "loading..."}</p>
+    </section>
+  )
+}
+```
+
+## Layout hooks
+### `useDisplayMode`
+Returns the current display mode (`pip`, `inline`, or `fullscreen`) granted by the host. Useful for adjusting density or controls when PiP or fullscreen is active.
+
+### `useMaxHeight`
+Returns the available vertical space in pixels for the widget, or `null` while loading. Combine with overflow styles to keep content scrollable.
+
+```tsx
+import { useDisplayMode } from "@openai/apps-sdk-ui/hooks/useDisplayMode"
+import { useMaxHeight } from "@openai/apps-sdk-ui/hooks/useMaxHeight"
+
+function WidgetFrame({ children }: { children: React.ReactNode }) {
+  const displayMode = useDisplayMode()
+  const maxHeight = useMaxHeight()
+
+  return (
+    <div
+      className={displayMode === "pip" ? "rounded-xl shadow-lg" : undefined}
+      style={{ maxHeight: maxHeight ?? undefined, overflow: "auto" }}
+    >
+      {children}
+    </div>
+  )
+}
+```
+
+## Widget data
+### `useWidgetProps`
+Reads the latest `toolOutput` provided by the host and falls back to an optional default (value or lazy initializer) when developing outside ChatGPT.
+
+```tsx
+import { useWidgetProps } from "@openai/apps-sdk-ui/hooks/useWidgetProps"
+
+type ReservationProps = { venue: string; time: string }
+
+const props = useWidgetProps<ReservationProps>(() => ({ venue: "Loading", time: "" }))
+```
+
+### `useWidgetState`
+Synchronizes widget UI state with ChatGPT. The hook hydrates from `window.openai.widgetState` when the widget mounts (or falls back to your initializer), subscribes to host changes, and mirrors writes through `window.openai.setWidgetState` so the host persists the snapshot for this widget instance. State is message-scoped and survives re-opens of the same widget but not new runs.
+
+```tsx
+import { useWidgetState } from "@openai/apps-sdk-ui/hooks/useWidgetState"
+
+type Filters = { cuisine: string | null; guests: number }
+
+function FiltersPanel() {
+  const [filters, setFilters] = useWidgetState<Filters>(() => ({ cuisine: null, guests: 2 }))
+
+  return (
+    <div className="space-y-3">
+      <button onClick={() => setFilters((prev) => ({ ...prev, cuisine: "italian" }))}>
+        Set to Italian
+      </button>
+      <button onClick={() => setFilters((prev) => ({ ...prev, guests: prev.guests + 1 }))}>
+        Add guest
+      </button>
+    </div>
+  )
+}
+```
+
+All hooks return `null` until `window.openai` is available. Provide defaults where appropriate so your components render gracefully in non-ChatGPT environments.
