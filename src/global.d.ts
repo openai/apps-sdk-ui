@@ -1,3 +1,7 @@
+/**
+ * Global oai object injected by the web sandbox for communicating with chatgpt host page.
+ */
+import type { API, OpenAiGlobals, type SET_GLOBALS_EVENT_TYPE, type SetGlobalsEvent } from "./types"
 declare global {
   interface DefaultConfig {
     LinkComponent: "a"
@@ -15,6 +19,13 @@ declare global {
   namespace AppsSDKUI {
     export type LinkComponent = Config["LinkComponent"]
     export type Breakpoint = Config["Breakpoint"]
+  }
+  interface Window {
+    openai: API & OpenAiGlobals
+  }
+
+  interface WindowEventMap {
+    [SET_GLOBALS_EVENT_TYPE]: SetGlobalsEvent
   }
 }
 
