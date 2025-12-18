@@ -157,6 +157,24 @@
   }
 
   /* =============================================
+     Ghost variant
+     ============================================= */
+  &:where([data-variant="ghost"]) {
+    /* No background or border by default, blends with container */
+    background-color: transparent;
+
+    &:not([data-disabled]) {
+      &[data-focused="true"] {
+        box-shadow: 0 0 0 1px var(--input-soft-border-color-focus) inset;
+      }
+
+      &[data-invalid] {
+        box-shadow: 0 0 0 1px var(--input-border-color-invalid) inset;
+      }
+    }
+  }
+
+  /* =============================================
     Invalid
   ============================================= */
   &[data-invalid] {
