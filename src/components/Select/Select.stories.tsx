@@ -46,6 +46,7 @@ const meta = {
     onChange: { control: false },
     actions: { control: false },
     searchEmptyMessage: { control: false },
+    onSearchTermChange: { control: false },
     searchPredicate: { control: false },
     triggerClassName: { control: false },
     TriggerView: { control: false },
