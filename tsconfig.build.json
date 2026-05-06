@@ -1,18 +1,14 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "rootDir": "src",
-    "declaration": true,
-    "emitDeclarationOnly": false,
-    "declarationDir": "dist/types",
     "outDir": "dist/es",
-    "sourceMap": true,
     "inlineSources": true,
     "allowImportingTsExtensions": false,
-    "module": "ESNext",
     "target": "ES2022",
     "jsx": "react-jsx",
-    "noEmit": false
+    "noEmit": false,
   },
   "include": ["src/**/*"],
   "exclude": [
@@ -24,6 +20,6 @@
     "scripts",
     "boilerplate-example",
     "public",
-    ".storybook-base"
-  ]
+    ".storybook-base",
+  ],
 }
