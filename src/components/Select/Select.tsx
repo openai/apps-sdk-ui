@@ -233,6 +233,8 @@ export type SelectProps<T extends Option> = (SingleSelectProps<T> | MultiSelectP
   listMaxWidth?: number | "auto"
   /** Predicate used to filter searches */
   searchPredicate?: SearchPredicate<T>
+  /** Callback called when the search input changes */
+  onSearchTermChange?: (searchTerm: string) => void
   /** Placeholder of the search input */
   searchPlaceholder?: string
   /**
@@ -292,6 +294,7 @@ type SelectContextValue<T extends Option> = (
   // References
   onSelectRef: React.MutableRefObject<(option: T, removeOption?: boolean) => void>
   searchPredicateRef: React.MutableRefObject<SearchPredicate<T>>
+  onSearchTermChangeRef: React.MutableRefObject<((value: string) => void) | undefined>
   // Derived
   searchable: boolean
 }
@@ -356,6 +359,7 @@ export const Select = <T extends Option>(props: SelectProps<T>) => {
     TriggerView: TriggerViewFromProps,
     searchPlaceholder = "",
     searchPredicate = defaultSearchPredicate,
+    onSearchTermChange,
     searchEmptyMessage = "No results found.",
     listMaxWidth = "auto",
   } = props
@@ -391,6 +395,9 @@ export const Select = <T extends Option>(props: SelectProps<T>) => {
 
   const searchPredicateRef = useRef<SearchPredicate<T>>(searchPredicate)
   searchPredicateRef.current = searchPredicate
+
+  const onSearchTermChangeRef = useRef(onSearchTermChange)
+  onSearchTermChangeRef.current = onSearchTermChange
 
   // It should be exceedingly uncommon to change actions dynamically, and they are unlikely to be a stable array reference from consumers
   // eslint-disable-next-line react-hooks/exhaustive-deps -- Intentionally limiting when this stable value changes to length of actions
@@ -475,6 +482,7 @@ export const Select = <T extends Option>(props: SelectProps<T>) => {
       onActionSelect,
       onSelectRef,
       searchPredicateRef,
+      onSearchTermChangeRef,
       // Derived state
       searchable,
       disabled,
@@ -512,6 +520,7 @@ export const Select = <T extends Option>(props: SelectProps<T>) => {
       actions,
       onActionSelect,
       onSelectRef,
+      onSearchTermChangeRef,
       searchable,
       disabled,
     ],
@@ -806,7 +815,7 @@ type CustomSelectMenuProps = {
 }
 
 const CustomSelectMenu = ({ onOpenChange }: CustomSelectMenuProps) => {
-  const { multiple, value, options, searchable, searchPredicateRef } = useSelectContext()
+  const { multiple, value, options, searchable, searchPredicateRef, onSearchTermChangeRef } = useSelectContext()
   const requestCloseRef = useRef<() => void>(() => onOpenChange(false))
   const menuRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
@@ -1057,6 +1066,10 @@ const CustomSelectMenu = ({ onOpenChange }: CustomSelectMenuProps) => {
     const maybeFirstOption = getFirstValidOption(filteredOptions)
     if (maybeFirstOption) setHighlightedValue(maybeFirstOption.value)
   }, [filteredOptions])
+
+  useEffect(() => {
+    onSearchTermChangeRef.current?.(searchTerm)
+  }, [searchTerm, onSearchTermChangeRef])
 
   return (
     <CustomSelectMenuContext value={store}>
