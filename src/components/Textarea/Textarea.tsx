@@ -12,8 +12,7 @@ export type TextareaProps = {
    * Visual style of the textarea
    * @default outline
    */
-  variant?: Variants<"outline" | "soft">
-  /**
+  variant?: Variants<"outline" | "soft" | "ghost">  /**
    * Controls the size of the textarea
    *
    * | 3xs     | 2xs     | xs      | sm      | md      | lg      | xl      | 2xl     | 3xl     |
