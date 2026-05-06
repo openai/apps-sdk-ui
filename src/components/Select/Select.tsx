@@ -24,6 +24,38 @@ import { Tooltip } from "../Tooltip"
 import { TransitionGroup } from "../Transition"
 import s from "./Select.module.css"
 
+/**
+ * Scroll an element into view within the given scroll container only.
+ *
+ * Native `scrollIntoView` can propagate across iframe boundaries, causing
+ * host pages to jump when a Select dropdown opens inside an embedded widget.
+ * This helper uses manual `scrollTop` adjustment on the container, which is
+ * scoped and cannot affect ancestor frames.
+ */
+function scrollIntoContainer(
+  element: Element,
+  container: Element,
+  block: ScrollLogicalPosition = "nearest",
+) {
+  const containerRect = container.getBoundingClientRect()
+  const elementRect = element.getBoundingClientRect()
+
+  if (block === "center") {
+    container.scrollTop +=
+      elementRect.top - containerRect.top - (containerRect.height - elementRect.height) / 2
+  } else if (block === "nearest") {
+    if (elementRect.top < containerRect.top) {
+      container.scrollTop += elementRect.top - containerRect.top
+    } else if (elementRect.bottom > containerRect.bottom) {
+      container.scrollTop += elementRect.bottom - containerRect.bottom
+    }
+  } else if (block === "end") {
+    container.scrollTop += elementRect.bottom - containerRect.bottom
+  } else {
+    container.scrollTop += elementRect.top - containerRect.top
+  }
+}
+
 export type Option<T extends string = string> = {
   value: T
   label: string
@@ -863,7 +895,9 @@ const CustomSelectMenu = ({ onOpenChange }: CustomSelectMenuProps) => {
 
     const highlightOption = (val: string, element: Element) => {
       setHighlightedValue(val)
-      element.scrollIntoView({ block: "nearest" })
+      if (listRef.current) {
+        scrollIntoContainer(element, listRef.current, "nearest")
+      }
     }
 
     const highlightSelectedOrFirstOption = () => {
@@ -987,7 +1021,9 @@ const CustomSelectMenu = ({ onOpenChange }: CustomSelectMenuProps) => {
         if (matchedNode) {
           setHighlightedValue(firstMatchingOption.value)
           // Ensure the newly highlighted option is scrolled into view
-          matchedNode.scrollIntoView({ block: "nearest" })
+          if (listRef.current) {
+            scrollIntoContainer(matchedNode, listRef.current, "nearest")
+          }
         }
       }
     }
@@ -1019,8 +1055,9 @@ const CustomSelectMenu = ({ onOpenChange }: CustomSelectMenuProps) => {
 
       // Ensure the highlighted option is in view
       const currentOption = findOptionByValue(highlightedValue, menuRef.current)
-      // Scroll the selected item into view, and its bottom edge.
-      currentOption?.scrollIntoView({ block: "center" })
+      if (currentOption && listRef.current) {
+        scrollIntoContainer(currentOption, listRef.current, "center")
+      }
     })
 
     // Send initial focus to the menu container or search input, to capture key events
