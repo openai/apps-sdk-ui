@@ -235,7 +235,7 @@ export const Slider = memo((props: SliderProps) => {
   }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
-    const nextValue = evt.currentTarget.value.replace(/[^\d.]/, "").trim()
+    const nextValue = evt.currentTarget.value.replace(/[^\d.]/g, "").trim()
     let parsed = parseFloat(nextValue || "0")
     parsed = clamp(parsed, min, max)
     if (step >= 1) {
