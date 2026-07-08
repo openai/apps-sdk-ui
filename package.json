@@ -26,6 +26,10 @@
       "types": "./dist/types/hooks/*.d.ts",
       "default": "./dist/es/hooks/*.js"
     },
+    "./icons/*": {
+      "types": "./dist/types/components/Icon/svg/*.d.ts",
+      "default": "./dist/es/components/Icon/svg/*.js"
+    },
     "./theme": {
       "types": "./dist/types/lib/theme.d.ts",
       "default": "./dist/es/lib/theme.js"
@@ -107,6 +111,7 @@
     "@types/luxon": "3.6.2",
     "@types/mdast": "^4.0.4",
     "@types/mdx": "^2.0.13",
+    "@types/node": "^20.19.43",
     "@types/postcss-functions": "4.0.4",
     "@types/postcss-mixins": "9.0.6",
     "@types/react": "19.0.8",
