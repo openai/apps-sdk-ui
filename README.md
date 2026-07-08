@@ -141,6 +141,14 @@ export function ReservationCard() {
 }
 ```
 
+### Importing individual icons
+
+Icons can also be imported individually through the `icons` subpath. Each icon is a standalone module with a default export, so tools like Vite and Vitest resolve only the icons you use instead of the full collection:
+
+```tsx
+import Calendar from "@openai/apps-sdk-ui/icons/Calendar"
+```
+
 ## License
 
 [MIT](LICENSE) © OpenAI
