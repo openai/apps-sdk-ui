@@ -346,7 +346,7 @@ type MarksProps = {
 const MINIMUM_MARK_SPACING_PX = 16
 
 const SliderMarks = memo(({ marks, thumbRef, min, max }: MarksProps) => {
-  // We seperate the container and measure divs so that our resize observer
+  // We separate the container and measure divs so that our resize observer
   // does not fire when we adjust the height of the marks container.
   const marksContainerRef = useRef<HTMLDivElement>(null)
   const measureRef = useRef<HTMLDivElement>(null)
