@@ -21,4 +21,21 @@ import { Markdown } from "@openai/apps-sdk-ui/components/Markdown"
 
 Use `includeMath` to enable LaTeX rendering.
 
+Apps SDK UI loads the bundled KaTeX font faces from `https://cdn.openai.com`.
+When you use math inside a hosted component, allow that origin in the component
+resource's CSP metadata:
+
+```js
+_meta: {
+  ui: {
+    csp: {
+      resourceDomains: ["https://cdn.openai.com"],
+    },
+  },
+}
+```
+
+For hosts that still use the legacy ChatGPT compatibility metadata, add the
+same origin to `_meta["openai/widgetCSP"].resource_domains`.
+
 <Canvas of={MarkdownStories.Math} layout="padded" />
