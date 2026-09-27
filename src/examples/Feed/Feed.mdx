@@ -1,0 +1,117 @@
+import { Canvas, Meta, Source, Subtitle, Title } from "@storybook/blocks"
+import * as FeedStories from "./Feed.stories"
+import source from "./Feed.stories.tsx?raw"
+
+<Meta of={FeedStories} />
+
+<Title>Feed item actions</Title>
+<Subtitle>Compose a list with clear primary actions and an overflow menu</Subtitle>
+
+Use existing components to build a feed or list item. Keep frequent actions such
+as Like and Reply in a visible row, and place secondary actions such as Save and
+Report in a `Menu`. This is an application example, not a new component export.
+
+<Canvas of={FeedStories.Base} sourceState="none" />
+
+## Choosing components
+
+<table aria-label="Component choices">
+  <thead>
+    <tr>
+      <th scope="col">Element</th>
+      <th scope="col">Component</th>
+      <th scope="col">Behavior</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Identity</td>
+      <td><code>Avatar</code> with a visible author name</td>
+      <td>Initials work without an image request.</td>
+    </tr>
+    <tr>
+      <td>Like</td>
+      <td><code>Button</code> with <code>aria-pressed</code></td>
+      <td>Keep its accessible name stable; expose the selected state and count.</td>
+    </tr>
+    <tr>
+      <td>Reply</td>
+      <td><code>Button</code> and a labeled <code>Textarea</code></td>
+      <td>Move focus into the editor and preserve the draft when it closes.</td>
+    </tr>
+    <tr>
+      <td>More actions</td>
+      <td>A named, uniform <code>Button</code> inside <code>Menu.Trigger</code></td>
+      <td>The icon is decorative; the button names its action and the post.</td>
+    </tr>
+    <tr>
+      <td>Save</td>
+      <td><code>Menu.CheckboxItem</code></td>
+      <td>Represent an independent, reversible toggle.</td>
+    </tr>
+    <tr>
+      <td>Report</td>
+      <td><code>Menu.Item</code> followed by an <code>Alert</code> with buttons</td>
+      <td>Choosing the menu item opens a confirmation; it does not report immediately.</td>
+    </tr>
+  </tbody>
+</table>
+
+The outer list uses native `ul`, `li`, and `article` elements. Each item owns its
+state and uses unique IDs for labels and descriptions. The whole card is not a
+button, so its actions and editor remain separate interactive elements.
+
+## Keyboard and focus
+
+- All primary actions remain visible on touch screens and when navigating with Tab.
+- Like exposes its state through `aria-pressed`, not only its icon or color.
+- The menu uses its built-in arrow-key navigation. Use `onSelect` for menu items
+  so activation works with both a pointer and a keyboard.
+- Reply moves focus to the textarea. Enter adds a newline; Post reply submits.
+- Close or Escape keeps an unfinished draft and returns focus to Reply.
+- Escape is scoped to the open editor or confirmation. It respects prevented
+  events and IME composition.
+- Reporting moves focus to Cancel after the menu closes. Cancel, Escape, and
+  confirmation return focus to More actions.
+
+Keep inputs and confirmation buttons **outside `Menu.Content`**. Menu does not
+allow Tab to move through a form. This example uses an inline confirmation with
+`Alert`, so the post stays visible and the buttons follow normal tab order. It is
+not a modal and does not trap focus. For a longer anchored form, use `Popover`;
+if your app needs a modal confirmation, use its accessible dialog implementation
+with a label, description, focus containment, Escape handling, and focus return.
+
+## Narrow layouts and long content
+
+Like, Reply, and More actions use 44px-high buttons. The uniform overflow button
+also has a 44px width.
+Names, message text, and submitted replies can wrap without hiding the controls.
+Large counts use compact notation while their accessible descriptions retain the
+exact values. The action row can wrap if it needs more space. Adapt the number
+formatter's locale along with the example's English labels.
+The layout uses semantic design tokens for light and dark mode, logical spacing
+for directionality, and no additional animation.
+
+<Canvas of={FeedStories.Narrow} sourceState="none" />
+
+## Connecting real data
+
+The stories update local state only. Refreshing resets likes, saved posts, replies,
+and reports. No moderation or persistence service is implied.
+
+In an application, keep this interaction structure and connect each handler to
+your own data layer. Use stable post IDs for mutations. Reflect pending requests
+with `Button`'s loading and disabled states, preserve drafts on failure, and show
+an actionable error. Confirm success before marking a report as sent. If you
+optimistically update a like or saved state, restore the previous state when the
+request fails. Avoid moving focus back to the item if the user has moved elsewhere
+while waiting.
+
+## Complete example
+
+The source below includes the item, its local state, and the two stories. When
+adapting it to an app, import the components from
+`@openai/apps-sdk-ui/components/...` and replace the local updates with your data
+layer.
+
+<Source code={source} language="tsx" />
