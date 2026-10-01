@@ -41,8 +41,12 @@ export const isToday = (dateTime: DateTime): boolean => isSameDay(dateTime, Date
 
 /**
  * Split an array of days into weeks (arrays of 7 days each)
+ * @throws RangeError if size is not a positive integer.
  */
 export const chunkIntoWeeks = (daysInMonth: DateTime[], size = 7): DateTime[][] => {
+  if (!Number.isInteger(size) || size <= 0) {
+    throw new RangeError("Week chunk size must be a positive integer")
+  }
   const weeks = []
   for (let i = 0; i < daysInMonth.length; i += size) {
     weeks.push(daysInMonth.slice(i, i + size))
