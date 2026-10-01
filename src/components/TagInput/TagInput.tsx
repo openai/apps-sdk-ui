@@ -173,27 +173,35 @@ export const TagInput = (props: TagInputProps) => {
   // Tag lifecycle functions
   // ============================================
 
-  const addTag = (tagValue: string) => {
-    const trimmed = tagValue.trim()
-    if (!trimmed) {
-      return
-    }
-    if (tags.has(trimmed)) {
-      setDuplicateTags((prevTags) => new Set(prevTags).add(trimmed))
-      setTimeout(
-        () =>
-          setDuplicateTags((prevTags) => {
-            const newTags = new Set(prevTags)
-            newTags.delete(trimmed)
-            return newTags
-          }),
-        SHAKE_ANIMATION_DURATION_MS,
-      )
-      return
-    }
-    const validTag = validatorLatest.current?.(trimmed) ?? true
+  const addTags = (tagValues: string[]) => {
     const newSet = new Map(tags)
-    newSet.set(trimmed, { value: trimmed, valid: validTag })
+    for (const tagValue of tagValues) {
+      const trimmed = tagValue.trim()
+      if (!trimmed) {
+        continue
+      }
+      if (newSet.has(trimmed)) {
+        setDuplicateTags((prevTags) => new Set(prevTags).add(trimmed))
+        setTimeout(
+          () =>
+            setDuplicateTags((prevTags) => {
+              const newTags = new Set(prevTags)
+              newTags.delete(trimmed)
+              return newTags
+            }),
+          SHAKE_ANIMATION_DURATION_MS,
+        )
+        continue
+      }
+      if (maxTags && newSet.size >= maxTags) {
+        break
+      }
+      const validTag = validatorLatest.current?.(trimmed) ?? true
+      newSet.set(trimmed, { value: trimmed, valid: validTag })
+    }
+    if (newSet.size === tags.size) {
+      return
+    }
     const newTags = Array.from(newSet.values())
     onChangeLatest.current?.(newTags)
 
@@ -201,6 +209,8 @@ export const TagInput = (props: TagInputProps) => {
       setInternalTags(newTags)
     }
   }
+
+  const addTag = (tagValue: string) => addTags([tagValue])
 
   const removeTag = (tag: string) => {
     const newSet = new Map(tags)
@@ -322,7 +332,7 @@ export const TagInput = (props: TagInputProps) => {
 
     if (parts.length > 1) {
       e.preventDefault()
-      parts.forEach((part) => addTag(part))
+      addTags(parts)
     }
   }
 
