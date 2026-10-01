@@ -32,10 +32,10 @@ const managerListener = () => {
   }
 
   if (handlers.length > 0 && !listenerBound) {
-    document.addEventListener("mouseup", handleSelectionChange)
+    document.addEventListener("selectionchange", handleSelectionChange)
     listenerBound = true
   } else if (handlers.length === 0 && listenerBound) {
-    document.removeEventListener("mouseup", handleSelectionChange)
+    document.removeEventListener("selectionchange", handleSelectionChange)
     listenerBound = false
   }
 }
