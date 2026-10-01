@@ -1,5 +1,6 @@
 import { useMediaQuery } from "usehooks-ts"
 import { isDev } from "../lib/constants"
+import { canUseDOM } from "../lib/environment"
 
 export const cache = new Map<string, number>()
 let rootStyles: CSSStyleDeclaration | null = null
@@ -15,6 +16,9 @@ const FALLBACK_BREAKPOINTS: Record<AppsSDKUI.Breakpoint, number> = {
 } as const
 
 const resolveBreakpoint = (bp: AppsSDKUI.Breakpoint): number => {
+  if (!canUseDOM) {
+    return FALLBACK_BREAKPOINTS[bp] ?? FALLBACK_BREAKPOINTS.lg
+  }
   if (!cache.has(bp)) {
     rootStyles ||= getComputedStyle(document.documentElement)
 
