@@ -120,7 +120,11 @@ export const Slider = memo((props: SliderProps) => {
     ref: forwardedRef,
   } = props
   const id = useId()
-  const precision = useMemo(() => String(step).split(".")[1]?.length ?? 0, [step])
+  const precision = useMemo(() => {
+    const [mantissa, exponent = "0"] = String(step).split("e")
+    const decimalPlaces = mantissa.split(".")[1]?.length ?? 0
+    return Math.min(100, Math.max(0, decimalPlaces - Number(exponent)))
+  }, [step])
   const [inputValue, setInputValue] = useState<string>(String(value.toFixed(precision)))
   const setInputValueNumber = useCallback(
     (nextValue: number) => {
@@ -235,14 +239,21 @@ export const Slider = memo((props: SliderProps) => {
   }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
-    const nextValue = evt.currentTarget.value.replace(/[^\d.]/, "").trim()
+    const nextValue = evt.currentTarget.value
+      .replace(/[^\d.-]/g, "")
+      .replace(/(?!^)-/g, "")
+      .trim()
+    setInputValue(nextValue)
     let parsed = parseFloat(nextValue || "0")
+    if (Number.isNaN(parsed)) {
+      debouncedOnChange.cancel()
+      return
+    }
     parsed = clamp(parsed, min, max)
     if (step >= 1) {
       parsed = Math.floor(parsed)
     }
     debouncedOnChange(parsed)
-    setInputValue(nextValue)
   }
 
   const handleInputBlur: FocusEventHandler<HTMLInputElement> = (evt) => {
