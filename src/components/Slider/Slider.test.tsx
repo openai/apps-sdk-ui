@@ -59,4 +59,44 @@ describe("Slider signed input", () => {
     fireEvent.blur(input)
     expect(input).toHaveValue("-10")
   })
+
+  it("cancels a pending change when the next input is an incomplete minus", () => {
+    vi.useFakeTimers()
+    const onChange = vi.fn()
+    const { getByRole } = render(
+      <Slider min={-10} max={10} step={0.1} value={0} onChange={onChange} />,
+    )
+    const input = getByRole("textbox")
+
+    fireEvent.change(input, { target: { value: "5" } })
+    act(() => vi.advanceTimersByTime(100))
+    fireEvent.change(input, { target: { value: "-" } })
+    act(() => vi.advanceTimersByTime(250))
+
+    expect(input).toHaveValue("-")
+    expect(onChange).not.toHaveBeenCalled()
+  })
+})
+
+describe("Slider step precision", () => {
+  it.each([
+    [1e-7, 3e-7, "0.0000003"],
+    [1.5e-7, 4.5e-7, "0.00000045"],
+    [0.01, 0.03, "0.03"],
+    [1, 3, "3"],
+    [1e-101, 1, `1.${"0".repeat(100)}`],
+  ])("preserves value %s after focus and blur", (step, value, displayed) => {
+    const onChange = vi.fn()
+    const { getByRole } = render(
+      <Slider min={0} max={10} step={step} value={value} onChange={onChange} />,
+    )
+    const input = getByRole("textbox")
+
+    expect(input).toHaveValue(displayed)
+    fireEvent.focus(input)
+    fireEvent.blur(input)
+
+    expect(input).toHaveValue(displayed)
+    expect(onChange).not.toHaveBeenCalled()
+  })
 })
