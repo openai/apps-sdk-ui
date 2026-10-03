@@ -235,14 +235,18 @@ export const Slider = memo((props: SliderProps) => {
   }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
-    const nextValue = evt.currentTarget.value.replace(/[^\d.]/, "").trim()
+    const nextValue = evt.currentTarget.value
+      .replace(/[^\d.-]/g, "")
+      .replace(/(?!^)-/g, "")
+      .trim()
+    setInputValue(nextValue)
     let parsed = parseFloat(nextValue || "0")
+    if (Number.isNaN(parsed)) return
     parsed = clamp(parsed, min, max)
     if (step >= 1) {
       parsed = Math.floor(parsed)
     }
     debouncedOnChange(parsed)
-    setInputValue(nextValue)
   }
 
   const handleInputBlur: FocusEventHandler<HTMLInputElement> = (evt) => {
