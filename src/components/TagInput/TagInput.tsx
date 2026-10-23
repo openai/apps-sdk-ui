@@ -122,9 +122,9 @@ export const TagInput = (props: TagInputProps) => {
     if (selectedTag === null) {
       defaultFocusEl.focus()
     } else {
-      const selectedTagElement = containerRef.current.querySelector(
-        `[data-tag="${selectedTag}"]`,
-      ) as HTMLElement | null
+      const selectedTagElement = Array.from(
+        containerRef.current.querySelectorAll<HTMLElement>("[data-tag]"),
+      ).find((tag) => tag.dataset.tag === selectedTag)
       if (selectedTagElement) {
         selectedTagElement.focus()
       } else {
