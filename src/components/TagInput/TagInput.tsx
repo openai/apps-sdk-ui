@@ -269,6 +269,9 @@ export const TagInput = (props: TagInputProps) => {
   // ============================================
 
   const handleContainerKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing) {
+      return
+    }
     if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
       if (isEmptyStartingSelection()) {
         e.preventDefault()
@@ -289,6 +292,9 @@ export const TagInput = (props: TagInputProps) => {
   }
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing) {
+      return
+    }
     if (e.key === "Enter" || delimiters.includes(e.key)) {
       e.preventDefault()
       if (currentInput) {
