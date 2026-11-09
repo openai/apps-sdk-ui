@@ -39,41 +39,51 @@ When adding new functionality or docs, place files in the appropriate `src/*` lo
 
 Below is a quick reference of all provided components:
 
-| Component              | Description                                                           |
-| ---------------------- | --------------------------------------------------------------------- |
-| **Alert**              | Call attention to a specific message or warning.                      |
-| **Animate**            | Animate components as they mount and unmount.                         |
-| **AnimateLayout**      | Animate width & height of components as they mount and unmount.       |
-| **AnimateLayoutGroup** | Animate width & height of lists of components as they enter and exit. |
-| **Avatar**             | Display user identities with either text, photo, or an icon.          |
-| **AvatarGroup**        | Display avatars as a single stack.                                    |
-| **Badge**              | Emphasize details with a status indicator.                            |
-| **Button**             | Create actions in many different styles.                              |
-| **ButtonLink**         | `<Button>` but as a semantic anchor element.                          |
-| **Checkbox**           | Toggle control for on and off states.                                 |
-| **CodeBlock**          | Display syntax‑highlighted code snippets.                             |
-| **CopyTooltip**        | Allow users to easily copy to clipboard.                              |
-| **EmptyMessage**       | Gracefully inform users when there's nothing to see.                  |
-| **Icon**               | Collection of SVG icons exported as React components.                 |
-| **Image**              | Load remote images with optional aspect ratio and cover mode.         |
-| **Indicator**          | Loading dots and circular progress indicators.                        |
-| **Input**              | Semantic input text collection.                                       |
-| **Markdown**           | Render rich formatted content.                                        |
-| **Menu**               | Structured actions in a dropdown list.                                |
-| **Modal**              | Capture focus for essential tasks or details.                         |
-| **AppsSDKUIProvider**  | React provider for shared context (e.g., link component).             |
-| **Popover**            | Generic floating UI utility for contextual actions.                   |
-| **RadioGroup**         | Radio button group selection component.                               |
-| **SegmentedControl**   | Toggle through grouped options.                                       |
-| **Select**             | Choose from a dropdown of options.                                    |
-| **SelectControl**      | Alternative select control component with enhanced features.          |
-| **Slider**             | Fine-tune values within a set range.                                  |
-| **Switch**             | Toggle control for on and off states.                                 |
-| **TagInput**           | Enter multiple unique tags.                                           |
-| **TextLink**           | Semantic link used for both internal and external links.              |
-| **Textarea**           | Autosizable text input area with optional validation.                 |
-| **Tooltip**            | Brief and informative hover text.                                     |
-| **TransitionGroup**    | Primitive for rendering components over time.                         |
+| Component               | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+| **Alert**               | Call attention to a specific message or warning.                      |
+| **Animate**             | Animate components as they mount and unmount.                         |
+| **AnimateLayout**       | Animate width & height of components as they mount and unmount.       |
+| **AnimateLayoutGroup**  | Animate width & height of lists of components as they enter and exit. |
+| **Avatar**              | Display user identities with either text, photo, or an icon.          |
+| **AvatarGroup**         | Display avatars as a single stack.                                    |
+| **Badge**               | Emphasize details with a status indicator.                            |
+| **Button**              | Create actions in many different styles.                              |
+| **ButtonLink**          | `<Button>` but as a semantic anchor element.                          |
+| **Checkbox**            | Toggle control for on and off states.                                 |
+| **CircularProgress**    | Circular progress ring with simulated progress animation.             |
+| **CodeBlock**           | Display syntax‑highlighted code snippets.                             |
+| **CodeBlockBase**       | Composable base container for building custom code blocks.            |
+| **CopyButton**          | Copy content to clipboard with animated copy and check states.        |
+| **CopyTooltip**         | Allow users to easily copy to clipboard.                              |
+| **DatePicker**          | Select a single date with an interactive calendar.                    |
+| **DateRangePicker**     | Select a date range with an interactive calendar.                     |
+| **EmptyMessage**        | Gracefully inform users when there's nothing to see.                  |
+| **Icon**                | Collection of SVG icons exported as React components.                 |
+| **Image**               | Load remote images with optional aspect ratio and cover mode.         |
+| **Indicator**           | Loading dots and circular progress indicators.                        |
+| **Input**               | Semantic input text collection.                                       |
+| **LoadingDots**         | Indicate typing progress with staggered pulsing dot animation.        |
+| **LoadingIndicator**    | Spinning indicator for general loading states.                        |
+| **Markdown**            | Render rich formatted content.                                        |
+| **Menu**                | Structured actions in a dropdown list.                                |
+| **Modal**               | Capture focus for essential tasks or details.                         |
+| **AppsSDKUIProvider**   | React provider for shared context (e.g., link component).             |
+| **Popover**             | Generic floating UI utility for contextual actions.                   |
+| **RadioGroup**          | Radio button group selection component.                               |
+| **SegmentedControl**    | Toggle through grouped options.                                       |
+| **Select**              | Choose from a dropdown of options.                                    |
+| **SelectControl**       | Alternative select control component with enhanced features.          |
+| **ShimmerText**         | Render text with a continuous shimmer effect.                         |
+| **ShimmerableText**     | Render text with a toggleable shimmer effect.                         |
+| **Slider**              | Fine-tune values within a set range.                                  |
+| **SlotTransitionGroup** | Primitive for rendering components over time (slot-based).            |
+| **Switch**              | Toggle control for on and off states.                                 |
+| **TagInput**            | Enter multiple unique tags.                                           |
+| **TextLink**            | Semantic link used for both internal and external links.              |
+| **Textarea**            | Autosizable text input area with optional validation.                 |
+| **Tooltip**             | Brief and informative hover text.                                     |
+| **TransitionGroup**     | Primitive for rendering components over time.                         |
 
 ## Documentation & Storybook
 
