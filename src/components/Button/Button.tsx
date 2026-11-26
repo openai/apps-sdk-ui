@@ -20,9 +20,9 @@ import s from "./Button.module.css"
 type CommonProps = {
   /**
    * Color for the button
-   * @default secondary
+   * @default primary
    */
-  color: SemanticColors<
+  color?: SemanticColors<
     "primary" | "secondary" | "danger" | "success" | "info" | "discovery" | "caution" | "warning"
   >
   /**
