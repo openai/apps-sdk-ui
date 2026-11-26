@@ -66,6 +66,9 @@ When external paths are provided, `<a>` will be used with `target="_blank"` and 
 
 <Canvas of={TextLinkStories.External} />
 
+External links do not automatically call the ChatGPT host's `window.openai.openExternal` method.
+See the [ButtonLink host navigation example](?path=/docs/components-buttonlink--docs#opening-external-links-in-chatgpt) for an explicit click handler that also works with `TextLink`. The provider's router link is bypassed for external URLs unless you supply an `as` override.
+
 ### Font weight
 To customize the font weight, pass a Tailwind class to the `className` prop.
 
