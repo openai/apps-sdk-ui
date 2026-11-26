@@ -38,6 +38,51 @@ If your link is not being automatically identified, you can force external link 
 
 <Canvas of={ButtonLinkStories.External} />
 
+#### Opening external links in ChatGPT
+
+`ButtonLink` does not call the ChatGPT host's `window.openai.openExternal` method automatically.
+External URLs bypass the router link configured by `AppsSDKUIProvider` unless you explicitly supply an `as` override.
+
+To open a link through the host, intercept an ordinary click when the host method is available. Keep the real `href` so the link also works outside ChatGPT, and leave modified clicks and already-handled events alone.
+
+```tsx
+import type { MouseEvent } from "react"
+import { ButtonLink } from "@openai/apps-sdk-ui/components/Button"
+
+function openInHost(event: MouseEvent<HTMLAnchorElement>) {
+  const host = (window as Window & {
+    openai?: { openExternal?: (args: { href: string }) => void }
+  }).openai
+
+  if (
+    !host?.openExternal ||
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  ) {
+    return
+  }
+
+  event.preventDefault()
+  host.openExternal({ href: event.currentTarget.href })
+}
+
+export function ExternalLink() {
+  return (
+    <ButtonLink as="a" href="https://openai.com" onClick={openInHost}>
+      Open website
+    </ButtonLink>
+  )
+}
+```
+
+The same click handler works with `TextLink`. For shared navigation logic, pass a custom link component through `as` explicitly.
+See the [Apps SDK UI integration guide](https://developers.openai.com/apps-sdk/build/chatgpt-ui/) for the host API.
+
+
 ### Colors & variants
 You can stylize the display of the link using the `color` and `variant` props.
 
